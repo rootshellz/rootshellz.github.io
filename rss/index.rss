@@ -1,7 +1,7 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>rootshellz</title><description>Drink all the booze hack all the things...</description><link>http://localhost:2368/</link><image><url>http://localhost:2368/favicon.png</url><title>rootshellz</title><link>http://localhost:2368/</link></image><generator>Ghost 1.25</generator><lastBuildDate>Mon, 30 Jul 2018 00:59:07 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Kioptrix: Level 1.2 (#3) Walkthrough</title><description>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>rootshellz</title><description>Drink all the booze hack all the things...</description><link>http://localhost:2368/</link><image><url>http://localhost:2368/favicon.png</url><title>rootshellz</title><link>http://localhost:2368/</link></image><generator>Ghost 1.25</generator><lastBuildDate>Mon, 30 Jul 2018 06:22:14 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Kioptrix: Level 1.2 (#3) Walkthrough - OLD</title><description>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
 &lt;p&gt;Today I will be continuing on the the &lt;a href="http://www.kioptrix.com/blog/test-page/"&gt;Kioptrix series&lt;/a&gt; of vulnerable VMs.  In previous posts, I covered &lt;a href="https://blog.rootshellz.com/kioptrix-walkthrough-1/"&gt;Kioptrix1&lt;/a&gt; and &lt;a href="https://blog.rootshellz.com/kioptrix-walkthrough-2/"&gt;Kioptrix1.1&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Per the author of the challenge, &amp;quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not&lt;/p&gt;&lt;/div&gt;</description><link>http://localhost:2368/kioptrix-walkthrough-3/</link><guid isPermaLink="false">5b5e5022036efda395e270f0</guid><category>Boot2Root</category><category>VulnHub</category><category>OSCP</category><category>Kioptrix</category><dc:creator>rootshellz</dc:creator><pubDate>Tue, 12 Sep 2017 04:49:33 GMT</pubDate><media:content url="http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg" medium="image"/><content:encoded>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
-&lt;img src="http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg" alt="Kioptrix: Level 1.2 (#3) Walkthrough"&gt;&lt;p&gt;Today I will be continuing on the the &lt;a href="http://www.kioptrix.com/blog/test-page/"&gt;Kioptrix series&lt;/a&gt; of vulnerable VMs.  In previous posts, I covered &lt;a href="https://blog.rootshellz.com/kioptrix-walkthrough-1/"&gt;Kioptrix1&lt;/a&gt; and &lt;a href="https://blog.rootshellz.com/kioptrix-walkthrough-2/"&gt;Kioptrix1.1&lt;/a&gt;.&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg" alt="Kioptrix: Level 1.2 (#3) Walkthrough - OLD"&gt;&lt;p&gt;Today I will be continuing on the the &lt;a href="http://www.kioptrix.com/blog/test-page/"&gt;Kioptrix series&lt;/a&gt; of vulnerable VMs.  In previous posts, I covered &lt;a href="https://blog.rootshellz.com/kioptrix-walkthrough-1/"&gt;Kioptrix1&lt;/a&gt; and &lt;a href="https://blog.rootshellz.com/kioptrix-walkthrough-2/"&gt;Kioptrix1.1&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Per the author of the challenge, &amp;quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not so easy.&amp;quot;  So let's see if we can find both, shall we?&lt;/p&gt;
 &lt;h1 id="setup"&gt;Setup&lt;/h1&gt;
 &lt;p&gt;The challenge description and Readme file tells us that in addition to spinning up the VM and letting DHCP assign it an address, we also need to point &lt;strong&gt;kioptrix3.com&lt;/strong&gt; to the VM's IP.  The Readme also confirms this is another web challenge, which makes sense given the required name mapping.  Let's spin up the VM, find it on the network, and then point the domain name via our Kali attack box's hosts file.&lt;/p&gt;
@@ -349,13 +349,13 @@ Nmap done: 1 IP address (1 host up) scanned in 3.70 seconds
 &lt;h1 id="webappfingerprinting"&gt;Web App Fingerprinting&lt;/h1&gt;
 &lt;p&gt;Let's manually map the application a bit via our browser and Burp.  We will simply proxy our browser through Burp with Intercept turned off.  This will allow us to quickly click around the web app and then inspect the requests and responses.&lt;/p&gt;
 &lt;p&gt;One of the first things we can see is the web application is running something called LotusCMS:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/09/Burp-LotusCMS-1.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/09/Burp-LotusCMS-1.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;I've never heard of LotusCMS, but let's see what &lt;a href="https://www.exploit-db.com/"&gt;Exploit DB&lt;/a&gt; can tell us about it:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/09/ExploitDB-LotusCMS.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/09/ExploitDB-LotusCMS.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;h1 id="rce"&gt;RCE&lt;/h1&gt;
 &lt;p&gt;RCE spotted (assuming the vulnerable version of the CMS)!  The ExploitDB page for the Metasploit module references &lt;a href="https://secuniaresearch.flexerasoftware.com/secunia_research/2011-21/"&gt;https://secuniaresearch.flexerasoftware.com/secunia_research/2011-21/&lt;/a&gt;, which is a decent summary of the issue.  The jist is that arbitrary PHP code execution is possible due to two separate issues in the CMS' code.  Both issues are caused by incorrectly implemented input sanitization with the input being passed to the PHP eval() statement.  This effectively provides system-level RCE by injecting PHP system() calls.&lt;/p&gt;
 &lt;p&gt;Let's see if we can find a stand-alone exploit script, instead of using Metasploit.&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/09/Google-LotusCMS-RCE.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/09/Google-LotusCMS-RCE.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;The &lt;a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit"&gt;repo&lt;/a&gt; contains both &lt;a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.sh"&gt;Bash&lt;/a&gt; and &lt;a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.rb"&gt;Ruby&lt;/a&gt; stand-alone exploitation scripts.  Thanks &lt;a href="https://github.com/Hood3dRob1n"&gt;Hood3dRob1n&lt;/a&gt;!  Let's go for the Bash script...  After a quick review, we verify that the script is safe to run and understand its functionality.  When run, the script will check that we have a vulnerable target, ask us to select from a menu of payloads, and then run the exploit.  Interestingly, it appears Hood3dRob1n wrote this script with Kioptrix #3 (1.2) in mind.&lt;/p&gt;
 &lt;h2 id="exploitingtherce"&gt;Exploiting the RCE&lt;/h2&gt;
 &lt;p&gt;We start our listener:&lt;/p&gt;
@@ -655,7 +655,7 @@ select * from gallarific_users;
 &lt;p&gt;Most interesting here is the password hash for loneferret in the dev_accounts table.  Users are known to reuse passwords, so if we can crack this hash, we may be able to use the password to SSH to the target as the loneferret user.&lt;/p&gt;
 &lt;h2 id="passwordhashcracking"&gt;Password Hash Cracking&lt;/h2&gt;
 &lt;p&gt;Instead of cracking locally, let's see if any of the online hash-crackers can help us:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/09/CrackStation-starwars-1.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/09/CrackStation-starwars-1.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;Awesome, &lt;a href="https://crackstation.net/"&gt;CrackStation&lt;/a&gt; was able to easily crack loneferret's password.&lt;/p&gt;
 &lt;h2 id="becomingloneferret"&gt;Becoming loneferret&lt;/h2&gt;
 &lt;p&gt;We now have the lonferret user's Gallerific web application password, but that doesn't seem to help us much in getting root on the box.  However, maybe the user reused the same password for his local account on the server.  Let's find out:&lt;/p&gt;
@@ -695,7 +695,7 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 loneferret@Kioptrix3:~$ ht /etc/sudoers
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Even though we shouldn't have permission to read the sudoers file, using the setuid / setgid ht executable, we are able to load the file.&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/09/ht-sudoers-before.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/09/ht-sudoers-before.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;Now let's do some hex patching.  We want to change&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 4e 4f 50 41 |eferret ALL=NOPA|│
 │00000140 53 53 57 44 3a 20 21 2f-75 73 72 2f 62 69 6e 2f |SSWD: !/usr/bin/|│
@@ -713,7 +713,7 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 &lt;code&gt;#/usr/bin/su, /usr/local/bin/ht&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This will effectively give us full, root access to the target, as we will be able to run any command as root using sudo.&lt;/p&gt;
 &lt;p&gt;Let's make the change and save the file using ht:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/09/ht-sudoers-after.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/09/ht-sudoers-after.png" alt="Kioptrix: Level 1.2 (#3) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;After saving the file, let's see if we win:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;loneferret@Kioptrix3:~$ sudo -l
 [sudo] password for loneferret: 
@@ -790,11 +790,11 @@ starwars
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This just goes to show, both on challenge VMs and real world servers, there is usually more than one way to pop the box.&lt;/p&gt;
 &lt;p&gt;Until next time, stay root my friends!&lt;/p&gt;
-&lt;/div&gt;</content:encoded></item><item><title>Kioptrix: Level 1.1 (#2) Walkthrough</title><description>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
+&lt;/div&gt;</content:encoded></item><item><title>Kioptrix: Level 1.1 (#2) Walkthrough - OLD</title><description>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
 &lt;p&gt;In this post, I will continue hacking on the &lt;a href="http://www.kioptrix.com/blog/test-page/"&gt;Kioptrix series&lt;/a&gt; of VMs.  In the &lt;a href="https://blog.rootshellz.com/kioptrix-level-1-writeup/"&gt;last post&lt;/a&gt;, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  &amp;quot;&lt;/p&gt;&lt;/div&gt;</description><link>http://localhost:2368/kioptrix-walkthrough-2/</link><guid isPermaLink="false">5b5e5022036efda395e270ef</guid><category>Boot2Root</category><category>VulnHub</category><category>OSCP</category><category>Kioptrix</category><dc:creator>rootshellz</dc:creator><pubDate>Thu, 24 Aug 2017 06:57:09 GMT</pubDate><media:content url="http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg" medium="image"/><content:encoded>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
-&lt;img src="http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;p&gt;In this post, I will continue hacking on the &lt;a href="http://www.kioptrix.com/blog/test-page/"&gt;Kioptrix series&lt;/a&gt; of VMs.  In the &lt;a href="https://blog.rootshellz.com/kioptrix-level-1-writeup/"&gt;last post&lt;/a&gt;, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  &amp;quot;[the] first release had a bug in it with the web application,&amp;quot; so I have opted to hack on the updated version.  While a major part these challenges is to find and exploit bugs, I don't want to be fighting unintentional bugs in the challenge VM.&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;p&gt;In this post, I will continue hacking on the &lt;a href="http://www.kioptrix.com/blog/test-page/"&gt;Kioptrix series&lt;/a&gt; of VMs.  In the &lt;a href="https://blog.rootshellz.com/kioptrix-level-1-writeup/"&gt;last post&lt;/a&gt;, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  &amp;quot;[the] first release had a bug in it with the web application,&amp;quot; so I have opted to hack on the updated version.  While a major part these challenges is to find and exploit bugs, I don't want to be fighting unintentional bugs in the challenge VM.&lt;/p&gt;
 &lt;p&gt;I have downloaded and booted the VM on a local network.  Let's begin.&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Kioptrix1.1.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Kioptrix1.1.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;h1 id="prehack"&gt;Pre-Hack&lt;/h1&gt;
 &lt;h2 id="whereyouat"&gt;Where you at?&lt;/h2&gt;
 &lt;p&gt;First, we need to identify what address the VM grabbed from DHCP:&lt;/p&gt;
@@ -1252,7 +1252,7 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 &lt;h2 id="apache"&gt;Apache&lt;/h2&gt;
 &lt;p&gt;We learned from our scanning above that Apache is running on ports 80/tcp and 443/tcp and we have a handful of things to go check out. Since this is just one web web property, we'll go start at this manually in a browser.  If we had a larger scope, we would definitely want to script a few more things before we proceeded — things like like screenshots of the identified URLs, source downloads, and URL spidering.&lt;/p&gt;
 &lt;p&gt;To check things out, we'll proxy FireFox through &lt;a href="https://portswigger.net/burp"&gt;Burp&lt;/a&gt; and turn off intercept for now.  When we browse to out target at &lt;a href="http://172.16.2.131"&gt;http://172.16.2.131&lt;/a&gt;, we are greeted with a simple looking login form:&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Login-Form.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Login-Form.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;Browsing to &lt;a href="https://172.16.2.131"&gt;https://172.16.2.131&lt;/a&gt; simply loads an HTTPS version of the same login form.&lt;/p&gt;
 &lt;p&gt;When we view the source, we see that the interesting comment we saw in the nmap output is actually nothing to get excited about, it was just a place holder and not actually marking anything sensitive.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-html"&gt;&amp;lt;html&amp;gt;
@@ -1308,9 +1308,9 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 &lt;p&gt;Working off of this first hunch, what if we submit something like &lt;code&gt;' OR 1=1#&lt;/code&gt;?  If our assumption about the back end code is correct, this will result in something like this:&lt;br&gt;
 &lt;code&gt;SELECT * FROM Users WHERE Username='admin' AND Password='' OR 1=1#'&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Let's see if this works...&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/08/Burp-SQLi.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/08/Burp-SQLi.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;Awesome our hunch was correct, we successfully bypassed authentication.&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/08/Basic-Administrative-Web-Console.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/08/Basic-Administrative-Web-Console.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;h3 id="commandinjection"&gt;Command Injection&lt;/h3&gt;
 &lt;p&gt;Testing out the &amp;quot;Ping a Machine on the Network&amp;quot; functionality, it looks like the &lt;em&gt;ip&lt;/em&gt; parameter posted to /pingit.php, is simply passed to the system's ping command (&lt;em&gt;ping -c3 ip&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;The request:&lt;/p&gt;
@@ -1328,11 +1328,11 @@ Upgrade-Insecure-Requests: 1
 ip=127.0.0.1&amp;amp;submit=submit
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and the response:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/08/pingit.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/08/pingit.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;Let's think about how the backend for this functionality might work, like we did above for the SQL statement.  It is reasonable to assume that the ping command is being called from PHP with something like this: &lt;code&gt;output = exec('ping -c3 $ip');&lt;/code&gt; where &lt;em&gt;$ip&lt;/em&gt; is taken directly from the posted value and not sanitized at all.&lt;/p&gt;
 &lt;p&gt;Let's see what we can sneak in to that &lt;em&gt;$ip&lt;/em&gt; parameter.&lt;br&gt;
 The request:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/08/Command-Injection.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;br&gt;
+&lt;img src="http://localhost:2368/content/images/2017/08/Command-Injection.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;br&gt;
 which looks like this in Burp:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-html"&gt;POST /pingit.php HTTP/1.1
 Host: 172.16.2.131
@@ -1348,7 +1348,7 @@ Upgrade-Insecure-Requests: 1
 ip=127.0.0.1%3B+id&amp;amp;submit=submit
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Results in:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/08/Command-Injected.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/08/Command-Injected.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;Notice the last line of output;  It's clear we are able to run arbitrary commands as the apache user!&lt;/p&gt;
 &lt;h4 id="shellingout"&gt;Shelling Out&lt;/h4&gt;
 &lt;p&gt;To make things easier, let's get ourselves a better shell.  I first attempted to use netcat, but it is not installed on the target.  We know PHP is installed, so let's leverage that for a shell.&lt;/p&gt;
@@ -1417,7 +1417,7 @@ sh-3.00$
 Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 i686 i386 GNU/Linux
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Googling for the kernel version shows a promising result:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/08/Google-2.6.9-55.EL.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2017/08/Google-2.6.9-55.EL.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;root@kali:~# searchsploit linux 2.6 | grep 9542
 Linux Kernel 2.6 &amp;lt; 2.6.19 (White Box 4 / CentOS 4.4/4.5 / Fedora Cor | ./linux/local/9542.c
 &lt;/code&gt;&lt;/pre&gt;
@@ -1475,7 +1475,7 @@ sh-3.00$ /tmp/9542
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Well, that's not good... The shell seems to be hung.  Let's check the VMware console:&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Kernel-Panic-9479.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Kernel-Panic-9479.png" alt="Kioptrix: Level 1.1 (#2) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;Kernel Panic!  Oops, another exploit that seems like it should have worked, but failed.  Again, good material for a future exploit research post, but for now let's reset the VM and try again.&lt;/p&gt;
 &lt;h4 id="privilegeescalationtake3"&gt;Privilege Escalation - Take 3&lt;/h4&gt;
 &lt;p&gt;We are oh-for-two on this local privilege escalation, but the good news is we still have another exploit to try from our original search:&lt;br&gt;
@@ -1508,17 +1508,17 @@ uid=0(root) gid=0(root) groups=48(apache)
 &lt;p&gt;Whoomp, there it is!  A root shell!  Since this was the goal of the challenge we can stop here.  There may be other ways in to this box, but we'll leave those shells for a rainy day.&lt;/p&gt;
 &lt;h1 id="conclusion"&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;Things were looking a bit hairy there for a minute, with two failed exploits back to back.  If we've learned anything here it's persistence — or maybe the lesson is, we shouldn't be running exploits without fist completely digesting them, lest we be confused for a skid.  As mentioned above, it will make for an interesting future exercise to dissect the attempted exploits and understand why they failed.  For now, let's just be content with the root shell we achieved and move forward in our Kioprtix jorney.  See you next time neighbors, until then keep your boxes patched and your shells root.&lt;/p&gt;
-&lt;/div&gt;</content:encoded></item><item><title>Kioptrix: Level 1 (#1) Walkthrough</title><description>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
+&lt;/div&gt;</content:encoded></item><item><title>Kioptrix: Level 1 (#1) Walkthrough - OLD</title><description>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://www.defcon.org/html/defcon-25/dc-25-index.html"&gt;Defcon 25&lt;/a&gt; is in the books and my &lt;a href="https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/"&gt;Penetration Testing Training with Kali Linux (PWK)&lt;/a&gt; / &lt;a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"&gt;Offensive Security Certified Professional (OSCP)&lt;/a&gt; lab time is up.  I now have a bit of extra time but I also want to keep my forward momentum in the land of pwning boxes...  Accordingly, this&lt;/p&gt;&lt;/div&gt;</description><link>http://localhost:2368/kioptrix-walkthrough-1/</link><guid isPermaLink="false">5b5e5022036efda395e270ed</guid><category>Boot2Root</category><category>VulnHub</category><category>OSCP</category><category>Kioptrix</category><dc:creator>rootshellz</dc:creator><pubDate>Wed, 16 Aug 2017 05:24:00 GMT</pubDate><media:content url="http://localhost:2368/content/images/2018/07/Kioptrix-1-Cover-1.jpg" medium="image"/><content:encoded>&lt;div class="kg-card-markdown"&gt;&lt;h1 id="intro"&gt;Intro&lt;/h1&gt;
-&lt;img src="http://localhost:2368/content/images/2018/07/Kioptrix-1-Cover-1.jpg" alt="Kioptrix: Level 1 (#1) Walkthrough"&gt;&lt;p&gt;&lt;a href="https://www.defcon.org/html/defcon-25/dc-25-index.html"&gt;Defcon 25&lt;/a&gt; is in the books and my &lt;a href="https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/"&gt;Penetration Testing Training with Kali Linux (PWK)&lt;/a&gt; / &lt;a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"&gt;Offensive Security Certified Professional (OSCP)&lt;/a&gt; lab time is up.  I now have a bit of extra time but I also want to keep my forward momentum in the land of pwning boxes...  Accordingly, this seems like an opportune time to start posting, and what better topic than gaining root shellz?&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2018/07/Kioptrix-1-Cover-1.jpg" alt="Kioptrix: Level 1 (#1) Walkthrough - OLD"&gt;&lt;p&gt;&lt;a href="https://www.defcon.org/html/defcon-25/dc-25-index.html"&gt;Defcon 25&lt;/a&gt; is in the books and my &lt;a href="https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/"&gt;Penetration Testing Training with Kali Linux (PWK)&lt;/a&gt; / &lt;a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/"&gt;Offensive Security Certified Professional (OSCP)&lt;/a&gt; lab time is up.  I now have a bit of extra time but I also want to keep my forward momentum in the land of pwning boxes...  Accordingly, this seems like an opportune time to start posting, and what better topic than gaining root shellz?&lt;/p&gt;
 &lt;p&gt;I went in search of pwnables that were similar to the boxes I experienced in the PWK lab and found the &lt;a href="http://www.kioptrix.com/blog/test-page/"&gt;Kioptrix&lt;/a&gt; series of VMs recommended.  The series is also on &lt;a href="https://www.vulnhub.com/series/kioptrix,8/"&gt;VulnHub&lt;/a&gt;.  Kioptrix consists of five machines, each of increasing difficulty.  The challenges appear to be a bit older, but still seem relevant.&lt;/p&gt;
 &lt;p&gt;For those that don't know, a pwnable or Boot2Root is an intentionally vulnerable virtual machine (VM) that provides a challenge to hackers.  The goal is usually to root the box.  Some challenges have an intended solution and guide you down the correct path, others expect you to attack the box by any means necessary.&lt;/p&gt;
 &lt;p&gt;Let's get started with the first box.  I downloaded the .rar file, decompressed it, and spun up the VM in &lt;a href="https://www.vmware.com/products/fusion.html"&gt;VMware Fusion&lt;/a&gt;.  After booting, I was presented with the following screen:&lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2017/08/Kioptrix1-VM-Console.png" alt="Kioptrix: Level 1 (#1) Walkthrough"&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2018/07/Kioptrix1-VM-Console.png" alt="Kioptrix: Level 1 (#1) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;h1 id="scanningandenumeration"&gt;Scanning and Enumeration&lt;/h1&gt;
 &lt;h2 id="identifyingtargetaddressdhcp"&gt;Identifying Target Address (DHCP)&lt;/h2&gt;
 &lt;p&gt;The host grabs an address via DHCP as it boots.  Identifying the host on my network was simple as the VM is in a low traffic local subnet on my host machine.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-bash"&gt;root@kali:~# ifconfig eth1 | grep &amp;quot;inet\s&amp;quot;
+&lt;pre&gt;&lt;code class="language-language-bash"&gt;root@kali:~# ifconfig eth1 | grep &amp;quot;inet\s&amp;quot;
 inet 172.16.2.129  netmask 255.255.255.0  broadcast 172.16.2.255
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;root@kali:~# nmap -T4 -sn 172.16.2.0/24
@@ -1649,7 +1649,7 @@ root@kali:~#
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Unfortunately, after running through the address brute-force, this exploit script did not seem to do the trick.&lt;/p&gt;
 &lt;p&gt;I was still convinced that this vulnerability was exploitable, so I went looking for another working exploit.  I simply Googled &amp;quot;Samba 2.2.1a&amp;quot; and my first hit was for an exploit actually labeled Samba 2.2.&lt;em&gt;8&lt;/em&gt;, but stated, &amp;quot;Remote root exploit for Samba 2.2.x and prior that works against Linux (all distributions) [...].&amp;quot;&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Google-Samba-2.2.1a.png" alt="Kioptrix: Level 1 (#1) Walkthrough"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2017/08/Google-Samba-2.2.1a.png" alt="Kioptrix: Level 1 (#1) Walkthrough - OLD"&gt;&lt;/p&gt;
 &lt;p&gt;As a side note, this exploit labeling makes it difficult to identify this exploit with the searchsploit tool.  If anyone know how to better use searchsploit, let me know.&lt;/p&gt;
 &lt;p&gt;At any rate, I located, compiled, and ran the exploit:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;root@kali:~# searchsploit &amp;quot;Samba 2.2.8&amp;quot;
