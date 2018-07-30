@@ -33,7 +33,7 @@ pre[class*="language-"] {
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
-	overflow: auto;
+	/*overflow: auto;*/
 	border-radius: 0.3em;
 }
 
@@ -245,7 +245,7 @@ div.code-toolbar > .toolbar button {
 	color: inherit;
 	font: inherit;
 	line-height: normal;
-	overflow: visible;
+	/*overflow: visible;/*
 	padding: 0;
 	-webkit-user-select: none; /* for button */
 	-moz-user-select: none;
