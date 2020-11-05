@@ -15,20 +15,19 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="../assets/highlighter/prettify.css?v=2a75f4a198">
-    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=2a75f4a198">
+    <link rel="stylesheet" type="text/css" href="../assets/highlighter/prettify.css?v=cc9bda7911">
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=cc9bda7911">
 
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="index.html">
+    <link rel="canonical" href="http://localhost:3001/kioptrix-walkthrough-2/">
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <link rel="amphtml" href="amp/index.html">
+    <link rel="amphtml" href="http://localhost:3001/kioptrix-walkthrough-2/amp/">
     
     <meta property="og:site_name" content="rootshellz">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Kioptrix: Level 1.1 (#2) Walkthrough">
     <meta property="og:description" content="Intro In this post, I will continue hacking on the Kioptrix series of VMs.  In the last post, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  &amp;quot;">
-    <meta property="og:url" content="http://localhost:2368/kioptrix-walkthrough-2/">
-    <meta property="og:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg">
+    <meta property="og:url" content="http://localhost:3001/kioptrix-walkthrough-2/">
+    <meta property="og:image" content="http://localhost:3001/content/images/2018/07/Kioptrix-2-Cover.jpg">
     <meta property="article:published_time" content="2017-08-24T06:57:09.000Z">
     <meta property="article:modified_time" content="2018-07-30T08:01:09.000Z">
     <meta property="article:tag" content="Boot2Root">
@@ -39,8 +38,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kioptrix: Level 1.1 (#2) Walkthrough">
     <meta name="twitter:description" content="Intro In this post, I will continue hacking on the Kioptrix series of VMs.  In the last post, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  &amp;quot;">
-    <meta name="twitter:url" content="http://localhost:2368/kioptrix-walkthrough-2/">
-    <meta name="twitter:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg">
+    <meta name="twitter:url" content="http://localhost:3001/kioptrix-walkthrough-2/">
+    <meta name="twitter:image" content="http://localhost:3001/content/images/2018/07/Kioptrix-2-Cover.jpg">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="rootshellz">
     <meta name="twitter:label2" content="Filed under">
@@ -57,50 +56,47 @@
     "publisher": {
         "@type": "Organization",
         "name": "rootshellz",
-        "logo": "http://localhost:2368/content/images/2018/07/Blog-Logo.png"
+        "url": "http://localhost:3001/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:3001/content/images/2018/07/Blog-Logo.png"
+        }
     },
     "author": {
         "@type": "Person",
         "name": "rootshellz",
         "image": {
             "@type": "ImageObject",
-            "url": "http://localhost:2368/content/images/2018/07/rootshellz.jpg",
+            "url": "http://localhost:3001/content/images/2018/07/rootshellz.jpg",
             "width": 1630,
             "height": 1631
         },
-        "url": "http://localhost:2368/author/rootshellz/",
+        "url": "http://localhost:3001/author/rootshellz/",
         "sameAs": [
             "https://twitter.com/rootshellz"
         ]
     },
     "headline": "Kioptrix: Level 1.1 (#2) Walkthrough",
-    "url": "http://localhost:2368/kioptrix-walkthrough-2/",
+    "url": "http://localhost:3001/kioptrix-walkthrough-2/",
     "datePublished": "2017-08-24T06:57:09.000Z",
     "dateModified": "2018-07-30T08:01:09.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:2368/content/images/2018/07/Kioptrix-2-Cover.jpg",
+        "url": "http://localhost:3001/content/images/2018/07/Kioptrix-2-Cover.jpg",
         "width": 580,
         "height": 388
     },
     "keywords": "Boot2Root, VulnHub, OSCP, Kioptrix",
-    "description": "Intro In this post, I will continue hacking on the Kioptrix series of VMs.  In the last post, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  &amp;quot;",
+    "description": "Intro\nIn this post, I will continue hacking on the Kioptrix series\n[http://www.kioptrix.com/blog/test-page/]  of VMs. In the last post\n[https://blog.rootshellz.com/kioptrix-level-1-writeup/], I covered Kioptrix1. In\nthis post, I will be working my way through Kioptrix1.1, which is the second VM\nin the series. The VulnHub page for the challenge states that, &quot;[the] first\nrelease had a bug in it with the web application,&quot; so I have opted to hack on\nthe updated version. While a major part these chal",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:2368/"
+        "@id": "http://localhost:3001/"
     }
 }
     </script>
 
-    <script src="../public/ghost-sdk.js?v=2a75f4a198"></script>
-<script>
-ghost.init({
-	clientId: "ghost-frontend",
-	clientSecret: "bf2f60fa3213"
-});
-</script>
-    <meta name="generator" content="Ghost 1.25">
-    <link rel="alternate" type="application/rss+xml" title="rootshellz" href="../rss/index.html">
+    <meta name="generator" content="Ghost 3.36">
+    <link rel="alternate" type="application/rss+xml" title="rootshellz" href="http://localhost:3001/rss/">
     <link href="https://rootshellz.github.io/prism.css" rel="stylesheet">
 
 <script>
@@ -134,7 +130,7 @@ ghost.init({
     <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
 
         <header class="post-header">
-            <a id="blog-logo" href="../">
+            <a id="blog-logo" href="http://localhost:3001">
                     <img src="../content/images/2018/07/Blog-Logo.png" alt="Blog Logo">
             </a>
         </header>
@@ -145,10 +141,10 @@ ghost.init({
         <h1 class="post-title">Kioptrix: Level 1.1 (#2) Walkthrough</h1>
 
         <section class="post-content">
-            <div class="kg-card-markdown"><h1 id="intro">Intro</h1>
+            <!--kg-card-begin: markdown--><h1 id="intro">Intro</h1>
 <p>In this post, I will continue hacking on the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix series</a> of VMs.  In the <a href="https://blog.rootshellz.com/kioptrix-level-1-writeup/">last post</a>, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  "[the] first release had a bug in it with the web application," so I have opted to hack on the updated version.  While a major part these challenges is to find and exploit bugs, I don't want to be fighting unintentional bugs in the challenge VM.</p>
 <p>I have downloaded and booted the VM on a local network.  Let's begin.</p>
-<p><img src="../content/images/2017/08/Kioptrix1.1.png" alt="Kioptrix1.1"></p>
+<p><img src="http://localhost:3001/content/images/2017/08/Kioptrix1.1.png" alt="Kioptrix1.1"></p>
 <h1 id="prehack">Pre-Hack</h1>
 <h2 id="whereyouat">Where you at?</h2>
 <p>First, we need to identify what address the VM grabbed from DHCP:</p>
@@ -606,7 +602,7 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 <h2 id="apache">Apache</h2>
 <p>We learned from our scanning above that Apache is running on ports 80/tcp and 443/tcp and we have a handful of things to go check out. Since this is just one web web property, we'll go start at this manually in a browser.  If we had a larger scope, we would definitely want to script a few more things before we proceeded — things like like screenshots of the identified URLs, source downloads, and URL spidering.</p>
 <p>To check things out, we'll proxy FireFox through <a href="https://portswigger.net/burp">Burp</a> and turn off intercept for now.  When we browse to out target at <a href="http://172.16.2.131">http://172.16.2.131</a>, we are greeted with a simple looking login form:</p>
-<p><img src="../content/images/2017/08/Login-Form.png" alt="Login-Form"></p>
+<p><img src="http://localhost:3001/content/images/2017/08/Login-Form.png" alt="Login-Form"></p>
 <p>Browsing to <a href="https://172.16.2.131">https://172.16.2.131</a> simply loads an HTTPS version of the same login form.</p>
 <p>When we view the source, we see that the interesting comment we saw in the nmap output is actually nothing to get excited about, it was just a place holder and not actually marking anything sensitive.</p>
 <pre><code class="language-html">&lt;html&gt;
@@ -662,9 +658,9 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 <p>Working off of this first hunch, what if we submit something like <code>' OR 1=1#</code>?  If our assumption about the back end code is correct, this will result in something like this:<br>
 <code>SELECT * FROM Users WHERE Username='admin' AND Password='' OR 1=1#'</code></p>
 <p>Let's see if this works...<br>
-<img src="../content/images/2017/08/Burp-SQLi.png" alt="Burp-SQLi"></p>
+<img src="http://localhost:3001/content/images/2017/08/Burp-SQLi.png" alt="Burp-SQLi"></p>
 <p>Awesome our hunch was correct, we successfully bypassed authentication.<br>
-<img src="../content/images/2017/08/Basic-Administrative-Web-Console.png" alt="Basic-Administrative-Web-Console"></p>
+<img src="http://localhost:3001/content/images/2017/08/Basic-Administrative-Web-Console.png" alt="Basic-Administrative-Web-Console"></p>
 <h3 id="commandinjection">Command Injection</h3>
 <p>Testing out the "Ping a Machine on the Network" functionality, it looks like the <em>ip</em> parameter posted to /pingit.php, is simply passed to the system's ping command (<em>ping -c3 ip</em>).</p>
 <p>The request:</p>
@@ -682,11 +678,11 @@ Upgrade-Insecure-Requests: 1
 ip=127.0.0.1&amp;submit=submit
 </code></pre>
 <p>and the response:<br>
-<img src="../content/images/2017/08/pingit.png" alt="pingit"></p>
+<img src="http://localhost:3001/content/images/2017/08/pingit.png" alt="pingit"></p>
 <p>Let's think about how the backend for this functionality might work, like we did above for the SQL statement.  It is reasonable to assume that the ping command is being called from PHP with something like this: <code>shell-output = exec('ping -c3 $ip');</code> where <em>$ip</em> is taken directly from the posted value and not sanitized at all.</p>
 <p>Let's see what we can sneak in to that <em>$ip</em> parameter.<br>
 The request:<br>
-<img src="../content/images/2017/08/Command-Injection.png" alt="Command-Injection"><br>
+<img src="http://localhost:3001/content/images/2017/08/Command-Injection.png" alt="Command-Injection"><br>
 which looks like this in Burp:</p>
 <pre><code class="language-http">POST /pingit.php HTTP/1.1
 Host: 172.16.2.131
@@ -702,7 +698,7 @@ Upgrade-Insecure-Requests: 1
 ip=127.0.0.1%3B+id&amp;submit=submit
 </code></pre>
 <p>Results in:<br>
-<img src="../content/images/2017/08/Command-Injected.png" alt="Command-Injected"></p>
+<img src="http://localhost:3001/content/images/2017/08/Command-Injected.png" alt="Command-Injected"></p>
 <p>Notice the last line of output;  It's clear we are able to run arbitrary commands as the apache user!</p>
 <h4 id="shellingout">Shelling Out</h4>
 <p>To make things easier, let's get ourselves a better shell.  I first attempted to use netcat, but it is not installed on the target.  We know PHP is installed, so let's leverage that for a shell.</p>
@@ -771,7 +767,7 @@ sh-3.00$
 Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 i686 i386 GNU/Linux
 </code></pre>
 <p>Googling for the kernel version shows a promising result:<br>
-<img src="../content/images/2017/08/Google-2.6.9-55.EL.png" alt="Google-2.6.9-55.EL"></p>
+<img src="http://localhost:3001/content/images/2017/08/Google-2.6.9-55.EL.png" alt="Google-2.6.9-55.EL"></p>
 <pre><code class="language-shell-output">root@kali:~# searchsploit linux 2.6 | grep 9542
 Linux Kernel 2.6 &lt; 2.6.19 (White Box 4 / CentOS 4.4/4.5 / Fedora Cor | ./linux/local/9542.c
 </code></pre>
@@ -829,11 +825,11 @@ sh-3.00$ /tmp/9542
 
 </code></pre>
 <p>Well, that's not good... The shell seems to be hung.  Let's check the VMware console:</p>
-<p><img src="../content/images/2017/08/Kernel-Panic-9479.png" alt="Kernel-Panic-9479"></p>
+<p><img src="http://localhost:3001/content/images/2017/08/Kernel-Panic-9479.png" alt="Kernel-Panic-9479"></p>
 <p>Kernel Panic!  Oops, another exploit that seems like it should have worked, but failed.  Again, good material for a future exploit research post, but for now let's reset the VM and try again.</p>
 <h4 id="privilegeescalationtake3">Privilege Escalation - Take 3</h4>
 <p>We are oh-for-two on this local privilege escalation, but the good news is we still have another exploit to try from our original search:<br>
-<code>Linux Kernel 2.4.x / 2.6.x (CentOS 4.8/5.3 / RHEL 4.8/5.3 / SuSE 10 SP2/11 / Ubuntu 8.10) (PPC) - 'sock_sendpage()' Privilege Escalation | ./linux/local/9545.c</code></p>
+<code>Linux Kernel 2.4.x / 2.6.x (CentOS 4.8/5.3 / RHEL 4.8/5.3 / SuSE 10 SP2/11 / Ubuntu 8.10) (PPC) - 'sock_sendpage()' Privilege Escalation                                      | ./linux/local/9545.c</code></p>
 <p>By now, the workflow is clear:</p>
 <p>Download it to our target:</p>
 <pre><code class="language-shell-output">root@kali:~# cp /usr/share/exploitdb/platforms/linux/local/9545.c .
@@ -862,7 +858,7 @@ uid=0(root) gid=0(root) groups=48(apache)
 <p>Whoomp, there it is!  A root shell!  Since this was the goal of the challenge we can stop here.  There may be other ways in to this box, but we'll leave those shells for a rainy day.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>Things were looking a bit hairy there for a minute, with two failed exploits back to back.  If we've learned anything here it's persistence — or maybe the lesson is, we shouldn't be running exploits without fist completely digesting them, lest we be confused for a skid.  As mentioned above, it will make for an interesting future exercise to dissect the attempted exploits and understand why they failed.  For now, let's just be content with the root shell we achieved and move forward in our Kioprtix jorney.  See you next time neighbors, until then keep your boxes patched and your shells root.</p>
-</div>
+<!--kg-card-end: markdown-->
         </section>
         
         <div id="disqus_thread"></div>
@@ -882,20 +878,16 @@ uid=0(root) gid=0(root) groups=48(apache)
 
         <footer class="post-footer">
 
-                <section class="author">
-                    <h4>rootshellz</h4>
-                    <p></p>
-                </section>
 
             <section class="share">
                 <h4>Share this</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix:%20Level%201.1%20(#2)%20Walkthrough&amp;url=http://localhost:2368/kioptrix-walkthrough-2/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix:%20Level%201.1%20(#2)%20Walkthrough&amp;url=http://localhost:3001/kioptrix-walkthrough-2/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/kioptrix-walkthrough-2/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:3001/kioptrix-walkthrough-2/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/kioptrix-walkthrough-2/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:3001/kioptrix-walkthrough-2/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -908,15 +900,15 @@ uid=0(root) gid=0(root) groups=48(apache)
 </main>
 
     <footer class="site-footer">
-        <!-- <a class="subscribe icon-feed" href="http://localhost:2368/rss/"><span class="tooltip">Subscribe!</span></a> -->
+        <!-- <a class="subscribe icon-feed" href="http://localhost:3001/rss/"><span class="tooltip">Subscribe!</span></a> -->
         <div class="inner">
-             <section class="copyright">All content copyright <a href="../">rootshellz</a> © 2018 • All rights reserved.</section>
+             <section class="copyright">All content copyright <a href="../">rootshellz</a> © 2020 • All rights reserved.</section>
              <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://ghost.org"><span class="icon-ghost-text">Ghost</span></a> in <a href="https://github.com/mityalebedev/The-Shell">The Shell</a> theme.</section>
         </div>
     </footer>
 
     <script type="text/javascript" src="https://rootshellz.github.io/prism.js"></script>
 
-    <script type="text/javascript" src="../assets/highlighter/prettify.js?v=2a75f4a198"></script>
-    <script type="text/javascript" src="../assets/js/shell.js?v=2a75f4a198"></script>
+    <script type="text/javascript" src="../assets/highlighter/prettify.js?v=cc9bda7911"></script>
+    <script type="text/javascript" src="../assets/js/shell.js?v=cc9bda7911"></script>
 </body>
