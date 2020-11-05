@@ -15,20 +15,19 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="../assets/highlighter/prettify.css?v=2a75f4a198">
-    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=2a75f4a198">
+    <link rel="stylesheet" type="text/css" href="../assets/highlighter/prettify.css?v=cc9bda7911">
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=cc9bda7911">
 
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="index.html">
+    <link rel="canonical" href="http://localhost:3001/kioptrix-walkthrough-3/">
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <link rel="amphtml" href="amp/index.html">
+    <link rel="amphtml" href="http://localhost:3001/kioptrix-walkthrough-3/amp/">
     
     <meta property="og:site_name" content="rootshellz">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Kioptrix: Level 1.2 (#3) Walkthrough">
-    <meta property="og:description" content="Intro Today I will be continuing on the the Kioptrix series of vulnerable VMs.  In previous posts, I covered Kioptrix1 and Kioptrix1.1. Per the author of the challenge, &amp;quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not">
-    <meta property="og:url" content="http://localhost:2368/kioptrix-walkthrough-3/">
-    <meta property="og:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg">
+    <meta property="og:description" content="Intro Today I will be continuing on the the Kioptrix series of vulnerable VMs.  In previous posts, I covered Kioptrix1 and Kioptrix1.1.  Per the author of the challenge, &amp;quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not">
+    <meta property="og:url" content="http://localhost:3001/kioptrix-walkthrough-3/">
+    <meta property="og:image" content="http://localhost:3001/content/images/2018/07/Kioptrix-3-Cover.jpeg">
     <meta property="article:published_time" content="2017-09-12T04:49:33.000Z">
     <meta property="article:modified_time" content="2018-07-30T08:07:38.000Z">
     <meta property="article:tag" content="Boot2Root">
@@ -38,9 +37,9 @@
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kioptrix: Level 1.2 (#3) Walkthrough">
-    <meta name="twitter:description" content="Intro Today I will be continuing on the the Kioptrix series of vulnerable VMs.  In previous posts, I covered Kioptrix1 and Kioptrix1.1. Per the author of the challenge, &amp;quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not">
-    <meta name="twitter:url" content="http://localhost:2368/kioptrix-walkthrough-3/">
-    <meta name="twitter:image" content="http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg">
+    <meta name="twitter:description" content="Intro Today I will be continuing on the the Kioptrix series of vulnerable VMs.  In previous posts, I covered Kioptrix1 and Kioptrix1.1.  Per the author of the challenge, &amp;quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not">
+    <meta name="twitter:url" content="http://localhost:3001/kioptrix-walkthrough-3/">
+    <meta name="twitter:image" content="http://localhost:3001/content/images/2018/07/Kioptrix-3-Cover.jpeg">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="rootshellz">
     <meta name="twitter:label2" content="Filed under">
@@ -57,50 +56,47 @@
     "publisher": {
         "@type": "Organization",
         "name": "rootshellz",
-        "logo": "http://localhost:2368/content/images/2018/07/Blog-Logo.png"
+        "url": "http://localhost:3001/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:3001/content/images/2018/07/Blog-Logo.png"
+        }
     },
     "author": {
         "@type": "Person",
         "name": "rootshellz",
         "image": {
             "@type": "ImageObject",
-            "url": "http://localhost:2368/content/images/2018/07/rootshellz.jpg",
+            "url": "http://localhost:3001/content/images/2018/07/rootshellz.jpg",
             "width": 1630,
             "height": 1631
         },
-        "url": "http://localhost:2368/author/rootshellz/",
+        "url": "http://localhost:3001/author/rootshellz/",
         "sameAs": [
             "https://twitter.com/rootshellz"
         ]
     },
     "headline": "Kioptrix: Level 1.2 (#3) Walkthrough",
-    "url": "http://localhost:2368/kioptrix-walkthrough-3/",
+    "url": "http://localhost:3001/kioptrix-walkthrough-3/",
     "datePublished": "2017-09-12T04:49:33.000Z",
     "dateModified": "2018-07-30T08:07:38.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:2368/content/images/2018/07/Kioptrix-3-Cover.jpeg",
+        "url": "http://localhost:3001/content/images/2018/07/Kioptrix-3-Cover.jpeg",
         "width": 648,
         "height": 348
     },
     "keywords": "Boot2Root, VulnHub, OSCP, Kioptrix",
-    "description": "Intro Today I will be continuing on the the Kioptrix series of vulnerable VMs.  In previous posts, I covered Kioptrix1 and Kioptrix1.1. Per the author of the challenge, &amp;quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not",
+    "description": "Intro\nToday I will be continuing on the the Kioptrix series\n[http://www.kioptrix.com/blog/test-page/]  of vulnerable VMs. In previous posts,\nI covered Kioptrix1 [https://blog.rootshellz.com/kioptrix-walkthrough-1/]  and \nKioptrix1.1 [https://blog.rootshellz.com/kioptrix-walkthrough-2/].\n\nPer the author of the challenge, &quot;The same as the others, there’s more then one\nway to “pwn” this one. There’s easy and not so easy.&quot; So let&#x27;s see if we can\nfind both, shall we?\n\nSetup\nThe challenge description ",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:2368/"
+        "@id": "http://localhost:3001/"
     }
 }
     </script>
 
-    <script src="../public/ghost-sdk.js?v=2a75f4a198"></script>
-<script>
-ghost.init({
-	clientId: "ghost-frontend",
-	clientSecret: "bf2f60fa3213"
-});
-</script>
-    <meta name="generator" content="Ghost 1.25">
-    <link rel="alternate" type="application/rss+xml" title="rootshellz" href="../rss/index.html">
+    <meta name="generator" content="Ghost 3.36">
+    <link rel="alternate" type="application/rss+xml" title="rootshellz" href="http://localhost:3001/rss/">
     <link href="https://rootshellz.github.io/prism.css" rel="stylesheet">
 
 <script>
@@ -134,7 +130,7 @@ ghost.init({
     <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
 
         <header class="post-header">
-            <a id="blog-logo" href="../">
+            <a id="blog-logo" href="http://localhost:3001">
                     <img src="../content/images/2018/07/Blog-Logo.png" alt="Blog Logo">
             </a>
         </header>
@@ -145,7 +141,7 @@ ghost.init({
         <h1 class="post-title">Kioptrix: Level 1.2 (#3) Walkthrough</h1>
 
         <section class="post-content">
-            <div class="kg-card-markdown"><h1 id="intro">Intro</h1>
+            <!--kg-card-begin: markdown--><h1 id="intro">Intro</h1>
 <p>Today I will be continuing on the the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix series</a> of vulnerable VMs.  In previous posts, I covered <a href="https://blog.rootshellz.com/kioptrix-walkthrough-1/">Kioptrix1</a> and <a href="https://blog.rootshellz.com/kioptrix-walkthrough-2/">Kioptrix1.1</a>.</p>
 <p>Per the author of the challenge, "The same as the others, there’s more then one way to “pwn” this one. There’s easy and not so easy."  So let's see if we can find both, shall we?</p>
 <h1 id="setup">Setup</h1>
@@ -494,13 +490,13 @@ Nmap done: 1 IP address (1 host up) scanned in 3.70 seconds
 <h1 id="webappfingerprinting">Web App Fingerprinting</h1>
 <p>Let's manually map the application a bit via our browser and Burp.  We will simply proxy our browser through Burp with Intercept turned off.  This will allow us to quickly click around the web app and then inspect the requests and responses.</p>
 <p>One of the first things we can see is the web application is running something called LotusCMS:<br>
-<img src="../content/images/2017/09/Burp-LotusCMS-1.png" alt="Burp-LotusCMS-1"></p>
+<img src="http://localhost:3001/content/images/2017/09/Burp-LotusCMS-1.png" alt="Burp-LotusCMS-1"></p>
 <p>I've never heard of LotusCMS, but let's see what <a href="https://www.exploit-db.com/">Exploit DB</a> can tell us about it:<br>
-<img src="../content/images/2017/09/ExploitDB-LotusCMS.png" alt="ExploitDB-LotusCMS"></p>
+<img src="http://localhost:3001/content/images/2017/09/ExploitDB-LotusCMS.png" alt="ExploitDB-LotusCMS"></p>
 <h1 id="rce">RCE</h1>
 <p>RCE spotted (assuming the vulnerable version of the CMS)!  The ExploitDB page for the Metasploit module references <a href="https://secuniaresearch.flexerasoftware.com/secunia_research/2011-21/">https://secuniaresearch.flexerasoftware.com/secunia_research/2011-21/</a>, which is a decent summary of the issue.  The jist is that arbitrary PHP code execution is possible due to two separate issues in the CMS' code.  Both issues are caused by incorrectly implemented input sanitization with the input being passed to the PHP eval() statement.  This effectively provides system-level RCE by injecting PHP system() calls.</p>
 <p>Let's see if we can find a stand-alone exploit script, instead of using Metasploit.<br>
-<img src="../content/images/2017/09/Google-LotusCMS-RCE.png" alt="Google-LotusCMS-RCE"></p>
+<img src="http://localhost:3001/content/images/2017/09/Google-LotusCMS-RCE.png" alt="Google-LotusCMS-RCE"></p>
 <p>The <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit">repo</a> contains both <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.sh">Bash</a> and <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.rb">Ruby</a> stand-alone exploitation scripts.  Thanks <a href="https://github.com/Hood3dRob1n">Hood3dRob1n</a>!  Let's go for the Bash script...  After a quick review, we verify that the script is safe to run and understand its functionality.  When run, the script will check that we have a vulnerable target, ask us to select from a menu of payloads, and then run the exploit.  Interestingly, it appears Hood3dRob1n wrote this script with Kioptrix #3 (1.2) in mind.</p>
 <h2 id="exploitingtherce">Exploiting the RCE</h2>
 <p>We start our listener:</p>
@@ -800,7 +796,7 @@ select * from gallarific_users;
 <p>Most interesting here is the password hash for loneferret in the dev_accounts table.  Users are known to reuse passwords, so if we can crack this hash, we may be able to use the password to SSH to the target as the loneferret user.</p>
 <h2 id="passwordhashcracking">Password Hash Cracking</h2>
 <p>Instead of cracking locally, let's see if any of the online hash-crackers can help us:<br>
-<img src="../content/images/2017/09/CrackStation-starwars-1.png" alt="CrackStation-starwars-1"></p>
+<img src="http://localhost:3001/content/images/2017/09/CrackStation-starwars-1.png" alt="CrackStation-starwars-1"></p>
 <p>Awesome, <a href="https://crackstation.net/">CrackStation</a> was able to easily crack loneferret's password.</p>
 <h2 id="becomingloneferret">Becoming loneferret</h2>
 <p>We now have the lonferret user's Gallerific web application password, but that doesn't seem to help us much in getting root on the box.  However, maybe the user reused the same password for his local account on the server.  Let's find out:</p>
@@ -840,7 +836,7 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 loneferret@Kioptrix3:~$ ht /etc/sudoers
 </code></pre>
 <p>Even though we shouldn't have permission to read the sudoers file, using the setuid / setgid ht executable, we are able to load the file.<br>
-<img src="../content/images/2017/09/ht-sudoers-before.png" alt="ht-sudoers-before"></p>
+<img src="http://localhost:3001/content/images/2017/09/ht-sudoers-before.png" alt="ht-sudoers-before"></p>
 <p>Now let's do some hex patching.  We want to change</p>
 <pre><code class="language-hexdump">│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 4e 4f 50 41 |eferret ALL=NOPA|│
 │00000140 53 53 57 44 3a 20 21 2f-75 73 72 2f 62 69 6e 2f |SSWD: !/usr/bin/|│
@@ -858,7 +854,7 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 <code>#/usr/bin/su, /usr/local/bin/ht</code></p>
 <p>This will effectively give us full, root access to the target, as we will be able to run any command as root using sudo.</p>
 <p>Let's make the change and save the file using ht:<br>
-<img src="../content/images/2017/09/ht-sudoers-after.png" alt="ht-sudoers-after"></p>
+<img src="http://localhost:3001/content/images/2017/09/ht-sudoers-after.png" alt="ht-sudoers-after"></p>
 <p>After saving the file, let's see if we win:</p>
 <pre><code class="language-shell-output">loneferret@Kioptrix3:~$ sudo -l
 [sudo] password for loneferret: 
@@ -935,7 +931,7 @@ starwars
 </code></pre>
 <p>This just goes to show, both on challenge VMs and real world servers, there is usually more than one way to pop the box.</p>
 <p>Until next time, stay root my friends!</p>
-</div>
+<!--kg-card-end: markdown-->
         </section>
         
         <div id="disqus_thread"></div>
@@ -955,20 +951,16 @@ starwars
 
         <footer class="post-footer">
 
-                <section class="author">
-                    <h4>rootshellz</h4>
-                    <p></p>
-                </section>
 
             <section class="share">
                 <h4>Share this</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix:%20Level%201.2%20(#3)%20Walkthrough&amp;url=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix:%20Level%201.2%20(#3)%20Walkthrough&amp;url=http://localhost:3001/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:3001/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:3001/kioptrix-walkthrough-3/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -981,15 +973,15 @@ starwars
 </main>
 
     <footer class="site-footer">
-        <!-- <a class="subscribe icon-feed" href="http://localhost:2368/rss/"><span class="tooltip">Subscribe!</span></a> -->
+        <!-- <a class="subscribe icon-feed" href="http://localhost:3001/rss/"><span class="tooltip">Subscribe!</span></a> -->
         <div class="inner">
-             <section class="copyright">All content copyright <a href="../">rootshellz</a> © 2018 • All rights reserved.</section>
+             <section class="copyright">All content copyright <a href="../">rootshellz</a> © 2020 • All rights reserved.</section>
              <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://ghost.org"><span class="icon-ghost-text">Ghost</span></a> in <a href="https://github.com/mityalebedev/The-Shell">The Shell</a> theme.</section>
         </div>
     </footer>
 
     <script type="text/javascript" src="https://rootshellz.github.io/prism.js"></script>
 
-    <script type="text/javascript" src="../assets/highlighter/prettify.js?v=2a75f4a198"></script>
-    <script type="text/javascript" src="../assets/js/shell.js?v=2a75f4a198"></script>
+    <script type="text/javascript" src="../assets/highlighter/prettify.js?v=cc9bda7911"></script>
+    <script type="text/javascript" src="../assets/js/shell.js?v=cc9bda7911"></script>
 </body>
