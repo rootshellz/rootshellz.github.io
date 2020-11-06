@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <script>
         // UNCOMMENT AND USE YOUR VARIABLES FOR DISQUS AND GOOGLE ANALYTICS
-        var d_id  = 'rootshellz',
+        // var d_id  = '',
         //     g_id  = 'UA-XXXXXXXX-X', // Format: UA-########-#, Example: UA-11220899-1
         //     g_url = 'XXXXXXX.XXX' // Format: #####.####, Example: webdesignporto.com
     </script>
@@ -16,8 +16,8 @@
     <meta name="MobileOptimized" content="320" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="/assets/highlighter/prettify.css?v=84d6f6c242" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=84d6f6c242" />
+    <link rel="stylesheet" type="text/css" href="/assets/highlighter/prettify.css?v=fd6f04a315" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=fd6f04a315" />
 
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="canonical" href="https://blog.rootshellz.com/kioptrix-walkthrough-2/" />
@@ -868,15 +868,18 @@ uid=0(root) gid=0(root) groups=48(apache)
         </section>
         
         <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            var disqus_shortname = d_id; 
-        
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_config = function () {
+            this.page.url = "https://blog.rootshellz.com/kioptrix-walkthrough-2/";
+            this.page.identifier = "ghost-599667e73f739a3dd57c9683"
+        };
+        (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://rootshellz.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
         </script>
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
@@ -920,7 +923,7 @@ uid=0(root) gid=0(root) groups=48(apache)
     <!-- https://cdnjs.com/libraries/prism -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
 
-    <script type='text/javascript' src="/assets/highlighter/prettify.js?v=84d6f6c242"></script>
-    <script type='text/javascript' src="/assets/js/shell.js?v=84d6f6c242"></script>
+    <script type='text/javascript' src="/assets/highlighter/prettify.js?v=fd6f04a315"></script>
+    <script type='text/javascript' src="/assets/js/shell.js?v=fd6f04a315"></script>
 </body>
 </html>
