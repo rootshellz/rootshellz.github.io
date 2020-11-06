@@ -15,10 +15,11 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="assets/highlighter/prettify.css?v=f176b79811">
-    <link rel="stylesheet" type="text/css" href="assets/css/screen.css?v=f176b79811">
+    <link rel="stylesheet" type="text/css" href="assets/highlighter/prettify.css?v=ee42ff1935">
+    <link rel="stylesheet" type="text/css" href="assets/css/screen.css?v=ee42ff1935">
 
     <meta name="description" content="Drink all the booze hack all the things...">
+    <link rel="icon" href="favicon.png" type="image/png">
     <link rel="canonical" href="http://localhost:3001/">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
@@ -67,17 +68,21 @@
 
     <meta name="generator" content="Ghost 3.36">
     <link rel="alternate" type="application/rss+xml" title="rootshellz" href="http://localhost:3001/rss/">
-    <link href="https://rootshellz.github.io/prism.css" rel="stylesheet">
+    <!-- https://www.jsdelivr.com/package/npm/prism-themes?path=themes -->
+<!-- These three work together / are additive -->
+<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-synthwave84.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-xonokai.css" rel="stylesheet">
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TM0JKQZ7H1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-104761302-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'G-TM0JKQZ7H1');
 </script>
 
     <script>
@@ -109,6 +114,19 @@
 <main class="content" role="main">
 
 
+    <article class="post no-image">
+        <header class="post-header">
+            <span class="post-meta"><time datetime="2020-11-05">05 Nov 2020</time> </span>
+            <h2 class="post-title"><a href="test-code-block/">Test Code Block</a></h2>
+            
+            <!--<a href="/test-code-block/#disqus_thread"></a>-->
+        </header>
+        <section class="post-excerpt">
+            <p>This is a code block ls -l &lt;!-- Global site tag (gtag.js) - Google Analytics --&gt; &lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-TM0JKQZ7H1"&gt;&lt;/script&gt; &lt;script&gt;   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag(…</p>
+        </section>
+    </article>
+
+
     <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
         <header class="post-header">
             <span class="post-meta"><time datetime="2017-09-11">11 Sep 2017</time> on <a href="tag/boot2root/">Boot2Root</a>, <a href="tag/vulnhub/">VulnHub</a>, <a href="tag/oscp/">OSCP</a>, <a href="tag/kioptrix/">Kioptrix</a></span>
@@ -124,7 +142,7 @@
 
     <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
         <header class="post-header">
-            <span class="post-meta"><time datetime="2017-08-23">23 Aug 2017</time> on <a href="tag/boot2root/">Boot2Root</a>, <a href="tag/vulnhub/">VulnHub</a>, <a href="tag/oscp/">OSCP</a>, <a href="tag/kioptrix/">Kioptrix</a></span>
+            <span class="post-meta"><time datetime="2017-08-24">24 Aug 2017</time> on <a href="tag/boot2root/">Boot2Root</a>, <a href="tag/vulnhub/">VulnHub</a>, <a href="tag/oscp/">OSCP</a>, <a href="tag/kioptrix/">Kioptrix</a></span>
             <h2 class="post-title"><a href="kioptrix-walkthrough-2/">Kioptrix: Level 1.1 (#2) Walkthrough</a></h2>
             
             <!--<a href="/kioptrix-walkthrough-2/#disqus_thread"></a>-->
@@ -174,8 +192,9 @@
         </div>
     </footer>
 
-    <script type="text/javascript" src="https://rootshellz.github.io/prism.js"></script>
+    <!-- https://cdnjs.com/libraries/prism -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
 
-    <script type="text/javascript" src="assets/highlighter/prettify.js?v=f176b79811"></script>
-    <script type="text/javascript" src="assets/js/shell.js?v=f176b79811"></script>
+    <script type="text/javascript" src="assets/highlighter/prettify.js?v=ee42ff1935"></script>
+    <script type="text/javascript" src="assets/js/shell.js?v=ee42ff1935"></script>
 </body>
